@@ -1,0 +1,100 @@
+.bg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.card h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #151615;
+}
+.input-select{
+    display: flex;
+}
+.input-selection-btn{
+    cursor: pointer;
+    outline: none;
+    width: 250px;
+    font-size: 15px;
+    height: 40px;
+    border-style: none;
+    color: white;
+    background-color: grey;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#signup-btn{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#login-btn{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.selected{
+    background-color: black;
+}
+.oneClickBtn{
+    height: 50px;
+    width: 350px;
+    border-radius: 18px;
+    margin-top: 13px;
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: grey;
+}
+.hr-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.hr-text::before,
+.hr-text::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+.hr-text:not(:empty)::before {
+    margin-right: .25em;
+}
+.hr-text:not(:empty)::after {
+    margin-left: .25em;
+}
+.name-input{
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 7px;
+}
+.email-input{
+    width: 415px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 7px;
+    margin-top: 15px;
+}
+.submit-btn{
+    width: 415px;
+    height: 50px;
+    border-radius: 15px;
+    margin-left: 7px;
+    margin-top: 15px;
+    border: none;
+    cursor: pointer;
+    background-color: #838080;
+    color: #ffffff;
+    font-size: 20px;
+}
+.container{
+    min-height: 500px;
+}
+.signup-heading{
+    font-family:'Roboto';
+    font-size: 18px;
+}

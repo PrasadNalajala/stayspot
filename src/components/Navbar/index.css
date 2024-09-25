@@ -1,0 +1,25 @@
+.nav-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    align-items: center;
+}
+.nav-items-container{
+    display: flex;
+    
+}
+.nav-items-container ul{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    list-style-type: none;
+}
+.logo-container p{
+    font-size: 25px;
+    color: #20c755;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.nav-items-container ul li{
+    font-size: 19px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
