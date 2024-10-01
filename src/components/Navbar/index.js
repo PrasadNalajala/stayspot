@@ -1,4 +1,5 @@
 import './index.css'
+import { Link } from 'react-router-dom'
 const Navbar=()=>{
     return(
         <div className="nav-container">
@@ -8,9 +9,11 @@ const Navbar=()=>{
             </div>
             <div className="nav-items-container">
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
+                   <Link to='/' className='nav-link'>Home</Link>
+                    <Link to='/about' className='nav-link'>About</Link>
+                    <Link to="/browse-rentals" className='nav-link'>Browse</Link>
+                   <Link to="/contact" className='nav-link'>Contact </Link>
+                    
                 </ul>
             </div>
         </div>

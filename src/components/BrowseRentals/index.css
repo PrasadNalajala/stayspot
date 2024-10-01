@@ -1,0 +1,20 @@
+.rental-items-section{
+    background-color: black;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rental-section{
+    background-color: black;
+}
+.availble-rental{
+    color: #ffffff;
+    text-align: left;
+    padding-top: 30px;
+    margin-left: 30px;
+}

@@ -4,10 +4,14 @@ import house1 from '../../assets/house1.png'
 import profileMale from '../../assets/profileMale.png'
 import profileWomen from '../../assets/ProfileWomen.png'
 import { FaArrowRight } from "react-icons/fa";
+import Navbar from '../Navbar'
+import { Link } from 'react-router-dom'
 const Home=(props)=>{
 
     
     return(
+        <div>
+            <Navbar/>
         <div className='home'>
             <div className="welcome-section">
                 <h1 className="welcome-heading">Welcome to <br/><span>StaySpot</span></h1>
@@ -32,7 +36,7 @@ const Home=(props)=>{
                     <img src={familyImg} className='browse-img'/>
                 </div>
                 </div>
-                <button class="browse-btn">View All Rentals <FaArrowRight/></button>
+                <Link class="browse-btn" to='/browse-rentals'>View All Rentals <FaArrowRight/></Link>
            </div>
            <div className='post-rentals browse-rentals-section'>
                         <h1>Post Rentals</h1>
@@ -79,6 +83,7 @@ const Home=(props)=>{
             </div>
             </div>
            </div>
+        </div>
         </div>
     )
 }

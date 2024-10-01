@@ -19,7 +19,9 @@
     color: #20c755;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.nav-items-container ul li{
+.nav-link{
     font-size: 19px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+    color: rgb(104, 102, 102);
 }
