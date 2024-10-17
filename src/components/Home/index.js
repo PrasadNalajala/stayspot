@@ -33,7 +33,7 @@ const Home=(props)=>{
                 
                 
                 <div>
-                    <img src={familyImg} className='browse-img'/>
+                    <img src={familyImg} className='browse-img' alt=''/>
                 </div>
                 </div>
                 <Link class="browse-btn" to='/browse-rentals'>View All Rentals <FaArrowRight/></Link>
@@ -42,7 +42,7 @@ const Home=(props)=>{
                         <h1>Post Rentals</h1>
                         <div className='post-rentals-section'>
                             <div>
-                            <img src={house1} className='browse-img'/>
+                            <img src={house1} className='browse-img' alt='house'/>
                             </div>
                             <div className='post-rental-des'>
                                 <p>
@@ -58,7 +58,7 @@ const Home=(props)=>{
                                 </p>
                             </div>
                         </div>
-                        <button class="browse-btn">Post Your Rental <FaArrowRight/></button>
+                        <Link class="browse-btn" to="/post-rental">Post Your Rental <FaArrowRight/></Link>
            </div>
            <div className='testimonials-section'>
             <h1>Testimonials</h1>
@@ -69,7 +69,7 @@ const Home=(props)=>{
             <p className='customer-name'>- Sarah T</p>
             </div>
             <div>
-                <img src={profileWomen} className='profile-img'/>
+                <img src={profileWomen} className='profile-img'alt='profile'/>
             </div>
             </div>
             <div className='testimonial-container'>
@@ -79,7 +79,7 @@ const Home=(props)=>{
             <p className='customer-name'>- Boyapati Chandra</p>
             </div>
             <div className='profile-img-container'>
-                <img src={profileMale} className='profile-img'/>
+                <img src={profileMale} className='profile-img' alt='profile'/>
             </div>
             </div>
            </div>

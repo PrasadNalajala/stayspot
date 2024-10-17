@@ -122,6 +122,7 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     text-decoration: none;
+    margin-top: 15px;
   }
   
   .browse-btn:hover {
