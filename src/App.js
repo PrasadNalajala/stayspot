@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/index.js';
 import Home from './components/Home/index.js';
 import BrowseRentals from './components/BrowseRentals/index.js';
 import PostRental from './components/PostRental/index.js';
+import AboutUs from './components/AboutUs/index.js';
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/' Component={Home}/>
           <Route path='browse-rentals' Component={BrowseRentals}/>
           <Route path='/post-rental' Component={PostRental}/>
+          <Route path='/about-us' Component={AboutUs} />
       </Routes>
       </BrowserRouter>
     </div>

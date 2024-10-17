@@ -10,8 +10,9 @@ const Navbar=()=>{
             <div className="nav-items-container">
                 <ul>
                    <Link to='/' className='nav-link'>Home</Link>
-                    <Link to='/about' className='nav-link'>About</Link>
+                    <Link to='/about-us' className='nav-link'>About</Link>
                     <Link to="/browse-rentals" className='nav-link'>Browse</Link>
+                    <Link to='/post-rental' className='nav-link'>Post</Link>
                    <Link to="/contact" className='nav-link'>Contact </Link>
                     
                 </ul>
