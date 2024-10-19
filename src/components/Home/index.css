@@ -2,6 +2,7 @@
     background-color: black;
     color: #ffffff;
     padding-bottom: 40px;
+    padding-top: 80px;
 }
 
 @keyframes fadeIn {

@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import { FaHome, FaPhoneAlt, FaMapMarkerAlt, FaImage ,FaRupeeSign,FaBed,FaBath,FaRegUser} from "react-icons/fa"; // Icons
 import { TbRulerMeasure } from "react-icons/tb";
-import Navbar from "../Navbar"; // Your existing Navbar component
-import "./index.css"; // Assuming your styles are here
+import Navbar from "../Navbar";
+import "./postrental.css";
+import Footer from "../Footer";
 
 const PostRental = () => {
-  const [image, setImage] = useState(null); // State to hold image file
-
-  // Handle file change (Image Upload)
+  const [image, setImage] = useState(null);
+ 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(URL.createObjectURL(file)); // Preview the image
+      setImage(URL.createObjectURL(file));
     }
   };
 
   return (
     <div>
-      <Navbar /> {/* Your Navbar */}
-
-      {/* Welcome Section with Animation */}
+      <Navbar />
       <div className="post-rentals-section">
         <div className="post-rental-des">
           <h2 className="section-title">Post Your Rental Property</h2>
@@ -27,9 +25,9 @@ const PostRental = () => {
             Help potential renters discover the perfect space! Fill in the details below.
           </p>
 
-          {/* Input Form */}
+        
           <form className="rental-form">
-            {/* Property Title & Location (Two in a row) */}
+
             <div className="input-group">
               <div className="input-field">
                 <FaHome className="input-icon" />
@@ -41,7 +39,7 @@ const PostRental = () => {
               </div>
             </div>
 
-            {/* Price & Size (Two in a row) */}
+           
             <div className="input-group">
               <div className="input-field">
               <FaRupeeSign className="input-icon" />
@@ -53,7 +51,7 @@ const PostRental = () => {
               </div>
             </div>
 
-            {/* Bedrooms & Bathrooms (Two in a row) */}
+
             <div className="input-group">
               <div className="input-field">
               <FaBed className="input-icon" />
@@ -65,7 +63,7 @@ const PostRental = () => {
               </div>
             </div>
 
-            {/* Contact Info */}
+          
             <div className="input-group">
               <div className="input-field">
               <FaRegUser className="input-icon" />
@@ -77,7 +75,7 @@ const PostRental = () => {
               </div>
             </div>
 
-            {/* Image Upload */}
+
             <div className="input-group">
               <div className="input-field">
                 <FaImage className="input-icon" />
@@ -95,23 +93,24 @@ const PostRental = () => {
               )}
             </div>
 
-            {/* Description */}
+           
             <div className="input-group">
               <div className="input-field">
                 <textarea placeholder="Property Description"></textarea>
               </div>
             </div>
 
-            {/* Submit Button */}
+          
             <div className="form-submit">
               <button type="submit">Submit Listing</button>
             </div>
           </form>
         </div>
 
-        {/* Animated Content for a Modern Touch */}
+
 
       </div>
+      <Footer/>
     </div>
   );
 };

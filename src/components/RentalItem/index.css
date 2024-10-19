@@ -1,74 +1,155 @@
-.rental-item-heading{
-    color: black;
-    font-size: medium;
-    font-weight: 500;
-    text-align: left;
-    width: 70%;
-}
-.rental-img{
-    height: 300px;
+
+.rental-item {
     width: 420px;
-}
-.rental-item{
-    width:420px ;
-    margin: 10px;
+    margin: 15px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
-    border-radius: 5px;
+    transition: transform 0.3s ease;
 }
-.rental-heading-container{
+
+.rental-item:hover {
+    transform: scale(1.02);
+}
+.rental-img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rental-details {
+    padding: 20px;
+    color: #f0f0f0;
+}
+
+.rental-heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rental-item-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #20c755;
+    white-space: nowrap;
+    overflow: hidden;         
+    text-overflow: hidden;
+    margin-right: 14px;
+}
+
+.rental-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffba00;
+}
+
+.specifications-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Location section */
+.location-container {
+    margin-bottom: 15px;
+}
+
+.location {
+    font-size: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    
 }
-.rental-details{
-    padding:10px;
+
+.map-icon {
+    margin-right: 8px;
+    color: #ff5c5c;
+}
+
+/* Button styling */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    width: 48%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-btn {
+    background-color: #ffba00;
     color: black;
 }
-.rental-price{
-    font-size: 15px;
-    
+
+.view-details-btn:hover {
+    background-color: #e5a800;
 }
-.specifications-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+.contact-btn {
+    background-color: #20c755;
+    color: white;
 }
-.location{
-    text-align: left;
-    align-items: center;
+
+.contact-btn:hover {
+    background-color: #1a9f44;
 }
-.button{
-    height: 40px;
-    width: 120px;
-    border-style: none;
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .rental-item {
+        width: 100%;
+    }
+
+    .specifications-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+.owner-details {
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+.close-modal-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    outline: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-    border-radius: 5px;
+    margin-top: 15px;
 }
-.button-container{
+
+.close-modal-btn:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+.modal-header{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-.view-details-btn{
-    background-color: gold;
-   
-}
-.contact-btn{
-    background-color: green;
-    color: #ffffff;
-}
-.map-icon{
-    margin-right: 5px;
-}
-.location-container{
-    display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
+}
+.modal-header h2{
+    color: #20c755;
 }

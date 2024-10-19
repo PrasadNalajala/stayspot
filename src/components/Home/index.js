@@ -6,6 +6,7 @@ import profileWomen from '../../assets/ProfileWomen.png'
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
+import Footer from '../Footer'
 const Home=(props)=>{
 
     
@@ -36,7 +37,7 @@ const Home=(props)=>{
                     <img src={familyImg} className='browse-img' alt=''/>
                 </div>
                 </div>
-                <Link class="browse-btn" to='/browse-rentals'>View All Rentals <FaArrowRight/></Link>
+                <Link className="browse-btn" to='/browse-rentals'>View All Rentals <FaArrowRight/></Link>
            </div>
            <div className='post-rentals browse-rentals-section'>
                         <h1>Post Rentals</h1>
@@ -58,7 +59,7 @@ const Home=(props)=>{
                                 </p>
                             </div>
                         </div>
-                        <Link class="browse-btn" to="/post-rental">Post Your Rental <FaArrowRight/></Link>
+                        <Link className="browse-btn" to="/post-rental">Post Your Rental <FaArrowRight/></Link>
            </div>
            <div className='testimonials-section'>
             <h1>Testimonials</h1>
@@ -66,7 +67,7 @@ const Home=(props)=>{
             <div>
                 <p>"Finding a rental was so easy with <span>StaySpot</span>. The listings were accurate and the process was smooth!"
             </p>
-            <p className='customer-name'>- Sarah T</p>
+            <p className='customer-name'>- Koushik K</p>
             </div>
             <div>
                 <img src={profileWomen} className='profile-img'alt='profile'/>
@@ -84,6 +85,7 @@ const Home=(props)=>{
             </div>
            </div>
         </div>
+        <Footer/>
         </div>
     )
 }

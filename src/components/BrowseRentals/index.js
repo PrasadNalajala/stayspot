@@ -1,7 +1,7 @@
 import Navbar from "../Navbar"
 import './index.css'
 import RentalItem from "../RentalItem";
-
+import Footer from "../Footer";
 
 const BrowseRentals=(props)=>{
     const rentalsDetails = [
@@ -138,6 +138,7 @@ const BrowseRentals=(props)=>{
                 ))}
             </div>
             </div>
+            <Footer/>
         </div>
     )
 }

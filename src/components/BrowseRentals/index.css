@@ -7,14 +7,18 @@
     row-gap: 10px;
     align-items: center;
     justify-content: center;
+    
     padding: 20px;
+    
 }
 .rental-section{
     background-color: black;
+    padding-top: 80px;
 }
 .availble-rental{
-    color: #ffffff;
+    color: #20c755;
     text-align: left;
     padding-top: 30px;
     margin-left: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
