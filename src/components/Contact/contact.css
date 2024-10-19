@@ -1,0 +1,108 @@
+.contact-page {
+  background-color: black;
+  color: #ffffff;
+  padding: 60px 20px;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-header h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #20c755;
+}
+
+.contact-header p {
+  font-size: 18px;
+  color: #cccccc;
+  margin-top: 10px;
+}
+
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  flex: 1;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-icon {
+  font-size: 24px;
+  color: #20c755;
+  margin-right: 15px;
+}
+
+.contact-form-container {
+  flex: 1;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-field {
+  background-color: #141414;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  box-shadow: 0 0 5px #20c755;
+}
+
+.submit-btn {
+  background-color: #20c755;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #1b9f47;
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-info,
+  .contact-form-container {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}

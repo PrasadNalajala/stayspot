@@ -7,6 +7,8 @@ import Home from './components/Home/index.js';
 import BrowseRentals from './components/BrowseRentals/index.js';
 import PostRental from './components/PostRental/index.js';
 import AboutUs from './components/AboutUs/index.js';
+import ContactUs from './components/Contact/index.js';
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,7 @@ function App() {
           <Route path='browse-rentals' Component={BrowseRentals}/>
           <Route path='/post-rental' Component={PostRental}/>
           <Route path='/about-us' Component={AboutUs} />
+          <Route path='/contact' Component={ContactUs}/>
       </Routes>
       </BrowserRouter>
     </div>
