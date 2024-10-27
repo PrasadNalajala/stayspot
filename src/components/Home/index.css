@@ -5,7 +5,7 @@
     padding-top: 80px;
 }
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -22,8 +22,8 @@
     transform: translateX(0);
     opacity: 1;
   }
-}
-@keyframes slideInRight {
+} */
+/* @keyframes slideInRight {
   from {
     transform: translateX(100%);
     opacity: 0;
@@ -32,7 +32,7 @@
     transform: translateX(0);
     opacity: 1;
   }
-}
+} */
 
 
 .welcome-section{
@@ -41,8 +41,8 @@
     height: 79vh;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-  animation: slideInLeft 0.8s ease-in forwards;
+    opacity: 1;
+  animation: fadeIn 0.8s ease-in forwards;
 }
 .welcome-heading span{
     margin-left: 30px;
@@ -69,7 +69,7 @@
     /* justify-content: space-around; */
     align-items: space-around;
     padding: 50px;
-    opacity: 0;
+    opacity: 1;
   animation: slideInLeft 2s ease-in forwards;
     
 }
@@ -143,7 +143,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    opacity: 0;
+    opacity: 1;
   animation: slideInRight 2s ease-in forwards;
   }
   .post-rental-des{

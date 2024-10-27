@@ -1,6 +1,13 @@
 import './index.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Navbar=()=>{
+    const jwtToken=localStorage.getItem('token')
+    const navigate=useNavigate()
+    const handleLogout=()=>{
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
+    const isLoggedin=jwtToken!==null?'Logout':'Login'
     return(
         <div className="nav-container">
             <Link className="logo-container" to="/" style={{textDecoration:'none'}}>
@@ -14,6 +21,7 @@ const Navbar=()=>{
                     <Link to='/post-rental' className='nav-link'>Post</Link>
                     <Link to='/about-us' className='nav-link'>About</Link>
                    <Link to="/contact" className='nav-link'>Contact </Link>
+                   <li className='nav-link' onClick={handleLogout}>{isLoggedin}</li>
                     
                 </ul>
             </div>

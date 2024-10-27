@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import './index.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -22,9 +22,13 @@ const Signup=()=>{
                     }
                     try {
                         const response = await axios.post('http://localhost:3000/register', data);
-                        toast.success('Login Success')
-                        navigate('/')
-                        console.log(response); 
+                        if (response.status === 201) {
+                            const { token } = response.data;
+                            localStorage.setItem('token', token);
+                            toast.success('Registration Successful');
+                            navigate('/'); 
+                            console.log(response.data);
+                        }
                     } catch (error) {
                         if (error.response) {
                             if (error.response.status === 400) {
@@ -50,9 +54,9 @@ const Signup=()=>{
     return(
         <div>
             <h3 className="signup-heading">Sign up</h3>
-            <button className="oneClickBtn"><FaFacebook/>    Signup with Facebook</button>
+            <button className="oneClickBtn"><FaFacebook style={{ color: '#3b5998',fontSize:'25px' }}/>    Signup with Facebook</button>
             <br/>
-            <button className="oneClickBtn"><FaGoogle/>      Signup with Google</button>
+            <button className="oneClickBtn"><FaGoogle style={{ color: '#db4437',fontSize:'25px' }}/>      Signup with Google</button>
             <p className="hr-text">OR</p>
             <form>
                 <input type='name'id='firstname'className="name-input" placeholder="First Name" onChange={(e)=>setFirstname(e.target.value)}/>
@@ -80,8 +84,13 @@ const LoginFields=()=>{
         }
         try{
         const response=await axios.post('http://localhost:3000/login',credentials)
-        toast.success("Login success")
-        navigate('/')
+        if (response.status===200){
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            toast.success("Login success")
+            navigate('/')
+        }
+        
         }
         catch(error){
             if (error.response) {
@@ -98,10 +107,16 @@ const LoginFields=()=>{
     }
     const onClickLogin=(e)=>{
         e.preventDefault()
-        fecthLogin()
+        if (email && password){
+            fecthLogin()
+         }
+         else{
+            toast.warning('Enter All Fields')
+         }
     }
     return(
         <div>
+            <h3 className="signup-heading">Login</h3>
             <form>
             <input type='email' id='email-input'className="email-input" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
             <br/>
@@ -115,14 +130,21 @@ const LoginFields=()=>{
 
 const Login=(props)=>{
     const [isSignupSelected,setisSignUpSelected]=useState(true)
-    const signupselected=isSignupSelected?'selected':''
-    const loginselected=isSignupSelected?'':'selected'
+    const signupselected=!isSignupSelected?'selected':''
+    const loginselected=!isSignupSelected?'':'selected'
+    const navigate=useNavigate()
+    useEffect(()=>{
+        const token=localStorage.getItem('token');
+        if (token){
+            navigate('/');
+        }
+    },[])
     return(
         <div className="bg">
             <div className="card">
-            <h1>StaySpot</h1>
+            <h1 style={{color:'#20c755'}}>StaySpot</h1>
             <div className="input-select">
-                <button id="signup-btn" className={`input-selection-btn ${signupselected}`} onClick={()=>setisSignUpSelected(true)}>Sign up</button>
+                <button id="signup-btn" className={`input-selection-btn ${signupselected}`} onClick={()=>setisSignUpSelected(true)}>Sign Up</button>
                 <button  id="login-btn" className={`input-selection-btn ${loginselected}`}onClick={()=>setisSignUpSelected(false)}>Login</button>
             </div>
             <div className="container">
