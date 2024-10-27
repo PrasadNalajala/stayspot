@@ -33,16 +33,16 @@ const ContactUs = () => {
           <form className="contact-form">
             <input
               type="text"
-              className="input-field"
+              className="contact-input-field"
               placeholder="Your Name"
             />
             <input
               type="email"
-              className="input-field"
+              className="contact-input-field"
               placeholder="Your Email"
             />
             <textarea
-              className="input-field"
+              className="contact-input-field"
               rows="5"
               placeholder="Your Message"
             ></textarea>

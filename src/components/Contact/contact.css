@@ -62,7 +62,7 @@
   width: 100%;
 }
 
-.input-field {
+.contact-input-field {
   background-color: #141414;
   color: #ffffff;
   border: none;
@@ -73,7 +73,7 @@
   transition: all 0.3s ease;
 }
 
-.input-field:focus {
+.contact-input-field:focus {
   outline: none;
   box-shadow: 0 0 5px #20c755;
 }
