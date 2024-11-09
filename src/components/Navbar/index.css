@@ -1,37 +1,106 @@
-.nav-container{
+.nav-container {
     display: flex;
     background-color: black;
-    justify-content: space-around;
+    justify-content: space-between;
     position: fixed;
-    margin: 0 !important;
-    padding-top: 20px;
+    padding: 7px;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    margin-top: 20px;
     align-items: center;
 }
-.nav-items-container{
-    display: flex;
-    
-}
 
-.nav-items-container ul{
-    display: flex;
-    width: 300px;
-    justify-content: space-between;
-    list-style-type: none;
-}
-.logo-container p{
+.logo-container p {
     font-size: 25px;
     color: #20c755;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.nav-link{
+
+.nav-items-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Hamburger menu icon */
+.menu-icon {
+    display: none;
+    color: #20c755;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: center;
+}
+
+/* Menu items layout */
+.nav-items-container ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    align-items: center;
+}
+
+.nav-link {
     font-size: 19px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-decoration: none;
     color: rgb(197, 194, 194);
     margin-left: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.logout {
+    margin-right: 20px; /* Ensures logout button is fully visible */
+}
+
+/* Hide icons and show text on large screens */
+.icon-only {
+    display: none;
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .nav-items-container ul {
+        display: none; /* Hide the menu items by default */
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        width: 200px;
+        padding: 10px;
+        border-radius: 8px;
+        z-index: 999;
+    }
+
+    .nav-items-container ul.active {
+        display: flex; /* Show the menu when active */
+    }
+
+    .nav-link {
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    .icon-only {
+        display: inline; /* Show icons only */
+        font-size: 24px;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+
+    .icon-only:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Slightly darker on hover */
+    }
+
+    .link-text {
+        display: none; /* Hide text on small screens */
+    }
 }
