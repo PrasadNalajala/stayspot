@@ -20,7 +20,7 @@ const Home=(props)=>{
            
             <div className='browse-rentals-section'> 
                 
-                <h1>Browse Rentals</h1>
+                <h1 style={{color:'#20c755'}}>Browse Rentals</h1>
                 <p>Explore a wide range of homes available for rent in your city. Whether you're looking for an apartment, house, or shared accommodation, we've got options to suit your needs.</p>
                 <div className='browse-rental-items-container'>
                 <ul>
@@ -40,7 +40,7 @@ const Home=(props)=>{
                 <Link className="browse-btn" to='/browse-rentals'>View All Rentals <FaArrowRight/></Link>
            </div>
            <div className='post-rentals browse-rentals-section'>
-                        <h1>Post Rentals</h1>
+                        <h1 style={{color:'#20c755'}}>Post Rentals</h1>
                         <div className='post-rentals-section'>
                             <div>
                             <img src={house1} className='browse-img' alt='house'/>
@@ -62,7 +62,7 @@ const Home=(props)=>{
                         <Link className="browse-btn" to="/post-rental">Post Your Rental <FaArrowRight/></Link>
            </div>
            <div className='testimonials-section'>
-            <h1>Testimonials</h1>
+            <h1 style={{color:'#20c755'}}>Testimonials</h1>
             <div className='testimonial-container'>
             <div>
                 <p>"Finding a rental was so easy with <span>StaySpot</span>. The listings were accurate and the process was smooth!"
