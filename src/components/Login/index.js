@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import axios from 'axios'
 import { toast } from "react-toastify";
+import { DotLoader } from 'react-spinners';
 
 const Signup=()=>{
     
@@ -76,6 +77,7 @@ const Signup=()=>{
 const LoginFields=()=>{
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('') 
+    const [isLoading,setIsLoading]=useState(false)
     const navigate=useNavigate()
     const fecthLogin=async()=>{
         const credentials={
@@ -93,6 +95,7 @@ const LoginFields=()=>{
         
         }
         catch(error){
+            // setIsLoading(false)
             if (error.response) {
                 if (error.response.status === 400) {
                     toast.error(error.response.data.error );
@@ -109,6 +112,7 @@ const LoginFields=()=>{
         e.preventDefault()
         if (email && password){
             fecthLogin()
+            setIsLoading(true)
          }
          else{
             toast.warning('Enter All Fields')
@@ -122,7 +126,7 @@ const LoginFields=()=>{
             <br/>
             <input type='password' id='password-input'className="email-input" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
             <br/>
-            <button type='submit' className="submit-btn" onClick={onClickLogin}>Login</button>
+            <button type='submit' className="submit-btn" onClick={onClickLogin}>{isLoading ? <DotLoader color="#ffffff" size={10} /> : 'Login'}</button>
             </form>
             </div>
     )

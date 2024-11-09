@@ -135,3 +135,99 @@
     }
   }
   
+  .values-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.value-card {
+    background: #2c2c2c; /* Match team card background */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Consistent shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ffffff; /* Match text color */
+    border: 1px solid #333333; /* Subtle border for consistency */
+}
+
+.value-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
+}
+
+.value-icon {
+    font-size: 3rem; /* Increase icon size slightly */
+    color: #20c755;
+    margin-bottom: 10px;
+}
+
+.value-card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #20c755;
+    margin-bottom: 8px;
+}
+
+.value-card p {
+    font-size: 16px;
+    color: #bbbbbb; /* Match the color of the team role */
+    margin: 0;
+}
+.about-content, .mission-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.icon {
+  font-size: 2rem;
+  color: #20c755;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.about-point, .mission-point {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.about-point h3, .mission-point h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #20c755;
+  margin-top: 10px;
+}
+
+.about-point p, .mission-point p {
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  max-width: 600px;
+}
+
+.divider {
+  width: 50%;
+  border: 0;
+  height: 1px;
+  background: #20c755;
+  margin: 15px auto;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
