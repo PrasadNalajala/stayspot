@@ -27,7 +27,7 @@ const RentalItem = (props) => {
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         },
         overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)', // Black overlay with opacity
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
         },
     };
 
@@ -59,8 +59,8 @@ const RentalItem = (props) => {
                 contentLabel="Owner Details Modal"
             >
                 <div className='modal-header'>
-                <h2>Owner Details</h2>
-                <button className='close-modal-btn' onClick={closeModal}>Close</button>
+                    <h2>Owner Details</h2>
+                    <button className='close-modal-btn' onClick={closeModal}>Close</button>
                 </div>
                 <div className='owner-details'>
                     <p><strong>Name:</strong> {contact.name}</p>
