@@ -9,11 +9,10 @@ import "./postrental.css";
 
 const PostRental = () => {
   const [image, setImage] = useState(null);
-  const [contactName,setcontactName]=useState('')
-  const [phoneNumber,setPhoneNumber]=useState()
-  const [email,setEmail]=useState('')
+  const [contactName, setContactName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({
-    
     title: '',
     location: '',
     price: '',
@@ -24,9 +23,9 @@ const PostRental = () => {
     description: '',
     amenities: { Gym: false, WiFi: false, Parking: false },
     status: 'available',
-    contact_name:contactName,
-    contact_mail:'',
-    contact_phone:phoneNumber,
+    contact_name: contactName,
+    contact_mail: '',
+    contact_phone: phoneNumber,
   });
 
   const handleChange = (e) => {
@@ -48,7 +47,6 @@ const PostRental = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedFormData = {
@@ -57,7 +55,6 @@ const PostRental = () => {
       contact_phone: phoneNumber,
       contact_mail: email,
     };
-    console.log('updated form data',updatedFormData)
     const data = new FormData();
     Object.keys(updatedFormData).forEach(key => {
       if (key === "amenities") {
@@ -67,19 +64,10 @@ const PostRental = () => {
       }
     });
     data.append("image", updatedFormData.imageUrl);
-    for (let [key, value] of data.entries()) {
-      console.log(`${key}: ${value}`);
-    }
     try {
-      const response = await axios.post("http://localhost:3000/rentals", updatedFormData, {
-        headers: {
-          // "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response.data);
+      const response = await axios.post("http://localhost:3000/rentals", updatedFormData);
       toast.success("Rental property posted successfully!");
     } catch (error) {
-      console.error("Error posting rental:", error);
       toast.error("Failed to post rental property.");
     }
   };
@@ -131,11 +119,11 @@ const PostRental = () => {
             <div className="input-group">
               <div className="input-field">
                 <FaRegUser className="input-icon" />
-                <input type="text" placeholder="Contact Name" name="contactName" value={contactName} onChange={(e)=>setcontactName(e.target.value)} required />
+                <input type="text" placeholder="Contact Name" name="contactName" value={contactName} onChange={(e) => setContactName(e.target.value)} required />
               </div>
               <div className="input-field">
                 <FaPhoneAlt className="input-icon" />
-                <input type="tel" placeholder="Contact Number" name="contactPhone" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} required />
+                <input type="tel" placeholder="Contact Number" name="contactPhone" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
               </div>
             </div>
 
