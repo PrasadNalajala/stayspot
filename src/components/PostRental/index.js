@@ -1,19 +1,23 @@
 import React, { useState } from "react";
+import LoginModalContent from '../LoginModal/index.js';
 import axios from "axios";
 import { FaHome, FaPhoneAlt, FaMapMarkerAlt, FaImage, FaRupeeSign, FaBed, FaBath, FaRegUser } from "react-icons/fa"; 
 import { TbRulerMeasure } from "react-icons/tb";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { toast } from "react-toastify";
+import Modal from 'react-modal';
 import "./postrental.css";
 
 const PostRental = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const jwtToken = localStorage.getItem('token');
+  const isLoggedin=jwtToken!==null
    const [allAmenities] = useState([
     "Gym", "Wi-Fi", "Parking", "Pool", "Garden"
-  ]); // State to store the generated image URL
+  ]); 
   const [formData, setFormData] = useState({
     title: '',
     location: '',
@@ -99,6 +103,35 @@ const PostRental = () => {
     } catch (error) {
       toast.error("Failed to post rental property.");
     }
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(!isLoggedin);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
+  const customStyles = {
+      content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          padding: '20px',
+          borderRadius: '8px',
+          maxWidth: '500px',
+          width: '90%', 
+          border:'none',
+          display:'flex',
+          flexDirection:'column',
+          alignItems:'center',
+          
+          backgroundColor:'transparent'
+      },
+      overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+      },
   };
  
 
@@ -260,6 +293,20 @@ const PostRental = () => {
             </div>
           </form>
         </div>
+        {
+           <Modal
+           isOpen={modalIsOpen}
+           style={customStyles}
+           onRequestClose={closeModal}
+           contentLabel="Login to Post"
+       >
+           {/* <div className='modal-header'>
+               <h2>Log in to add a post</h2>
+               
+           </div> */}
+           <LoginModalContent onClose={closeModal}/>
+       </Modal>
+        }
       </div>
       <Footer />
     </div>

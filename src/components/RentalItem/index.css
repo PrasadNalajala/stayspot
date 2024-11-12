@@ -129,6 +129,10 @@
 .owner-details {
     margin-top: 15px;
     line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap:5px;
 }
 
 .close-modal-btn {

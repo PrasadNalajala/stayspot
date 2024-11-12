@@ -1,5 +1,7 @@
 import './index.css';
 import { FaMapMarkedAlt } from "react-icons/fa";
+import { SiMinutemailer } from "react-icons/si";
+import {FiPhoneOutgoing} from 'react-icons/fi';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
@@ -23,6 +25,7 @@ const RentalItem = (props) => {
             borderRadius: '8px',
             maxWidth: '500px',
             width: '90%', 
+            border:'none',
             backgroundColor: '#141414',
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         },
@@ -63,9 +66,9 @@ const RentalItem = (props) => {
                     <button className='close-modal-btn' onClick={closeModal}>Close</button>
                 </div>
                 <div className='owner-details'>
-                    <p><strong>Name:</strong> {contact.name}</p>
-                    <p><strong>Email:</strong> {contact.email}</p>
-                    <p><strong>Phone:</strong> {contact.phone}</p>
+                    <p><strong>Name:</strong> <span style={{textDecoration:'none',color:'#20c755'}}>{contact.name}</span></p>
+                    <p><strong>Email:</strong> <a style={{textDecoration:'none',color:'#20c755'}}href={`mailto:${contact.email}`}>{contact.email}</a></p>
+                    <p><strong>Phone:</strong><a style={{textDecoration:'none',color:'#20c755'}} href={`tel:${contact.phone}`}>{contact.phone}</a> </p>
                 </div>
             </Modal>
         </div>
