@@ -22,7 +22,7 @@ const Signup=()=>{
                         password:password
                     }
                     try {
-                        const response = await axios.post('http://localhost:3000/register', data);
+                        const response = await axios.post('http://localhost:3001/register', data);
                         if (response.status === 201) {
                             const { token } = response.data;
                             localStorage.setItem('token', token);
@@ -85,7 +85,7 @@ const LoginFields=()=>{
             password:password
         }
         try{
-        const response=await axios.post('http://localhost:3000/login',credentials)
+        const response=await axios.post('http://localhost:3001/login',credentials)
         if (response.status===200){
             const { token } = response.data;
             localStorage.setItem('token', token);
@@ -95,7 +95,7 @@ const LoginFields=()=>{
         
         }
         catch(error){
-            // setIsLoading(false)
+            setIsLoading(false)
             if (error.response) {
                 if (error.response.status === 400) {
                     toast.error(error.response.data.error );
