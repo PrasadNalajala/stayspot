@@ -11,7 +11,7 @@ const BrowseRentals=(props)=>{
    const [rentalsDetails,setRentaldetails]=useState([])
    const [isLoading,setIsLoading]=useState(true)
   const fetchRentals=async()=>{
-    const response=await axios.get('http://localhost:3000/rentals')
+    const response=await axios.get('http://localhost:3001/rentals')
     try{
       if (response.status===200){
         setRentaldetails(response.data)

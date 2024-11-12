@@ -105,6 +105,23 @@ body, html {
   max-height: 200px;
   object-fit: cover;
 }
+.form-submit button {
+  background-color: #20c755;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.form-submit button:hover {
+  
+  background-color: #1aaf4a;
+  box-shadow: 0 5px 10px rgba(32, 199, 85, 0.5);
+}
 
 /* Responsive Styling */
 @media (max-width: 768px) {

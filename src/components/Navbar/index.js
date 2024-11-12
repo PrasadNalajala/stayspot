@@ -43,7 +43,7 @@ const Navbar = () => {
                     <Link to='/contact' className='nav-link'>
                         <FaPhone className="icon-only" /> <span className="link-text">Contact</span>
                     </Link>
-                    <li className='nav-link logout' onClick={handleLogout}>
+                    <li className='nav-link logout' onClick={handleLogout} style={{cursor:'pointer'}}>
                         {loginIcon} <span className="link-text">{isLoggedin}</span>
                     </li>
                 </ul>
