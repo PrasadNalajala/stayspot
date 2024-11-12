@@ -9,9 +9,11 @@ import "./postrental.css";
 
 const PostRental = () => {
   const [image, setImage] = useState(null);
-  const [contactName, setContactName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [imageUrl, setImageUrl] = useState(null); 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+   const [allAmenities] = useState([
+    "Gym", "Wi-Fi", "Parking", "Pool", "Garden"
+  ]); // State to store the generated image URL
   const [formData, setFormData] = useState({
     title: '',
     location: '',
@@ -20,57 +22,85 @@ const PostRental = () => {
     bathrooms: '',
     size: '',
     imageUrl: '',
+    availble_from:'',
     description: '',
-    amenities: { Gym: false, WiFi: false, Parking: false },
+    amenities: { },
     status: 'available',
-    contact_name: contactName,
-    contact_mail: '',
-    contact_phone: phoneNumber,
+    contact_name: '',
+    contact_email: '',
+    contact_phone: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
-
+ 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(URL.createObjectURL(file));
-      setFormData((prev) => ({
-        ...prev,
-        imageUrl: file
-      }));
+      setImage(URL.createObjectURL(file)); 
+      uploadImageToCloud(file); 
     }
   };
 
+  const uploadImageToCloud = (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "imageUrl"); 
+
+    axios.post(`https://api.cloudinary.com/v1_1/dnd03w7us/image/upload`, formData)
+      .then(response => {
+        setImageUrl(response.data.secure_url);
+      })
+      .catch(error => {
+        toast.error("Failed to upload image");
+      });
+  };
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!imageUrl) {
+      toast.error("Please upload an image.");
+      return;
+    }
+
+   
     const updatedFormData = {
       ...formData,
-      contact_name: contactName,
-      contact_phone: phoneNumber,
-      contact_mail: email,
+      imageUrl: imageUrl, 
     };
-    const data = new FormData();
-    Object.keys(updatedFormData).forEach(key => {
-      if (key === "amenities") {
-        data.append(key, JSON.stringify(updatedFormData[key])); // For amenities, store JSON string
-      } else {
-        data.append(key, updatedFormData[key]);
-      }
-    });
-    data.append("image", updatedFormData.imageUrl);
+
+
     try {
-      const response = await axios.post("http://localhost:3000/rentals", updatedFormData);
+      const response = await axios.post("http://localhost:3001/rentals", updatedFormData);
       toast.success("Rental property posted successfully!");
+      setFormData({
+        title: '',
+        location: '',
+        price: '',
+        bedrooms: '',
+        bathrooms: '',
+        size: '',
+        description: '',
+        availble_from:'',
+        
+        status: 'available',
+        contact_name: '',
+        contact_email: '',
+        contact_phone: '',
+      });
+      setImage(null); 
     } catch (error) {
       toast.error("Failed to post rental property.");
     }
   };
+ 
 
   return (
     <div>
@@ -86,51 +116,125 @@ const PostRental = () => {
             <div className="input-group">
               <div className="input-field">
                 <FaHome className="input-icon" />
-                <input type="text" placeholder="Property Title" name="title" value={formData.title} onChange={handleChange} required />
+                <input
+                  type="text"
+                  placeholder="Property Title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="input-field">
                 <FaMapMarkerAlt className="input-icon" />
-                <input type="text" placeholder="Location" name="location" value={formData.location} onChange={handleChange} required />
+                <input
+                  type="text"
+                  placeholder="Location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-field">
                 <FaRupeeSign className="input-icon" />
-                <input type="number" placeholder="Price (₹)" name="price" value={formData.price} onChange={handleChange} required />
+                <input
+                  type="number"
+                  placeholder="Price (₹)"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="input-field">
                 <TbRulerMeasure className="input-icon" />
-                <input type="text" placeholder="Size (sq.ft)" name="size" value={formData.size} onChange={handleChange} required />
+                <input
+                  type="text"
+                  placeholder="Size (sq.ft)"
+                  name="size"
+                  value={formData.size}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-field">
                 <FaBed className="input-icon" />
-                <input type="number" placeholder="Bedrooms" name="bedrooms" value={formData.bedrooms} onChange={handleChange} required />
+                <input
+                  type="number"
+                  placeholder="Bedrooms"
+                  name="bedrooms"
+                  value={formData.bedrooms}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="input-field">
                 <FaBath className="input-icon" />
-                <input type="number" placeholder="Bathrooms" name="bathrooms" value={formData.bathrooms} onChange={handleChange} required />
+                <input
+                  type="number"
+                  placeholder="Bathrooms"
+                  name="bathrooms"
+                  value={formData.bathrooms}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
+            <div className="input-group">
+              <div className="input-field">
+                <FaBed className="input-icon" />
+                <input
+                  type="date"
+                  placeholder="Availbe from"
+                  name="availble_from"
+                  value={formData.availble_from}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              </div>
 
             <div className="input-group">
               <div className="input-field">
                 <FaRegUser className="input-icon" />
-                <input type="text" placeholder="Contact Name" name="contactName" value={contactName} onChange={(e) => setContactName(e.target.value)} required />
+                <input
+                  type="text"
+                  placeholder="Contact Name"
+                  name="contact_name"
+                  value={formData.contact_name}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="input-field">
                 <FaPhoneAlt className="input-icon" />
-                <input type="tel" placeholder="Contact Number" name="contactPhone" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                <input
+                  type="tel"
+                  placeholder="Contact Number"
+                  name="contact_phone"
+                  value={formData.contact_phone}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input-field">
                 <FaImage className="input-icon" />
-                <input type="file" accept="image/*" onChange={handleImageUpload} required />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  required
+                />
               </div>
               {image && (
                 <div className="image-preview">
@@ -141,7 +245,13 @@ const PostRental = () => {
 
             <div className="input-group">
               <div className="input-field">
-                <textarea placeholder="Property Description" name="description" value={formData.description} onChange={handleChange} required></textarea>
+                <textarea
+                  placeholder="Property Description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
