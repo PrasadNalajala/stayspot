@@ -122,9 +122,9 @@ const LoginFields=()=>{
         <div>
             <h3 className="signup-heading">Login</h3>
             <form>
-            <input type='email' id='email-input'className="email-input" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
+            <input type='email' id='email-input'className="email-input" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
             <br/>
-            <input type='password' id='password-input'className="email-input" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
+            <input type='password' id='password-input'className="email-input" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} value={password}/>
             <br/>
             <button type='submit' className="submit-btn" onClick={onClickLogin}>{isLoading ? <DotLoader color="#ffffff" size={10} /> : 'Login'}</button>
             </form>

@@ -1,0 +1,149 @@
+/* Adjusting modal for responsive layout */
+.stayspot-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #151615;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+.stayspot-modal-header h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color:#20c755;
+}
+.stayspot-modal-header{
+    color: #20c755;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.stayspot-input-select {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+.stayspot-input-select button {
+    flex: 1;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    background-color: #333333;
+    font-family: inherit;
+}
+
+.stayspot-input-select .selected {
+    background-color: #20c755;
+    color: #151615;
+}
+
+.stayspot-form {
+    width: 100%;
+}
+
+.stayspot-form input[type="text"],
+.stayspot-form input[type="email"],
+.stayspot-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-family: inherit;
+    background-color: #ffffff;
+}
+
+/* Style for side-by-side fields for larger screens */
+@media (min-width: 600px) {
+    .stayspot-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .stayspot-form input[type="text"] {
+        width: calc(50% - 5px);
+    }
+}
+
+.stayspot-submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #20c755;
+    color: #151615;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.stayspot-submit-btn:hover {
+    background-color: #1aa748;
+}
+
+.stayspot-close-btn {
+    margin-top: 20px;
+    background: transparent;
+    color: #999999;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.stayspot-close-btn:hover {
+    color: #ffffff;
+}
+
+/* Adjust spacing and layout for smaller screens */
+@media (max-width: 599px) {
+    .stayspot-modal-header h3 {
+        font-size: 20px;
+    }
+    
+    .stayspot-submit-btn {
+        font-size: 16px;
+    }
+}
+.login-header {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #20c755;
+    font-weight: 600;
+    margin: 7px 0;
+    padding: 7px;
+    
+    border-radius: 10px;
+    
+    width: 80%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.login-header:hover {
+    transform: scale(1.05);
+    
+}
+
+/* Additional responsiveness */
+@media (max-width: 768px) {
+    .login-header {
+        font-size: 1.6rem; /* Adjust font size for smaller screens */
+        padding: 12px;
+    }
+}
