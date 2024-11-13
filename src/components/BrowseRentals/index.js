@@ -1,54 +1,104 @@
-import Navbar from "../Navbar"
-import './index.css'
+import Navbar from "../Navbar";
+import "./index.css";
 import RentalItem from "../RentalItem";
 import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from 'axios'
+import axios from "axios";
 import ImageGrid from "../Loader";
+import { FaSearch } from "react-icons/fa";
+import notFound from '../../assets/undraw_empty_re_opql.svg'
 
-const BrowseRentals=(props)=>{
-   const [rentalsDetails,setRentaldetails]=useState([])
-   const [isLoading,setIsLoading]=useState(true)
-  const fetchRentals=async()=>{
-    const response=await axios.get('http://localhost:3001/rentals')
-    try{
-      if (response.status===200){
-        setRentaldetails(response.data)
-        setIsLoading(false)
+const BrowseRentals = (props) => {
+  const [rentalsDetails, setRentaldetails] = useState([]);
+  const [filteredRentalDetails,setFilteredRentalDetails]=useState([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchInput,setSearchInput]=useState('')
+  const fetchRentals = async () => {
+    const response = await axios.get("http://localhost:3001/rentals");
+    try {
+      if (response.status === 200) {
+        setRentaldetails(response.data);
+        setFilteredRentalDetails(response.data)
+        setIsLoading(false);
+      }
+    } catch (er) {
+      toast.error(er.message);
+      setIsLoading(false);
     }
-    } 
-    catch(er){
-      toast.error(er.message)
-      setIsLoading(false)
+  };
+
+  const onChangeInput=(e)=>{
+    setSearchInput(e.target.value)
+    if (searchInput===''){
+      setFilteredRentalDetails(rentalsDetails)
     }
   }
+  const tryAgain=()=>{
+    fetchRentals()
+  }
 
-   useEffect(()=>{
-      fetchRentals()
-   },[])
-    return(
-        <div style={{minHeight:'100vh'}}>
-            <Navbar/>
-            {isLoading?
-            <div style={{marginTop:'120px',height:'100%'}}>
-            <ImageGrid/>
-            </div>
-            :
-            <div className="rental-section">
-            <h1 className="availble-rental">Available Rentals</h1>
-            <div className="rental-items-section">
-                {rentalsDetails.map(each=>(
-                    <RentalItem itemDetails={each} key={each.id}/>
-                ))}
-            </div>
-            </div>
-            }
-            <Footer/>
+  const onClicksearch=()=>{
+    const updatedRentalDetails = rentalsDetails.filter(
+      (item) =>
+        (item.title && item.title.toLowerCase().includes(searchInput.toLowerCase())) ||
+        (item.location && item.location.toLowerCase().includes(searchInput.toLowerCase()))
+    );
+    setFilteredRentalDetails(updatedRentalDetails)
+    setSearchInput('')
+    
+  }
+
+  useEffect(() => {
+    fetchRentals();
+  }, []);
+
+  return (
+    <div style={{ minHeight: "100vh" }}>
+      <Navbar />
+      {isLoading ? (
+        <div style={{ marginTop: "120px", height: "100%" }}>
+          <ImageGrid />
         </div>
-          
+      ) : (
+        <div className="rental-section">
+          <div className="search-section">
+            <h1 className="availble-rental">Available Rentals</h1>
+            <div className="search-input-container">
+              <input type="text" className="rental-search-input" placeholder="Search" value={searchInput} onChange={onChangeInput}/>
+              <div className="search-icon-container" onClick={onClicksearch}>
+                <FaSearch className="search-icon"/>
+              </div>
+            </div>
+          </div>
+          <div className="rental-items-section">
+            {filteredRentalDetails.length >0?
+            <>
+            {filteredRentalDetails.map((each) => (
+              <RentalItem itemDetails={each} key={each.id} />
+            ))}
+            </> :
+            <div className="no-results-wrapper"> 
+            <div class="no-results-container">
+            <img src={notFound} alt="No Results Found" class="no-results-image" />
+            
+            <h2 class="no-results-title">No Results Found</h2>
+            
+            <p class="no-results-description">
+                We couldn't find any matches for your search. Try adjusting your search terms or explore other options!
+            </p>
+            
+            <button class="retry-button" onClick={tryAgain}>Try Again</button>
+        </div>
+        </div>
+        
+          }
+          </div>
+        </div>
+      )}
+      <Footer />
+    </div>
+  );
+};
 
-    )
-}
-
-export default BrowseRentals
+export default BrowseRentals;
