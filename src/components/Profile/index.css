@@ -1,0 +1,150 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color:black;
+    margin-top: 65px;
+    min-height: 100vh;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(13, 12, 12);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .profile-picture {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    background-color: #c7b620;
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  
+  .edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #1b9e4b;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .upload-input {
+    display: none;
+  }
+  
+  .profile-info {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .username {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #20c755;
+  }
+  
+  .info-label {
+    text-align: start;
+    margin-bottom: 5px;
+    color: #a9a4a4;
+    font-weight: 600;
+  }
+  
+  .info-row {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .editable-input,
+  .editable-textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 0.6px solid #ccc;
+    margin-top: 5px;
+    background-color: #0c0c0c;
+    color: #908d8d;
+  }
+  
+  .editable-input:focus,
+  .editable-textarea:focus {
+    outline: none;
+    border-color: #20c755;
+  }
+  
+  .save-btn {
+    background-color: #20c755;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .save-btn:hover {
+    background-color: #1b9e4b;
+  }
+  
+  @media (min-width:768px) {
+    .profile-section{
+        display: flex;
+        gap: 10%;
+        align-items: center;
+        width: 100%;
+    }
+    .info-row{
+        width: 45%;
+    }
+    .profile-info{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .bio-container{
+        width: 95%;
+    }
+    .save-btn{
+        width: 170px;
+    }
+    .username{
+        text-align: start;
+    }
+
+  }
