@@ -22,8 +22,8 @@ const Footer = () => {
       </div>
       <div className="footer-section contact">
         <h2>Contact Us</h2>
-        <p>Email: support@stayspot.com</p>
-        <p>Phone: +91 8374240950</p>
+        <p>Email: <a  style={{color:'#bbbbbb',textDecoration:'none'}}href={`mailto:support@stayspot.com}`}>support@stayspot.com</a></p>
+        <p>Phone: <a style={{color:'#bbbbbb',textDecoration:'none'}} href={`tel:8374240950`}>+91 8374240950</a></p>
         <p>Address: Seena Shop, Polepalli, Anantapur, India</p>
       </div>
       <div className="footer-section social-media">
