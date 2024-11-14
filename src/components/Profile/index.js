@@ -1,35 +1,61 @@
 import React, { useEffect, useState } from "react";
+import { formatDistanceToNow } from "date-fns";
 import Navbar from "../Navbar";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { FiEdit2 } from "react-icons/fi"; // Import edit icon
-import "./index.css"; // Import the CSS file
+import { FiEdit2 } from "react-icons/fi";
+import "./index.css";
 
 const Profile = () => {
+  const [userDetails, setUserDetails] = useState([]);
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [email, setEmail] = useState("john.doe@example.com");
-  const [Occupation,setOccupation]=useState("Software engineer");
-  const [phone, setPhone] = useState("123-456-7890");
-  const [bio, setBio] = useState("Hi! I'm John, a passionate traveler and real estate enthusiast.");
-  const [location, setLocation] = useState("New York, USA");
-  const [name, setName] = useState("John Doe");
+  const [email, setEmail] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState("");
+  const [location, setLocation] = useState("");
+  const [name, setName] = useState("Prasad Nallajala");
+  let timeAgo;
+  if (userDetails.length !== 0) {
+    const date = new Date(userDetails.created_at);
 
+    timeAgo = formatDistanceToNow(date, { addSuffix: true });
+  }
+
+  const fecthUserDetails = async () => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const response = await axios.get("http://localhost:3001/api/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = response.data[0];
+    setUserDetails(data);
+    setImage(data.profile_url);
+    setImageUrl(data.profile_url);
+    setEmail(data.email);
+    setPhone(data.phone_number);
+    setOccupation(data.occupation);
+    setBio(data.bio);
+    setLocation(data.location);
+  };
+  console.log(image, imageUrl, occupation);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(URL.createObjectURL(file)); // Local preview of the image
-      uploadImageToCloud(file); // Upload to cloud storage
+      setImage(URL.createObjectURL(file));
+      uploadImageToCloud(file);
     }
   };
 
   const uploadImageToCloud = (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "YOUR_UPLOAD_PRESET"); // Replace with your actual upload preset
-
+    formData.append("upload_preset", "imageUrl");
     axios
-      .post(`https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload`, formData)
+      .post(`https://api.cloudinary.com/v1_1/dnd03w7us/image/upload`, formData)
       .then((response) => {
         setImageUrl(response.data.secure_url);
         toast.success("Image uploaded successfully");
@@ -40,24 +66,22 @@ const Profile = () => {
   };
 
   const handleSave = () => {
-    // You can add logic to save these changes to your backend here
     toast.success("Profile updated successfully!");
   };
 
   useEffect(() => {
-    console.log("Profile Component Loaded");
+    fecthUserDetails();
   }, []);
 
-  // If no image, display first letter of the name
   const renderProfileImage = () => {
     if (!imageUrl && !image) {
       return (
-        <div className="profile-image-placeholder">
-          {name[0].toUpperCase()}
-        </div>
+        <div className="profile-image-placeholder">{name[0].toUpperCase()}</div>
       );
     }
-    return <img src={imageUrl || image} alt="Profile" className="profile-image" />;
+    return (
+      <img src={imageUrl || image} alt="Profile" className="profile-image" />
+    );
   };
 
   return (
@@ -65,28 +89,26 @@ const Profile = () => {
       <Navbar />
       <div className="profile-container">
         <div className="profile-header">
-            <div className="profile-section">
-          <div className="profile-picture">
-            {renderProfileImage()}
-            <label htmlFor="upload-button" className="edit-icon">
-              <FiEdit2 size={18} />
-            </label>
-            <input
-              id="upload-button"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="upload-input"
-            />
+          <div className="profile-section">
+            <div className="profile-picture">
+              {renderProfileImage()}
+              <label htmlFor="upload-button" className="edit-icon">
+                <FiEdit2 size={18} />
+              </label>
+              <input
+                id="upload-button"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="upload-input"
+              />
+            </div>
+            <div>
+              <h2 className="username">{name}</h2>
+              <p className="info-label">Joined On: {timeAgo}</p>
+            </div>
           </div>
-          <div>
-          <h2 className="username">{name}</h2>
-          <p className="info-label">Joined On: May 10, 2023</p>
-            </div>
-            </div>
           <div className="profile-info">
-            
-
             <div className="info-row">
               <p className="info-label">Email</p>
               <input
@@ -114,7 +136,7 @@ const Profile = () => {
               <input
                 type="text"
                 placeholder="Occupation"
-                value={Occupation}
+                value={occupation}
                 onChange={(e) => setOccupation(e.target.value)}
                 className="editable-input"
               />
