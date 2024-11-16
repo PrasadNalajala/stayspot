@@ -1,4 +1,5 @@
 ```markdown
+```
 # 🌟 StaySpot
 
 Welcome to **StaySpot**! Your go-to platform for all things rental. Whether you're searching for a cozy apartment or looking to list your property, we've got you covered. 🚪🏡
@@ -19,10 +20,13 @@ Welcome to **StaySpot**! Your go-to platform for all things rental. Whether you'
 - **React Toastify**: For elegant notifications and alerts.
 - **React Modal**: For displaying modals to enhance user interaction.
 - **React Icons**: To use a variety of icons in your app.
- ```
+  
+ 
 ## 🚀 Installation
-
+```
+```
 1. **Clone the repository**:
+
 
    ```bash
    git clone https://github.com/your-username/stayspot.git
