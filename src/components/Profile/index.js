@@ -41,7 +41,35 @@ const Profile = () => {
     setBio(data.bio);
     setLocation(data.location);
   };
-  console.log(image, imageUrl, occupation);
+
+  const updateUserDetails=async()=>{
+    const token = localStorage.getItem("token");
+    const data={
+      name: name,
+      location: location,
+      occupation: occupation,
+      phone_number: phone,
+      bio: bio,
+      profile_url: imageUrl,
+      
+    }
+    try {
+      const response = await axios.put("http://localhost:3001/api/user", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      if (error.response) {
+        toast.success(error.response.data);
+      } else {
+        toast.success(error.message);
+      }
+    }
+    
+  }
+  
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -58,7 +86,6 @@ const Profile = () => {
       .post(`https://api.cloudinary.com/v1_1/dnd03w7us/image/upload`, formData)
       .then((response) => {
         setImageUrl(response.data.secure_url);
-        toast.success("Image uploaded successfully");
       })
       .catch((error) => {
         toast.error("Failed to upload image");
@@ -66,7 +93,7 @@ const Profile = () => {
   };
 
   const handleSave = () => {
-    toast.success("Profile updated successfully!");
+    updateUserDetails()
   };
 
   useEffect(() => {
@@ -105,7 +132,7 @@ const Profile = () => {
             </div>
             <div>
               <h2 className="username">{name}</h2>
-              <p className="info-label">Joined On: {timeAgo}</p>
+              <p className="info-label">Joined {timeAgo}</p>
             </div>
           </div>
           <div className="profile-info">
