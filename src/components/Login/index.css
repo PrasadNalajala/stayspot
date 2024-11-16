@@ -110,3 +110,12 @@
     font-family:'Roboto';
     font-size: 18px;
 }
+@media (min-width:768px){
+    .container{
+        padding: 30px;
+        margin-top: 20px;
+        background-color: #161515;
+        border-radius: 15px;
+        min-height: auto;
+    }
+}
