@@ -8,6 +8,7 @@ import BrowseRentals from './components/BrowseRentals/index.js';
 import PostRental from './components/PostRental/index.js';
 import AboutUs from './components/AboutUs/index.js';
 import ContactUs from './components/Contact/index.js';
+import RentalDetails from './components/RentalDetails/index.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/about-us' Component={AboutUs} />
           <Route path='/contact' Component={ContactUs}/>
           <Route path='/profile' Component={Profile}/>
+          <Route path='/rental/details' Component={RentalDetails}/>
       </Routes>
       <ToastContainer 
           position="top-right" 
