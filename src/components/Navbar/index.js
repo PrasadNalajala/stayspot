@@ -49,7 +49,7 @@ const Navbar = () => {
       <Link
         className="logo-container"
         to="/"
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none" ,outline:'none'}}
       >
         <p>StaySpot</p>
       </Link>

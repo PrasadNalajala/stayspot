@@ -1,0 +1,143 @@
+/* General Layout */
+.rental-details-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.rental-header-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.rental-image-container {
+    width: 100%;
+    height: 300px;
+    max-width: 100%;
+    position: relative;
+}
+
+.rental-image {
+    width: fit-content;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.rental-header {
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+.rental-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.rental-location {
+    font-size: 1.2rem;
+    color: #777;
+}
+
+.rental-price {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #2c7be5;
+    margin-top: 10px;
+}
+
+.rental-specs {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.rental-specs span {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Owner Details Section */
+.posted-by-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.owner-profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rental-description {
+    max-width: 900px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.comments-section {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.comments-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.post-comment textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    resize: none;
+    min-height: 120px;
+}
+
+.post-comment button {
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.post-comment button:hover {
+    background-color: #218838;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .rental-header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rental-specs {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
