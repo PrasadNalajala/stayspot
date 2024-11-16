@@ -83,7 +83,7 @@ const Navbar = () => {
               <div className="profile-dropdown">
                 {isLoggedIn ? (
                   <Link to="/profile" className="dropdown-item">
-                    Profile Info
+                    Profile 
                   </Link>
                 ) : (
                   " "
