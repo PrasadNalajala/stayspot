@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   FaBars,
   FaHome,
@@ -18,6 +19,22 @@ const Navbar = () => {
   const [profileDropdownActive, setProfileDropdownActive] = useState(false);
   const jwtToken = localStorage.getItem("token");
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [userImageUrl, setProfileImageUrl] = useState("");
+  const fecthUserDetails = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log(token);
+      const response = await axios.get("http://localhost:3001/api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data[0];
+      setProfileImageUrl(data.profile_url);
+      setUserName(data.name);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -33,23 +50,26 @@ const Navbar = () => {
   };
 
   const isLoggedIn = jwtToken !== null;
-  const userName = localStorage.getItem("userName") || "P";
-  const userImageUrl = localStorage.getItem("userImageUrl");
+
   const loginIcon = isLoggedIn ? <FaSignOutAlt /> : <FaSignInAlt />;
   const profileIcon = userImageUrl ? (
-    <img src={userImageUrl} alt="Profile" className="profile-image" />
+    <img src={userImageUrl} alt="Profile" className="profile-image-navbar" />
   ) : (
     <div className="profile-placeholder">
       {isLoggedIn ? userName.charAt(0).toUpperCase() : <FaUserCircle />}
     </div>
   );
 
+  useEffect(() => {
+    fecthUserDetails();
+  });
+
   return (
     <div className="nav-container">
       <Link
         className="logo-container"
         to="/"
-        style={{ textDecoration: "none" ,outline:'none'}}
+        style={{ textDecoration: "none", outline: "none" }}
       >
         <p>StaySpot</p>
       </Link>
@@ -83,7 +103,7 @@ const Navbar = () => {
               <div className="profile-dropdown">
                 {isLoggedIn ? (
                   <Link to="/profile" className="dropdown-item">
-                    Profile 
+                    Profile
                   </Link>
                 ) : (
                   " "

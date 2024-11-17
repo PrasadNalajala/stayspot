@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useRef} from "react";
 import './index.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -60,13 +60,13 @@ const Signup=()=>{
             <button className="oneClickBtn"><FaGoogle style={{ color: '#db4437',fontSize:'25px' }}/>      Signup with Google</button>
             <p className="hr-text">OR</p>
             <form>
-                <input type='name'id='firstname'className="name-input" placeholder="First Name" onChange={(e)=>setFirstname(e.target.value)}/>
+                <input type='name'id='firstname'className="name-input" placeholder="First Name" value={firstName} onChange={(e)=>setFirstname(e.target.value)}/>
         
-                <input type='name' id='secondname'className="name-input" placeholder="Last Name" onChange={(e)=>setLastname(e.target.value)}/>
+                <input type='name' id='secondname'className="name-input" placeholder="Last Name" value={lastName} onChange={(e)=>setLastname(e.target.value)}/>
                 <br/>
-                <input type='email' id='emailinput'className="email-input" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
+                <input type='email' id='emailinput'className="email-input" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 <br/>
-                <input type='password' id='passwordinput'className="email-input" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
+                <input type='password' id='passwordinput'className="email-input" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 <br/>
                 <button type='submit' className="submit-btn" onClick={onClickSignUp}>Sign up</button>
             </form>
@@ -118,11 +118,16 @@ const LoginFields=()=>{
             toast.warning('Enter All Fields')
          }
     }
+    const emailInputRef = useRef(null);
+
+    useEffect(() => {
+        emailInputRef.current?.focus();
+    }, []);
     return(
         <div>
             <h3 className="signup-heading">Login</h3>
             <form>
-            <input type='email' id='email-input'className="email-input" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
+            <input type='email' id='email-input'className="email-input" placeholder="Email" useRef={emailInputRef} onChange={(e)=>setEmail(e.target.value)} value={email}/>
             <br/>
             <input type='password' id='password-input'className="email-input" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} value={password}/>
             <br/>
