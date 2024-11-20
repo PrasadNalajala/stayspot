@@ -62,7 +62,7 @@ const Navbar = () => {
 
   useEffect(() => {
     fecthUserDetails();
-  });
+  },[]);
 
   return (
     <div className="nav-container">
