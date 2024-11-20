@@ -42,7 +42,7 @@ const RentalDetails = () => {
                 setRentalData(response.data);
                 const data=response.data
                 setTitle(data.title)
-                images.push(data.image_url)
+                images.push(data.imageUrl)
                 setLocation(data.location)
                 setPrice(data.price)
                 setDescription(data.description)
@@ -55,7 +55,7 @@ const RentalDetails = () => {
                 setOwner(data.name)
                 setStatus(data.status)
                 setProfileUrl(data.profile_url)
-                setImageUrl(data.image_url)
+                setImageUrl(data.imageUrl)
             } catch (err) {
                 console.error("Error fetching rental details:", err);
                 toast.error(err.message)
@@ -84,8 +84,12 @@ const RentalDetails = () => {
            {owner.charAt(0).toUpperCase()}
         </div>
       );
-    
-
+    const available_from_date=new Date(availableFrom)
+    const formattedDate = available_from_date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     return (
         <>
             <Navbar />
@@ -98,7 +102,7 @@ const RentalDetails = () => {
                             <Swiper spaceBetween={10} slidesPerView={1} loop>
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <img src={image} alt={title} className="rental-image" />
+                                        <img src={imageUrl} alt={title} className="rental-image" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -118,7 +122,7 @@ const RentalDetails = () => {
                         <div className="rental-description">
                         <h2>Description</h2>
                         <p className='description'> {description}</p>
-                        <p>Available From: <strong>{availableFrom}</strong></p>
+                        <p>Available From: <strong>{formattedDate}</strong></p>
                         <p>Status: <strong>{status}</strong></p>
                     </div>
                     </div>
@@ -153,6 +157,7 @@ const RentalDetails = () => {
                         <textarea
                             placeholder="Write a comment..."
                             value={newComment}
+                            style={{backgroundColor:'#101010',color:'#ffffff'}}
                             onChange={(e) => setNewComment(e.target.value)}
                         />
                         <button onClick={handlePostComment}>Post Comment</button>
