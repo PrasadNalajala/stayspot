@@ -54,7 +54,7 @@ const Home=(props)=>{
                                     Start listing today and find your perfect renter
                                     
                                 </p>
-                                <p>
+                                <p className='p-sm-none'>
                                 Once your listing is live, it will be visible to thousands of potential renters actively searching for homes. Our platform is designed to attract the right audience, helping you find your ideal tenant quickly and efficiently.
                                 </p>
                             </div>

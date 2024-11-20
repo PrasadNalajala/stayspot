@@ -83,10 +83,11 @@
     font-size: 25px;
     padding-left: 20px;
     font-family:cursive;
+    color:rgb(174, 170, 170) ;
 }
 
 .browse-rentals-section ul li{
-  color: #4ac7e6;
+  color: #47a5a9;
     list-style-type:none;
     font-size: 35px;
     text-align: left;
@@ -94,7 +95,6 @@
     font-weight: 500;
     padding: 10px;
   margin: 5px 0;
-  background-color: #0e0e0e;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
@@ -209,7 +209,51 @@
       width: 100%;
       padding: 10px;
     }
-  }
-  .profile-img-container{
+    .welcome-heading{
+      font-size: 55px;
+      
+    }
+    .browse-rentals-section{
+      padding-top: 20px;
+      padding: 0;
+    }
+    .post-rentals-section{
+      padding: 0;
+    }
+    .browse-rentals-section p{
+      font-size: 17px;
+    }
+    .browse-img{
+      height: 200px;
+    }
+    .browse-rentals-section ul li{
+      font-size: 27px;
+    }
+    .post-rentals-section{
+      padding: 0;
+    }
+    .p-sm-none{
+      display: none;
+    }
+    .post-rental-des{
+      width: 100% !important;
+    }
+    .browse-btn{
+      margin-right: 20px;
+    }
+    .testimonial-container p{
+      font-size: 17px;
+    }
+    .profile-img{
+      height: 70px;
+      width: 70px;
+    }
+    .browse-rentals-section h1{
+      font-size: 30px;
+    }
+    .welcome-section{
+      height: 88vh;
+    }
     
   }
+  
