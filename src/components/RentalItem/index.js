@@ -1,4 +1,5 @@
 import './index.css';
+import { Link } from 'react-router-dom';
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { SiMinutemailer } from "react-icons/si";
 import {FiPhoneOutgoing} from 'react-icons/fi';
@@ -7,7 +8,7 @@ import Modal from 'react-modal';
 
 const RentalItem = (props) => {
     const { itemDetails } = props;
-    const { title, location, price, bedrooms, bathrooms, size, imageUrl, contact } = itemDetails;
+    const { title, location, price, bedrooms, bathrooms, size, imageUrl, contact,id } = itemDetails;
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const openModal = () => setIsOpen(true);
@@ -51,8 +52,10 @@ const RentalItem = (props) => {
                     <p className='location'><FaMapMarkedAlt className='map-icon' />{location}</p>
                 </div>
                 <div className='button-container'>
-                    <button className='view-details-btn button'>View Details</button>
-                    <button className='contact-btn button' onClick={openModal}>Owner Details</button>
+                    <Link to={`http://localhost:3000/rental/details/${id}`} className='view-details-btn button' style={{textDecoration:'none'}}>
+                    View Details
+                    </Link>
+                    <button className='contact-btn button' onClick={openModal} style={{fontSize:'15px'}}>Owner Details</button>
                 </div>
             </div>
             <Modal

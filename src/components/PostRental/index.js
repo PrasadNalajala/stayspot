@@ -82,7 +82,15 @@ const PostRental = () => {
 
 
     try {
-      const response = await axios.post("http://localhost:3001/rentals", updatedFormData);
+      const response = await axios.post(
+        "http://localhost:3001/rentals",
+        updatedFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
       toast.success("Rental property posted successfully!");
       setFormData({
         title: '',
@@ -93,7 +101,7 @@ const PostRental = () => {
         size: '',
         description: '',
         availble_from:'',
-        
+        imageUrl:'',
         status: 'available',
         contact_name: '',
         contact_email: '',

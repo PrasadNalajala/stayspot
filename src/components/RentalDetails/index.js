@@ -1,51 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './index.css';
 import Navbar from '../Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'; 
+import { useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
+import axios from 'axios';
+import { FaUserCircle } from 'react-icons/fa';
 
-
+// #ToDo
+// imageUrls
+// UI
+// Amenties
+// RentalsSpecs
 const RentalDetails = () => {
-    const rentalData = {
-        title: "Luxury Villa with Private Pool",
-        images: [
-            "https://res.cloudinary.com/dnd03w7us/image/upload/v1731258220/utdfg7ymlkwm9quu7ugc.jpg",
-            "https://res.cloudinary.com/dnd03w7us/image/upload/v1731258221/another-image.jpg",
-            "https://th.bing.com/th/id/OIP.h61IxV-gjE7jF1i0Xw_qRAHaJ3?pid=ImgDet&w=184&h=245&c=7&dpr=1.3",
-            ""
-        ],
-        location: "789 Palm Avenue, Beverly Hills, CA",
-        price: "$15,000/month",
-        description:
-            "Experience ultimate luxury in this stunning villa located in Beverly Hills. Featuring a private pool, home theater, and gourmet kitchen, this property is perfect for entertaining guests or enjoying a peaceful retreat. The villa is surrounded by lush greenery and offers unparalleled privacy.",
-        bedrooms: 5,
-        bathrooms: 6,
-        size: "5,500 sqft",
-        availableFrom: "Available from: January 1, 2025",
-        status: "Status: Available",
-        phone: "+1 (123) 456-7890",
-        email: "michael.johnson@example.com",
-        owner: {
-            name: "Michael Johnson",
-            profilePicture: "https://res.cloudinary.com/dnd03w7us/image/upload/v1731750393/lpjo3imiv1sm06lnj5j9.jpg",
-        },
-    };
+    const { id } = useParams();
+    const [rentalData, setRentalData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [title,setTitle]=useState('')
+    const [imageUrl,setImageUrl]=useState('')
+    const [location,setLocation]=useState('')
+    const [price,setPrice]=useState('')
+    const [availableFrom,setAvailbleFrom]=useState('')
+    const [description,setDescription]=useState('')
+    const [bedrooms,setBedrooms]=useState('')
+    const [bathrooms,setBathrooms]=useState('')
+    const [size,setSize]=useState('')
+    const [status,setStatus]=useState('')
+    const [phone,setPhone]=useState('')
+    const [email,setEmail]=useState('')
+    const [owner,setOwner]=useState('')
+    const [profileUrl,setProfileUrl]=useState('')
+    const [images,setImages]=useState([])
+    
+    useEffect(() => {
+        const fetchRentalDetails = async () => {
+            try {
+                const response = await axios.post("http://localhost:3001/api/rental-details", {
+                    rental_id: id,
+                });
+                setRentalData(response.data);
+                const data=response.data
+                setTitle(data.title)
+                images.push(data.image_url)
+                setLocation(data.location)
+                setPrice(data.price)
+                setDescription(data.description)
+                setBathrooms(data.bathrooms)
+                setBedrooms(data.bedrooms)
+                setSize(data.size)
+                setAvailbleFrom(data.available_from)
+                setPhone(data.contact_phone)
+                setEmail(data.contact_email)
+                setOwner(data.name)
+                setStatus(data.status)
+                setProfileUrl(data.profile_url)
+                setImageUrl(data.image_url)
+            } catch (err) {
+                console.error("Error fetching rental details:", err);
+                toast.error(err.message)
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const {
-        title,
-        images,
-        location,
-        price,
-        description,
-        bedrooms,
-        bathrooms,
-        size,
-        availableFrom,
-        status,
-        phone,
-        email,
-        owner,
-    } = rentalData;
+        fetchRentalDetails();
+    }, [id]);
+
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
@@ -56,14 +77,24 @@ const RentalDetails = () => {
             setNewComment("");
         }
     };
+    const profileIcon = profileUrl!==null? (
+        <img src={profileUrl} alt="Profile" className="owner-profile-pic" />
+      ) : (
+        <div className="profile-placeholder">
+           {owner.charAt(0).toUpperCase()}
+        </div>
+      );
+    
 
     return (
         <>
             <Navbar />
+            {!loading?
+            
             <div className="rental-details-page">
                 <div className="rental-header-container">
                     <div className="rental-image-container">
-                        {images.length > 1 ? (
+                        {images??images.length > 1 ? (
                             <Swiper spaceBetween={10} slidesPerView={1} loop>
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
@@ -72,7 +103,7 @@ const RentalDetails = () => {
                                 ))}
                             </Swiper>
                         ) : (
-                            <img src={images[0]} alt={title} className="rental-image" />
+                            <img src={imageUrl} alt={title} className="rental-image" />
                         )}
                     </div>
                     <div className="rental-header">
@@ -86,23 +117,20 @@ const RentalDetails = () => {
                         </div>
                         <div className="rental-description">
                         <h2>Description</h2>
-                        <p>{description}</p>
-                        <p><strong>{availableFrom}</strong></p>
-                        <p><strong>{status}</strong></p>
+                        <p className='description'> {description}</p>
+                        <p>Available From: <strong>{availableFrom}</strong></p>
+                        <p>Status: <strong>{status}</strong></p>
                     </div>
                     </div>
                 </div>
 
                 <div className="rental-details-info">
                     <div className="posted-by-section">
-                        <img
-                            src={owner.profilePicture}
-                            alt={owner.name}
-                            className="owner-profile-pic"
-                        />
-                        <p><strong>Posted By:</strong> {owner.name}</p>
-                        <p><strong>Email:</strong> {email}</p>
-                        <p><strong>Phone:</strong> {phone}</p>
+                        <div style={{display:'flex',alignItems:'center',gap:'8px',paddingLeft:'7px'}}>
+                        {profileIcon}
+                        <p style={{color:'#20c755',fontFamily:'serif',fontSize:'22px'}}> {owner}</p>
+                        </div>
+
                     </div>
                     
                 </div>
@@ -111,7 +139,7 @@ const RentalDetails = () => {
                     <h2>Comments</h2>
                     <div className="comments-list">
                         {comments.length === 0 ? (
-                            <p>No comments yet. Be the first to comment!</p>
+                            <p>No comments yet. Be the first to comment!🙋‍♂️</p>
                         ) : (
                             comments.map((comment, index) => (
                                 <div key={index} className="comment">
@@ -121,7 +149,6 @@ const RentalDetails = () => {
                         )}
                     </div>
 
-                    {/* Post a Comment */}
                     <div className="post-comment">
                         <textarea
                             placeholder="Write a comment..."
@@ -131,7 +158,9 @@ const RentalDetails = () => {
                         <button onClick={handlePostComment}>Post Comment</button>
                     </div>
                 </div>
-            </div>
+            </div> 
+           : <p>Loading...</p>
+}
         </>
     );
 };

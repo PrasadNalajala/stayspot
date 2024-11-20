@@ -27,7 +27,7 @@ function App() {
           <Route path='/about-us' Component={AboutUs} />
           <Route path='/contact' Component={ContactUs}/>
           <Route path='/profile' Component={Profile}/>
-          <Route path='/rental/details' Component={RentalDetails}/>
+          <Route path='/rental/details/:id' Component={RentalDetails}/>
       </Routes>
       <ToastContainer 
           position="top-right" 
