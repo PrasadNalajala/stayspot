@@ -25,7 +25,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     if (token) {
       console.log(token);
-      const response = await axios.get("http://localhost:3001/api/user", {
+      const response = await axios.get("https://stayspot.onrender.com/api/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +74,7 @@ const Navbar = () => {
         <p>StaySpot</p>
       </Link>
       <div className="nav-items-container">
-        <FaBars className="menu-icon" onClick={toggleMenu} />
+        <FaBars className="menu-icon"  style={{outline:'none'}} onClick={toggleMenu} />
         <ul className={`menu ${menuActive ? "active" : ""}`}>
           <Link to="/" className="nav-link">
             <FaHome className="icon-only" />{" "}

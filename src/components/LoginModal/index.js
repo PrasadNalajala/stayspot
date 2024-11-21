@@ -21,7 +21,7 @@ const LoginModalContent = ({ onClose }) => {
       password,
     };
     try {
-      const response = await axios.post("http://localhost:3001/register", data);
+      const response = await axios.post("https://stayspot.onrender.com/register", data);
       if (response.status === 201) {
         localStorage.setItem("token", response.data.token);
         toast.success("Registration Successful");
@@ -38,7 +38,7 @@ const LoginModalContent = ({ onClose }) => {
     const credentials = { email, password };
     try {
       const response = await axios.post(
-        "http://localhost:3001/login",
+        "https://stayspot.onrender.com/login",
         credentials
       );
       if (response.status === 200) {

@@ -50,7 +50,7 @@ Welcome to **StaySpot**! Your go-to platform for all things rental. Whether you'
    npm start
    ```
 
-5. **Open your browser** and go to [http://localhost:3001](http://localhost:3001) 🌐.
+5. **Open your browser** and go to [http://localhost:3000](http://localhost:3000) 🌐.
 
 ## 💡 Usage
 
