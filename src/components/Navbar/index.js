@@ -25,7 +25,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     if (token) {
       console.log(token);
-      const response = await axios.get("http://localhost:3001/api/user", {
+      const response = await axios.get("https://stayspot.onrender.com/api/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
