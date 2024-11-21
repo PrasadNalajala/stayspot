@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from 'axios';
 import { FaUserCircle } from 'react-icons/fa';
+import Loader from '../Loader'
 
 // #ToDo
 // imageUrls
@@ -98,22 +99,23 @@ const RentalDetails = () => {
             <div className="rental-details-page">
                 <div className="rental-header-container">
                     <div className="rental-image-container">
-                        {images??images.length > 1 ? (
+                    <img src={imageUrl} alt={title} className="rental-image" />
+                        {/* {/* {images??images.length > 1 ? (
                             <Swiper spaceBetween={10} slidesPerView={1} loop>
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
                                         <img src={imageUrl} alt={title} className="rental-image" />
                                     </SwiperSlide>
                                 ))}
-                            </Swiper>
-                        ) : (
+                            </Swiper> */}
+                        {/* ) : (
                             <img src={imageUrl} alt={title} className="rental-image" />
-                        )}
+                        )} */} 
                     </div>
                     <div className="rental-header">
                         <h1 className="rental-title">{title}</h1>
                         <p className="rental-location">{location}</p>
-                        <p className="rental-price">{price}</p>
+                        <p className="rental-price">₹{price}</p>
                         <div className="rental-specs">
                             <span>{bedrooms} Bedrooms</span>
                             <span>{bathrooms} Bathrooms</span>
@@ -164,7 +166,7 @@ const RentalDetails = () => {
                     </div>
                 </div>
             </div> 
-           : <p>Loading...</p>
+           : <Loader/>
 }
         </>
     );

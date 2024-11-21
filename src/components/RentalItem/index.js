@@ -52,7 +52,7 @@ const RentalItem = (props) => {
                     <p className='location'><FaMapMarkedAlt className='map-icon' />{location}</p>
                 </div>
                 <div className='button-container'>
-                    <Link to={`https://stayspot.onrender.com/rental/details/${id}`} className='view-details-btn button' style={{textDecoration:'none'}}>
+                    <Link to={`/rental/details/${id}`} className='view-details-btn button' style={{textDecoration:'none'}}>
                     View Details
                     </Link>
                     <button className='contact-btn button' onClick={openModal} style={{fontSize:'15px'}}>Owner Details</button>

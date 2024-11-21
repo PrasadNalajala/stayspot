@@ -74,7 +74,7 @@ const Navbar = () => {
         <p>StaySpot</p>
       </Link>
       <div className="nav-items-container">
-        <FaBars className="menu-icon" onClick={toggleMenu} />
+        <FaBars className="menu-icon"  style={{outline:'none'}} onClick={toggleMenu} />
         <ul className={`menu ${menuActive ? "active" : ""}`}>
           <Link to="/" className="nav-link">
             <FaHome className="icon-only" />{" "}
