@@ -36,7 +36,7 @@ const RentalDetails = () => {
     useEffect(() => {
         const fetchRentalDetails = async () => {
             try {
-                const response = await axios.post("http://localhost:3001/api/rental-details", {
+                const response = await axios.post("https://stayspot.onrender.com/api/rental-details", {
                     rental_id: id,
                 });
                 setRentalData(response.data);
