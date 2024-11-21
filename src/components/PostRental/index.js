@@ -83,7 +83,7 @@ const PostRental = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/rentals",
+        "https://stayspot.onrender.com/rentals",
         updatedFormData,
         {
           headers: {

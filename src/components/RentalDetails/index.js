@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from 'axios';
 import { FaUserCircle } from 'react-icons/fa';
+import Loader from '../Loader'
 
 // #ToDo
 // imageUrls
@@ -36,13 +37,13 @@ const RentalDetails = () => {
     useEffect(() => {
         const fetchRentalDetails = async () => {
             try {
-                const response = await axios.post("http://localhost:3001/api/rental-details", {
+                const response = await axios.post("https://stayspot.onrender.com/api/rental-details", {
                     rental_id: id,
                 });
                 setRentalData(response.data);
                 const data=response.data
                 setTitle(data.title)
-                images.push(data.image_url)
+                images.push(data.imageUrl)
                 setLocation(data.location)
                 setPrice(data.price)
                 setDescription(data.description)
@@ -55,7 +56,7 @@ const RentalDetails = () => {
                 setOwner(data.name)
                 setStatus(data.status)
                 setProfileUrl(data.profile_url)
-                setImageUrl(data.image_url)
+                setImageUrl(data.imageUrl)
             } catch (err) {
                 console.error("Error fetching rental details:", err);
                 toast.error(err.message)
@@ -84,8 +85,12 @@ const RentalDetails = () => {
            {owner.charAt(0).toUpperCase()}
         </div>
       );
-    
-
+    const available_from_date=new Date(availableFrom)
+    const formattedDate = available_from_date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     return (
         <>
             <Navbar />
@@ -94,22 +99,23 @@ const RentalDetails = () => {
             <div className="rental-details-page">
                 <div className="rental-header-container">
                     <div className="rental-image-container">
-                        {images??images.length > 1 ? (
+                    <img src={imageUrl} alt={title} className="rental-image" />
+                        {/* {/* {images??images.length > 1 ? (
                             <Swiper spaceBetween={10} slidesPerView={1} loop>
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <img src={image} alt={title} className="rental-image" />
+                                        <img src={imageUrl} alt={title} className="rental-image" />
                                     </SwiperSlide>
                                 ))}
-                            </Swiper>
-                        ) : (
+                            </Swiper> */}
+                        {/* ) : (
                             <img src={imageUrl} alt={title} className="rental-image" />
-                        )}
+                        )} */} 
                     </div>
                     <div className="rental-header">
                         <h1 className="rental-title">{title}</h1>
                         <p className="rental-location">{location}</p>
-                        <p className="rental-price">{price}</p>
+                        <p className="rental-price">₹{price}</p>
                         <div className="rental-specs">
                             <span>{bedrooms} Bedrooms</span>
                             <span>{bathrooms} Bathrooms</span>
@@ -118,7 +124,7 @@ const RentalDetails = () => {
                         <div className="rental-description">
                         <h2>Description</h2>
                         <p className='description'> {description}</p>
-                        <p>Available From: <strong>{availableFrom}</strong></p>
+                        <p>Available From: <strong>{formattedDate}</strong></p>
                         <p>Status: <strong>{status}</strong></p>
                     </div>
                     </div>
@@ -153,13 +159,14 @@ const RentalDetails = () => {
                         <textarea
                             placeholder="Write a comment..."
                             value={newComment}
+                            style={{backgroundColor:'#101010',color:'#ffffff'}}
                             onChange={(e) => setNewComment(e.target.value)}
                         />
                         <button onClick={handlePostComment}>Post Comment</button>
                     </div>
                 </div>
             </div> 
-           : <p>Loading...</p>
+           : <Loader/>
 }
         </>
     );

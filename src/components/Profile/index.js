@@ -26,7 +26,7 @@ const Profile = () => {
   const fecthUserDetails = async () => {
     const token = localStorage.getItem("token");
     console.log(token);
-    const response = await axios.get("http://localhost:3001/api/user", {
+    const response = await axios.get("https://stayspot.onrender.com/api/user", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -54,7 +54,7 @@ const Profile = () => {
       
     }
     try {
-      const response = await axios.put("http://localhost:3001/api/user", data, {
+      const response = await axios.put("https://stayspot.onrender.com/api/user", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -107,3 +107,11 @@
     justify-content: center;
     align-items: center;
 }
+@media (max-width:768px){
+    .availble-rental{
+        font-size: 20px;
+    }
+    .rental-search-input{
+        width: 170px;
+    }
+}

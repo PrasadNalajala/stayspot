@@ -22,7 +22,7 @@ const Signup=()=>{
                         password:password
                     }
                     try {
-                        const response = await axios.post('http://localhost:3001/register', data);
+                        const response = await axios.post('https://stayspot.onrender.com/register', data);
                         if (response.status === 201) {
                             const { token } = response.data;
                             localStorage.setItem('token', token);
@@ -85,7 +85,7 @@ const LoginFields=()=>{
             password:password
         }
         try{
-        const response=await axios.post('http://localhost:3001/login',credentials)
+        const response=await axios.post('https://stayspot.onrender.com/login',credentials)
         if (response.status===200){
             const { token } = response.data;
             localStorage.setItem('token', token);

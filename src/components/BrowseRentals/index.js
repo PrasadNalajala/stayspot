@@ -14,8 +14,10 @@ const BrowseRentals = (props) => {
   const [filteredRentalDetails,setFilteredRentalDetails]=useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [searchInput,setSearchInput]=useState('')
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); 
   const fetchRentals = async () => {
-    const response = await axios.get("http://localhost:3001/rentals");
+    const response = await axios.get("https://stayspot.onrender.com/rentals");
     try {
       if (response.status === 200) {
         setRentaldetails(response.data);
@@ -46,12 +48,22 @@ const BrowseRentals = (props) => {
     );
     setFilteredRentalDetails(updatedRentalDetails)
     setSearchInput('')
-    
+    setCurrentPage(1);
   }
 
   useEffect(() => {
     fetchRentals();
   }, []);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredRentalDetails.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredRentalDetails.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -77,6 +89,7 @@ const BrowseRentals = (props) => {
             {filteredRentalDetails.map((each) => (
               <RentalItem itemDetails={each} key={each.id} />
             ))}
+            
             </> :
             <div className="no-results-wrapper"> 
             <div class="no-results-container">
