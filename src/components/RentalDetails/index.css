@@ -138,12 +138,16 @@
     }
 
     .rental-specs {
-        flex-direction: column;
+        
         align-items: center;
         gap: 10px;
     }
     .posted-by-section{
         flex-direction: column;
+        align-items: flex-start;
+    }
+    .rental-title{
+        font-size: 28px;
     }
 }
 
