@@ -231,3 +231,44 @@
       transform: translateY(0);
   }
 }
+
+
+@media (max-width:768px){
+  .about-header h1{
+    font-size: 30px;
+    margin: 0;
+  }
+  .about-content{
+    margin-top: 20px;
+  }
+  .about-point h3{
+    font-size: 20px;
+  }
+  .about-section h2{
+    font-size: 30px;
+  }
+  .mission-point h3{
+    font-size: 20px;
+  }
+  .value-card{
+    width: 34%;
+  }
+  .team-container{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .team-card{
+    width: 175px;
+    padding: 5px;
+  }
+  .team-img{
+    width: 83px;
+    height: 83px;
+  }
+  .third-about{
+    margin-top: 30px;
+  }
+  .about-section{
+    margin: 0;
+  }
+}
