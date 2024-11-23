@@ -50,6 +50,7 @@
     display: flex;
     justify-content: space-around;
     padding: 20px 0;
+    gap:10px;
   }
   
   .team-card {
@@ -256,14 +257,16 @@
   .team-container{
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: flex-start;
   }
   .team-card{
-    width: 175px;
+    width: 46%;
     padding: 5px;
   }
   .team-img{
     width: 83px;
     height: 83px;
+    padding-top: 7px;
   }
   .third-about{
     margin-top: 30px;
