@@ -14,6 +14,9 @@
     background-color: black;
     padding-top: 80px;
 }
+.rental-price{
+    font-size: 1rem !important;
+}
 .availble-rental{
     color: #20c755;
     text-align: left;
@@ -113,5 +116,59 @@
     }
     .rental-search-input{
         width: 170px;
+    }
+    .rental-items-section{
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+    .rental-item{
+        width: 48% !important;
+        margin: 0;
+    }
+    .rental-img{
+        height: 120px !important;
+    }
+    .rental-heading-container{
+        flex-direction: column;
+        align-items:  normal !important;
+    }
+    .rental-item-heading{
+        font-size: 15px !important;
+        text-align: left;
+    }
+    .rental-price{
+        font-size: 9px !important;
+        text-align: right;
+        margin: 0;
+        margin-top: 10px;
+    }
+    .rental-heading-container{
+        margin: 0;
+    }
+    .specifications-container{
+        margin: 0;
+    }
+    .specifications-container p{
+        font-size: 10px;
+        font-family: 'Roboto';
+    }
+    .location{
+        font-size: 11px;
+        text-align: left;
+    }
+    .view-details-btn{
+        height: 33px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+    }
+    .button{
+        padding: 0 !important;
+        font-size: 12px !important;
+        font-family: 'Roboto' !important;
+        margin-bottom: 0px !important;
+        outline: none !important;
     }
 }

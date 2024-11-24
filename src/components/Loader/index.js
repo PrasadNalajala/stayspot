@@ -1,10 +1,14 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const ImageGrid = props => (
+const ImageGrid = props => {
+  const isSmallScreen = window.innerWidth < 768; 
+  const dynamicWidth = isSmallScreen ? '100%' : 800;
+  const dynamicHeight = isSmallScreen ? 400 : 575;
+  return(
   <ContentLoader
-    width={800}
-    height={575}
+    width={dynamicWidth}
+    height={dynamicHeight}
     viewBox="0 0 800 575"
     backgroundColor="#fffff"
     foregroundColor="#808080"
@@ -27,13 +31,7 @@ const ImageGrid = props => (
     <circle cx="210" cy="535" r="12" />
     <circle cx="428" cy="536" r="12" />
   </ContentLoader>
-)
-
-ImageGrid.metadata = {
-  name: 'Hassan Tijani.A',
-  github: 'surepeps',
-  description: 'Image Grid with Pagination',
-  filename: 'ImageGrid',
+  )
 }
 
 export default ImageGrid

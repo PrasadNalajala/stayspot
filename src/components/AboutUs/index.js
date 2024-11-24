@@ -111,7 +111,7 @@ const AboutUs = () => {
             </div>
             <div className="team-card">
               <img src={prasad} alt="Team Member 3" className="team-img" />
-              <div className="team-info">
+              <div className="team-info third-about">
                 <p className="team-name" style={{color:'#20c755'}}>Prasad Chowdary</p>
                 <p className="team-role">Lead Developer</p>
               </div>
