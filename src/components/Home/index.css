@@ -213,6 +213,7 @@
       font-size: 55px;
       
     }
+    
     .browse-rentals-section{
       padding-top: 20px;
       padding: 0;
@@ -222,6 +223,8 @@
     }
     .browse-rentals-section p{
       font-size: 17px;
+      font-family: system-ui;
+      padding: 5px;
     }
     .browse-img{
       height: 200px;
@@ -240,6 +243,8 @@
     }
     .browse-btn{
       margin-right: 20px;
+      gap:7px;
+      outline: none;
     }
     .testimonial-container p{
       font-size: 17px;
