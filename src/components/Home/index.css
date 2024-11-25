@@ -201,7 +201,7 @@
     padding: 6%;
   }
   .testimonial-container {
-    width: 100%;
+    width: 90%;
     padding: 10px;
   }
   .welcome-heading {
@@ -241,7 +241,7 @@
     outline: none;
   }
   .testimonial-container p {
-    font-size: 17px;
+    font-size: 14px;
   }
   .profile-img {
     height: 70px;
