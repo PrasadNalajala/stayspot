@@ -1,8 +1,8 @@
-.home{
-    background-color: black;
-    color: #ffffff;
-    padding-bottom: 40px;
-    padding-top: 80px;
+.home {
+  background-color: black;
+  color: #ffffff;
+  padding-bottom: 40px;
+  padding-top: 80px;
 }
 
 /* @keyframes fadeIn {
@@ -34,231 +34,223 @@
   }
 } */
 
-
-.welcome-section{
-    display: flex;
-    flex-direction: column;
-    height: 79vh;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  height: 79vh;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
   animation: fadeIn 0.8s ease-in forwards;
 }
-.welcome-heading span{
-    margin-left: 30px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: normal;
-    color: #20c755;
+.welcome-heading span {
+  margin-left: 30px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: normal;
+  color: #20c755;
 }
-.welcome-heading{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 80px;
-    font-weight: bold;
-
+.welcome-heading {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 80px;
+  font-weight: bold;
 }
 /* .browse-rental-container{
     height: 400px; /* Adjust as needed */
-  /* overflow: hidden;
+/* overflow: hidden;
   position: relative; 
 }*/
- 
 
-.browse-rentals-section{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-around; */
-    align-items: space-around;
-    padding: 50px;
-    opacity: 1;
+.browse-rentals-section {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  align-items: space-around;
+  padding: 50px;
+  opacity: 1;
   animation: slideInLeft 2s ease-in forwards;
-    
 }
-.browse-rentals-section h1{
-    font-size: 40px;
-    text-align:center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.browse-rentals-section p{
-    font-size: 25px;
-    padding-left: 20px;
-    font-family:cursive;
-    color:rgb(174, 170, 170) ;
+.browse-rentals-section h1 {
+  font-size: 40px;
+  text-align: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
-.browse-rentals-section ul li{
+.browse-rentals-section p {
+  font-size: 25px;
+  padding-left: 20px;
+  font-family: cursive;
+  color: rgb(174, 170, 170);
+}
+
+.browse-rentals-section ul li {
   color: #47a5a9;
-    list-style-type:none;
-    font-size: 35px;
-    text-align: left;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 500;
-    padding: 10px;
+  list-style-type: none;
+  font-size: 35px;
+  text-align: left;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 500;
+  padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
-.browse-rentals-section ul li:hover{
-    background-color: #0a0a0a;
-    cursor: pointer;
+.browse-rentals-section ul li:hover {
+  background-color: #0a0a0a;
+  cursor: pointer;
 }
-.browse-rentals-section ul  p{
+.browse-rentals-section ul p {
   color: grey;
-    font-size: 20px;
-    text-align: left;
+  font-size: 20px;
+  text-align: left;
 }
 .browse-btn {
-    display: flex;
-    align-items: center;
-    background-color: #141414;
-    color: rgb(93, 232, 179);
-    padding: 15px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    width: fit-content;
-    align-self: end;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    margin-top: 15px;
-  }
-  
-  .browse-btn:hover {
-    background-color: #141313;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .browse-img{
-    height: 300px;
-  }
-  .browse-rental-items-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  @media (max-width:768px){
-    .browse-rental-items-container{
-      flex-direction: column;
-    }
-  }
-  .post-rentals-section{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    opacity: 1;
-  animation: slideInRight 2s ease-in forwards;
-  }
-  .post-rental-des{
-    width: 70%;
-  }
-  .post-rental-des p{
-    color: rgb(109, 107, 107);
-  }
-  .post-rental-des p span{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
-    color: #20c755;
-  }
-  .profile-img{
-    height: 100px;
-    border-radius: 50%;
-    width: 100px;
-    
-  }
-  .testimonial-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0e0e0e;
-    width: 1000px;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-  }
-  .testimonials-section{
-    display: flex;
+  display: flex;
+  align-items: center;
+  background-color: #141414;
+  color: rgb(93, 232, 179);
+  padding: 15px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  width: fit-content;
+  align-self: end;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.browse-btn:hover {
+  background-color: #141313;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.browse-img {
+  height: 300px;
+}
+.browse-rental-items-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+@media (max-width: 768px) {
+  .browse-rental-items-container {
     flex-direction: column;
-    align-items: center;
   }
-  .testimonial-container p{
-    font-size: 25px;
-    font-style: oblique;
-    font-family:cursive;
-    color: rgb(174, 170, 170);
+}
+.post-rentals-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 1;
+  animation: slideInRight 2s ease-in forwards;
+}
+.post-rental-des {
+  width: 70%;
+}
+.post-rental-des p {
+  color: rgb(109, 107, 107);
+}
+.post-rental-des p span {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+
+  color: #20c755;
+}
+.profile-img {
+  height: 100px;
+  border-radius: 50%;
+  width: 100px;
+}
+.testimonial-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0e0e0e;
+  width: 1000px;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.testimonials-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.testimonial-container p {
+  font-size: 25px;
+  font-style: Roboto !important;
+  font-family: cursive;
+  color: rgb(174, 170, 170);
+}
+.customer-name {
+  color: #20c755 !important;
+  text-align: right;
+  padding-right: 10px;
+  font-style: italic !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+.testimonial-container p span {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #20c755;
+}
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 6%;
   }
-  .customer-name{
-    color: #20c755 !important;
-    text-align: right;
-    padding-right: 10px;
-    font-style: italic !important;
-    font-family: Arial, Helvetica, sans-serif !important;
-    
+  .testimonial-container {
+    width: 100%;
+    padding: 10px;
   }
-  .testimonial-container p span{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: #20c755;
+  .welcome-heading {
+    font-size: 55px;
   }
-  @media (max-width:768px){
-    .testimonials-section{
-      padding: 6%;
-    }
-    .testimonial-container{
-      width: 100%;
-      padding: 10px;
-    }
-    .welcome-heading{
-      font-size: 55px;
-      
-    }
-    
-    .browse-rentals-section{
-      padding-top: 20px;
-      padding: 0;
-    }
-    .post-rentals-section{
-      padding: 0;
-    }
-    .browse-rentals-section p{
-      font-size: 17px;
-      font-family: system-ui;
-      padding: 5px;
-    }
-    .browse-img{
-      height: 200px;
-    }
-    .browse-rentals-section ul li{
-      font-size: 27px;
-    }
-    .post-rentals-section{
-      padding: 0;
-    }
-    .p-sm-none{
-      display: none;
-    }
-    .post-rental-des{
-      width: 100% !important;
-    }
-    .browse-btn{
-      margin-right: 20px;
-      gap:7px;
-      outline: none;
-    }
-    .testimonial-container p{
-      font-size: 17px;
-    }
-    .profile-img{
-      height: 70px;
-      width: 70px;
-    }
-    .browse-rentals-section h1{
-      font-size: 30px;
-    }
-    .welcome-section{
-      height: 88vh;
-    }
-    
+
+  .browse-rentals-section {
+    padding-top: 20px;
+    padding: 0;
   }
-  
+  .post-rentals-section {
+    padding: 0;
+  }
+  .browse-rentals-section p {
+    font-size: 17px;
+    font-family: system-ui;
+    padding: 5px;
+  }
+  .browse-img {
+    height: 200px;
+  }
+  .browse-rentals-section ul li {
+    font-size: 27px;
+  }
+  .post-rentals-section {
+    padding: 0;
+  }
+  .p-sm-none {
+    display: none;
+  }
+  .post-rental-des {
+    width: 100% !important;
+  }
+  .browse-btn {
+    margin-right: 20px;
+    gap: 7px;
+    outline: none;
+  }
+  .testimonial-container p {
+    font-size: 17px;
+  }
+  .profile-img {
+    height: 70px;
+    width: 70px;
+  }
+  .browse-rentals-section h1 {
+    font-size: 30px;
+  }
+  .welcome-section {
+    height: 88vh;
+  }
+}
