@@ -15,7 +15,7 @@ const Home=(props)=>{
             <Navbar/>
         <div className='home'>
             <div className="welcome-section">
-                <h1 className="welcome-heading">Welcome to <br/><span>StaySpot</span></h1>
+                <h1 className="welcome-heading">Welcome to <br/><span>StaySpot👋</span></h1>
             </div>
            
             <div className='browse-rentals-section'> 
