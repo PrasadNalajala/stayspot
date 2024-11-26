@@ -154,7 +154,7 @@
         font-family: 'Roboto';
     }
     .location{
-        font-size: 11px;
+        font-size: 12px !important;
         text-align: left;
     }
     .view-details-btn{
