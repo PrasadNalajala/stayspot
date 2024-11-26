@@ -105,4 +105,13 @@
     width: 100%;
     margin-bottom: 30px;
   }
+  .contact-info{
+    display: none !important;
+  }
+  .contact-header{
+    font-size: 30px;
+  }
+  .contact-page{
+    min-height: unset;
+  }
 }
