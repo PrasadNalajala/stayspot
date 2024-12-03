@@ -21,7 +21,10 @@ const LoginModalContent = ({ onClose }) => {
       password,
     };
     try {
-      const response = await axios.post("https://stayspot.onrender.com/register", data);
+      const response = await axios.post(
+        "https://stayspot.onrender.com/register",
+        data
+      );
       if (response.status === 201) {
         localStorage.setItem("token", response.data.token);
         toast.success("Registration Successful");
@@ -127,9 +130,13 @@ const LoginModalContent = ({ onClose }) => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="stayspot-submit-btn">
+        <button
+          type="submit"
+          className="stayspot-submit-btn"
+          style={{ display: "flex", justifyContent: "center", height: "44px" }}
+        >
           {isLoading ? (
-            <DotLoader color="#ffffff" size={10} />
+            <DotLoader color="#ffffff" size={14} />
           ) : isSignup ? (
             "Sign Up"
           ) : (
