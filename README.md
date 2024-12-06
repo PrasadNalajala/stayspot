@@ -1,6 +1,5 @@
-```markdown
-```
-# 🌟 StaySpot
+
+# StaySpot🏡
 
 Welcome to **StaySpot**! Your go-to platform for all things rental. Whether you're searching for a cozy apartment or looking to list your property, we've got you covered. 🚪🏡
 
