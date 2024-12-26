@@ -9,7 +9,7 @@ Welcome to **StaySpot**! Your go-to platform for all things rental. Whether you'
 - **Browse Rentals** 🏠: Explore a wide range of rental properties with all the details you need.
 - **Post Your Rental** 📝: Easily list your property for rent, complete with images and descriptions.
 - **Smart Search** 🔍: Find rentals that match your needs by filtering by location, price, and more.
-- **Responsive Design** 📱💻: A beautiful and functional experience on both desktop and mobile.
+- **Responsive Design** 📱💻: A beautiful and functional experience on both desktop and mobile. 
 
 ## ⚙️ Technologies Used
 
