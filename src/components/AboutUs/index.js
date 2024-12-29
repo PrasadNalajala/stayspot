@@ -7,6 +7,7 @@ import { FaRocket, FaCheckCircle, FaHandsHelping, FaShieldAlt ,FaLightbulb,FaHan
 import './index.css';
 import Footer from '../Footer';
 
+
 const AboutUs = () => {
   return (
     <div>
