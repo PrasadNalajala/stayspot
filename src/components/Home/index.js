@@ -3,6 +3,7 @@ import familyImg from '../../assets/familylmg.png'
 import house1 from '../../assets/house1.png'
 import profileMale from '../../assets/profileMale.png'
 import profileWomen from '../../assets/ProfileWomen.png'
+import apkPreview from '../../assets/apkPreview.png'
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
@@ -84,6 +85,31 @@ const Home=(props)=>{
             </div>
             </div>
            </div>
+            <div className="app-download-section">
+            <div className="download-container">
+                <div className="text-content">
+                <h1 className="download-heading">
+                    Download the <span>StaySpot</span> App 📲
+                </h1>
+                <p className="download-description">
+                    Enjoy seamless rental browsing and posting on mobile.
+                </p>
+                <a
+                    href="https://drive.google.com/file/d/1ZYmrV4nPTdDA3iOkOXRshdRtlAgAbfVN/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="download-btn"
+                >
+                    Download APK
+                </a>
+                </div>
+                <div className="image-content">
+                <img src={apkPreview} alt="StaySpot App Preview" className="app-mockup" />
+                </div>
+            </div>
+            </div>
+
+
         </div>
         <Footer/>
         </div>
