@@ -7,7 +7,7 @@ import { FiEdit2 } from "react-icons/fi";
 import "./index.css";
 
 const Profile = () => {
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState(null);
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [email, setEmail] = useState("");
@@ -17,10 +17,19 @@ const Profile = () => {
   const [location, setLocation] = useState("");
   const [name, setName] = useState("Prasad Nallajala");
   let timeAgo;
-  if (userDetails.length !== 0) {
-    const date = new Date(userDetails.created_at);
-
-    timeAgo = formatDistanceToNow(date, { addSuffix: true });
+  if (userDetails && userDetails.created_at) {
+    try {
+      const date = new Date(userDetails.created_at);
+      if (!isNaN(date.getTime())) {
+        timeAgo = formatDistanceToNow(date, { addSuffix: true });
+      } else {
+        timeAgo = "Recently";
+      }
+    } catch (error) {
+      timeAgo = "Recently";
+    }
+  } else {
+    timeAgo = "Recently";
   }
 
   const fecthUserDetails = async () => {
@@ -31,7 +40,7 @@ const Profile = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = response.data[0];
+    const data = response.data;
     setUserDetails(data);
     setImage(data.profile_url);
     setImageUrl(data.profile_url);

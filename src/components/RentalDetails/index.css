@@ -2,74 +2,154 @@
 .rental-details-page {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  margin-top: 60px;
+  gap: 2rem;
+  padding: 2rem;
+  margin-top: 65px;
+  background-color: #000000;
+  min-height: 100vh;
 }
 
 .rental-header-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  gap: 2rem;
+  background-color: #0c0c0c;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .rental-image-container {
   width: 100%;
-  height: 300px;
-  max-width: 100%;
+  height: 400px;
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .rental-image {
-  width: fit-content;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.rental-image:hover {
+  transform: scale(1.02);
 }
 
 .rental-header {
-  max-width: 900px;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .rental-title {
   font-size: 2.5rem;
-  font-weight: 600;
-  color: #20c755;
+  font-weight: 700;
+  color: #00ff9d;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
 }
 
 .rental-location {
   font-size: 1.2rem;
-  color: #777;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #00ff9d;
 }
 
 .rental-price {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #2c7be5;
-  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00ff9d;
+  margin: 0.5rem 0;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
 }
 
 .rental-specs {
   display: flex;
-  gap: 20px;
-  margin-top: 10px;
-  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
 .rental-specs span {
-  font-size: 1.2rem;
-  color: #7acdbe;
+  font-size: 1.1rem;
+  color: #00e5ff;
+  background-color: #0c0c0c;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 229, 255, 0.2);
 }
 
-/* Owner Details Section */
+.rental-specs .icon {
+  font-size: 1.1rem;
+  color: #00e5ff;
+}
+
+.rental-description {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: #0c0c0c;
+  border-radius: 12px;
+}
+
+.rental-description h2 {
+  font-size: 1.5rem;
+  color: #00e5ff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.rental-description h2 .icon {
+  color: #00e5ff;
+}
+
+.rental-description p {
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rental-description p .icon {
+  color: #00ff9d;
+}
+
+.rental-description strong {
+  color: #00ff9d;
+  font-weight: 600;
+}
+
+.rental-details-info {
+  background-color: #0c0c0c;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 .posted-by-section {
   display: flex;
-  gap: 20px;
   align-items: center;
-  margin-bottom: 30px;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #0c0c0c;
+  border-radius: 12px;
 }
 
 .owner-profile-pic {
@@ -77,76 +157,163 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid #20c755;
 }
 
-.rental-description {
-  max-width: 900px;
-  margin-bottom: 30px;
-  font-size: 1.1rem;
-  color: #555;
+.profile-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #20c755, #1b9e4b);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .comments-section {
-  background-color: #151414;
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 20px;
+  background-color: #0c0c0c;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.comments-section h2 {
+  font-size: 1.5rem;
+  color: #00e5ff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
 }
 
 .comments-list {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .comment {
-  background-color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #0c0c0c;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .post-comment textarea {
-  width: 94%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid #0c0c0c;
+  background-color: #101010;
+  color: #e0e0e0;
   font-size: 1rem;
-  margin-bottom: 12px;
-  resize: none;
+  resize: vertical;
   min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.post-comment textarea:focus {
+  outline: none;
+  border-color: #00ff9d;
+  background-color: #101010;
+  box-shadow: 0 0 0 4px rgba(0, 255, 157, 0.1);
+}
+
+.post-comment textarea::placeholder {
+  color: #666666;
 }
 
 .post-comment button {
-  padding: 12px 24px;
-  background-color: #28a745;
-  color: white;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00ff9d, #00cc7e);
+  color: #000000;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
 }
 
 .post-comment button:hover {
-  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 157, 0.2);
+  background: linear-gradient(135deg, #00ff9d, #00ff9d);
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
+.post-comment button:active {
+  transform: translateY(0);
+}
+
+/* Update the posted-by section text colors */
+.posted-by-section p:first-child {
+  color: #00ff9d !important;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+}
+
+.posted-by-section p:last-child {
+  color: #b3b3b3 !important;
+}
+
+/* Update the no comments message color */
+.comments-list p {
+  color: #b3b3b3 !important;
+}
+
+@media (min-width: 768px) {
   .rental-header-container {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .rental-image-container {
+    flex: 1;
+    height: 500px;
+  }
+
+  .rental-header {
+    flex: 1;
+    padding-left: 2rem;
   }
 
   .rental-specs {
-    align-items: center;
-    gap: 10px;
+    justify-content: flex-start;
   }
-  .posted-by-section {
-    flex-direction: column;
-    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .rental-details-page {
+    padding: 1rem;
   }
+
+  .rental-header-container {
+    padding: 1rem;
+  }
+
+  .rental-image-container {
+    height: 300px;
+  }
+
   .rental-title {
-    font-size: 28px;
+    font-size: 2rem;
+  }
+
+  .rental-price {
+    font-size: 1.5rem;
+  }
+
+  .rental-specs {
+    justify-content: center;
   }
 }
 
