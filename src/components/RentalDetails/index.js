@@ -6,7 +6,8 @@ import 'swiper/css';
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from 'axios';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaBed, FaBath, FaRuler, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
+import { MdLocationOn, MdDescription } from 'react-icons/md';
 import Loader from '../Loader'
 
 // #ToDo
@@ -94,80 +95,75 @@ const RentalDetails = () => {
     return (
         <>
             <Navbar />
-            {!loading?
-            
-            <div className="rental-details-page">
-                <div className="rental-header-container">
-                    <div className="rental-image-container">
-                    <img src={imageUrl} alt={title} className="rental-image" />
-                        {/* {/* {images??images.length > 1 ? (
-                            <Swiper spaceBetween={10} slidesPerView={1} loop>
-                                {images.map((image, index) => (
-                                    <SwiperSlide key={index}>
-                                        <img src={imageUrl} alt={title} className="rental-image" />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper> */}
-                        {/* ) : (
+            {!loading ? (
+                <div className="rental-details-page">
+                    <div className="rental-header-container">
+                        <div className="rental-image-container">
                             <img src={imageUrl} alt={title} className="rental-image" />
-                        )} */} 
-                    </div>
-                    <div className="rental-header">
-                        <h1 className="rental-title">{title}</h1>
-                        <p className="rental-location">{location}</p>
-                        <p className="rental-price">₹{price}</p>
-                        <div className="rental-specs">
-                            <span>{bedrooms} Bedrooms</span>
-                            <span>{bathrooms} Bathrooms</span>
-                            <span>{size}</span>
                         </div>
-                        <div className="rental-description">
-                        <h2>Description</h2>
-                        <p className='description'> {description}</p>
-                        <p>Available From: <strong>{formattedDate}</strong></p>
-                        <p>Status: <strong>{status}</strong></p>
+                        <div className="rental-header">
+                            <h1 className="rental-title">{title}</h1>
+                            <p className="rental-location">
+                                <MdLocationOn className="icon" /> {location}
+                            </p>
+                            <p className="rental-price">₹{price}/month</p>
+                            <div className="rental-specs">
+                                <span><FaBed className="icon" /> {bedrooms} Bedrooms</span>
+                                <span><FaBath className="icon" /> {bathrooms} Bathrooms</span>
+                                <span><FaRuler className="icon" /> {size}</span>
+                            </div>
+                            <div className="rental-description">
+                                <h2><MdDescription className="icon" /> Description</h2>
+                                <p className="description">{description}</p>
+                                <p><FaCalendarAlt className="icon" /> Available From: <strong>{formattedDate}</strong></p>
+                                <p><FaCheckCircle className="icon" /> Status: <strong>{status}</strong></p>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
 
-                <div className="rental-details-info">
-                    <div className="posted-by-section">
-                        <div style={{display:'flex',alignItems:'center',gap:'8px',paddingLeft:'7px'}}>
-                        {profileIcon}
-                        <p style={{color:'#20c755',fontFamily:'serif',fontSize:'22px'}}> {owner}</p>
+                    <div className="rental-details-info">
+                        <div className="posted-by-section">
+                            {profileIcon}
+                            <div>
+                                <p style={{ color: '#20c755', fontSize: '1.2rem', fontWeight: '600', margin: 0 }}>
+                                    {owner}
+                                </p>
+                                <p style={{ color: '#a9a4a4', margin: '0.5rem 0 0 0' }}>
+                                    Property Owner
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="comments-section">
+                        <h2>Comments</h2>
+                        <div className="comments-list">
+                            {comments.length === 0 ? (
+                                <p style={{ color: '#a9a4a4', textAlign: 'center' }}>
+                                    No comments yet. Be the first to comment! 🙋‍♂️
+                                </p>
+                            ) : (
+                                comments.map((comment, index) => (
+                                    <div key={index} className="comment">
+                                        <p>{comment}</p>
+                                    </div>
+                                ))
+                            )}
                         </div>
 
-                    </div>
-                    
-                </div>
-
-                <div className="comments-section">
-                    <h2>Comments</h2>
-                    <div className="comments-list">
-                        {comments.length === 0 ? (
-                            <p>No comments yet. Be the first to comment!🙋‍♂️</p>
-                        ) : (
-                            comments.map((comment, index) => (
-                                <div key={index} className="comment">
-                                    <p>{comment}</p>
-                                </div>
-                            ))
-                        )}
-                    </div>
-
-                    <div className="post-comment">
-                        <textarea
-                            placeholder="Write a comment..."
-                            value={newComment}
-                            style={{backgroundColor:'#101010',color:'#ffffff'}}
-                            onChange={(e) => setNewComment(e.target.value)}
-                        />
-                        <button onClick={handlePostComment}>Post Comment</button>
+                        <div className="post-comment">
+                            <textarea
+                                placeholder="Write a comment..."
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                            />
+                            <button onClick={handlePostComment}>Post Comment</button>
+                        </div>
                     </div>
                 </div>
-            </div> 
-           : <Loader/>
-}
+            ) : (
+                <Loader />
+            )}
         </>
     );
 };
