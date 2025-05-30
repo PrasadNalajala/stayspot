@@ -3,9 +3,10 @@ import Navbar from '../Navbar'; // Assuming you have a Navbar component
 import prasad from '.././../assets/prasad.png';
 import hari from '.././../assets/Hari.jpg';
 import chandra from '.././../assets/Chandra.jpg';
-import { FaRocket, FaCheckCircle, FaHandsHelping, FaShieldAlt ,FaLightbulb,FaHandshake,FaStar,FaHeart} from 'react-icons/fa'; // Icons for values
+import { FaRocket, FaCheckCircle, FaHandsHelping, FaShieldAlt ,FaLightbulb,FaHandshake,FaStar,FaHeart, FaArrowRight} from 'react-icons/fa'; // Icons for values
 import './index.css';
 import Footer from '../Footer';
+import { Link } from 'react-router-dom';
 
 const AboutUs = () => {
   return (
@@ -81,7 +82,7 @@ const AboutUs = () => {
             <div className="value-card">
               <FaHandsHelping className="value-icon" />
               <h3>Supportive</h3>
-              <p>We’re here to help you, providing support and resources whenever needed.</p>
+              <p>We're here to help you, providing support and resources whenever needed.</p>
             </div>
             <div className="value-card">
               <FaShieldAlt className="value-icon" />

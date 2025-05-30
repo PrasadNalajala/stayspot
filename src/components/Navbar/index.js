@@ -31,8 +31,8 @@ const Navbar = () => {
         },
       });
       const data = response.data[0];
-      setProfileImageUrl(data.profile_url);
-      setUserName(data.name);
+      setProfileImageUrl(data?.profile_url);
+      setUserName(data?.name);
     }
   };
 
@@ -56,7 +56,7 @@ const Navbar = () => {
     <img src={userImageUrl} alt="Profile" className="profile-image-navbar" />
   ) : (
     <div className="profile-placeholder">
-      {isLoggedIn ? userName.charAt(0).toUpperCase() : <FaUserCircle />}
+      {isLoggedIn ? userName?.charAt(0).toUpperCase() : <FaUserCircle />}
     </div>
   );
 
