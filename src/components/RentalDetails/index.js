@@ -9,6 +9,7 @@ import axios from 'axios';
 import { FaUserCircle, FaBed, FaBath, FaRuler, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 import { MdLocationOn, MdDescription } from 'react-icons/md';
 import Loader from '../Loader'
+import { formatDistanceToNow } from 'date-fns';
 
 // #ToDo
 // imageUrls
@@ -35,6 +36,9 @@ const RentalDetails = () => {
     const [profileUrl,setProfileUrl]=useState('')
     const [images,setImages]=useState([])
     
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
+
     useEffect(() => {
         const fetchRentalDetails = async () => {
             try {
@@ -66,19 +70,40 @@ const RentalDetails = () => {
             }
         };
 
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`https://stayspot.onrender.com/api/rentals/${id}/comments`);
+                setComments(response.data);
+            } catch (err) {
+                console.error("Error fetching comments:", err);
+                toast.error(err.message);
+            }
+        };
+
         fetchRentalDetails();
+        fetchComments();
     }, [id]);
 
-
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("");
-
-    const handlePostComment = () => {
+    const handlePostComment = async () => {
         if (newComment.trim()) {
-            setComments([...comments, newComment.trim()]);
-            setNewComment("");
+            try {
+                const token = localStorage.getItem("token"); 
+                await axios.post(`https://stayspot.onrender.com/api/rentals/${id}/comments`, {
+                    comment: newComment.trim(),
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setComments([...comments, { comment: newComment.trim(), created_at: new Date(), name: "You",  }]); 
+                setNewComment("");
+            } catch (err) {
+                console.error("Error posting comment:", err);
+                toast.error(err.message);
+            }
         }
     };
+
     const profileIcon = profileUrl!==null? (
         <img src={profileUrl} alt="Profile" className="owner-profile-pic" />
       ) : (
@@ -139,13 +164,26 @@ const RentalDetails = () => {
                         <h2>Comments</h2>
                         <div className="comments-list">
                             {comments.length === 0 ? (
-                                <p style={{ color: '#a9a4a4', textAlign: 'center' }}>
+                                <p className="no-comments-message">
                                     No comments yet. Be the first to comment! 🙋‍♂️
                                 </p>
                             ) : (
                                 comments.map((comment, index) => (
                                     <div key={index} className="comment">
-                                        <p>{comment}</p>
+                                        <div className="comment-header">
+                                            {comment.profile_url ? (
+                                                <img src={comment.profile_url} alt={comment.name} className="comment-profile-pic" />
+                                            ) : (
+                                                <FaUserCircle className="default-user-icon" />
+                                            )}
+                                            <p className="comment-author">
+                                                <strong>{comment.name}</strong>
+                                            </p>
+                                            <p className="comment-time">
+                                                {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
+                                            </p>
+                                        </div>
+                                        <p className="comment-text">{comment.comment}</p>
                                     </div>
                                 ))
                             )}
