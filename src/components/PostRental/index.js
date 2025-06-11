@@ -10,15 +10,18 @@ import {
   FaBed,
   FaBath,
   FaRegUser,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import "./postrental.css";
 
 const PostRental = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -47,6 +50,7 @@ const PostRental = () => {
     contact_email: "",
     contact_phone: "",
   });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -102,7 +106,7 @@ const PostRental = () => {
           },
         }
       );
-      toast.success("Rental property posted successfully!");
+      setShowSuccess(true);
       setFormData({
         title: "",
         location: "",
@@ -122,6 +126,14 @@ const PostRental = () => {
     } catch (error) {
       toast.error("Failed to post rental property.");
     }
+  };
+
+  const handleViewListing = () => {
+    navigate('/rentals');
+  };
+
+  const handlePostAnother = () => {
+    setShowSuccess(false);
   };
 
   const [modalIsOpen, setIsOpen] = useState(!isLoggedin);
@@ -330,6 +342,29 @@ const PostRental = () => {
         }
       </div>
       <Footer />
+
+      {showSuccess && (
+        <>
+          <div className="success-overlay" />
+          <div className="success-card">
+            <div className="success-icon">
+              <FaCheckCircle />
+            </div>
+            <h2 className="success-title">Success!</h2>
+            <p className="success-message">
+              Your rental property has been successfully posted. It will be visible to potential renters shortly.
+            </p>
+            <div className="success-actions">
+              <button className="success-btn primary" onClick={handleViewListing}>
+                View All Listings
+              </button>
+              <button className="success-btn secondary" onClick={handlePostAnother}>
+                Post Another
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
