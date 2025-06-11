@@ -8,7 +8,7 @@ import Modal from 'react-modal';
 
 const RentalItem = (props) => {
     const { itemDetails } = props;
-    const { title, location, price, bedrooms, bathrooms, size, imageUrl, contact,id } = itemDetails;
+    const { title, location, price, bedrooms, bathrooms, size, imageUrl, contact_email,contact_name,contact_phone,id } = itemDetails;
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const openModal = () => setIsOpen(true);
@@ -69,9 +69,9 @@ const RentalItem = (props) => {
                     <button className='close-modal-btn' onClick={closeModal}>Close</button>
                 </div>
                 <div className='owner-details'>
-                    <p><strong>Name:</strong> <span style={{textDecoration:'none',color:'#20c755'}}>{contact.name}</span></p>
-                    <p><strong>Email:</strong> <a style={{textDecoration:'none',color:'#20c755'}}href={`mailto:${contact.email}`}>{contact.email}</a></p>
-                    <p><strong>Phone:</strong><a style={{textDecoration:'none',color:'#20c755'}} href={`tel:${contact.phone}`}>{contact.phone}</a> </p>
+                    <p><strong>Name:</strong> <span style={{textDecoration:'none',color:'#20c755'}}>{contact_name}</span></p>
+                    <p><strong>Email:</strong> <a style={{textDecoration:'none',color:'#20c755'}}href={`mailto:${contact_email}`}>{contact_email}</a></p>
+                    <p><strong>Phone:</strong><a style={{textDecoration:'none',color:'#20c755'}} href={`tel:${contact_phone}`}>{contact_phone}</a> </p>
                 </div>
             </Modal>
         </div>
