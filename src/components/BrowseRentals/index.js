@@ -249,21 +249,19 @@ const BrowseRentals = (props) => {
           </div>
 
           <div className="sort-section">
-            <div className="sort-container">
-              <FaSort className="sort-icon" />
-              <select 
-                name="sortBy" 
-                value={sortBy} 
-                onChange={handleSortChange}
-                className="sort-select"
-              >
-                <option value="">Sort By</option>
-                <option value="price">Price: Low to High</option>
-                <option value="bedrooms">Bedrooms: Low to High</option>
-                <option value="bathrooms">Bathrooms: Low to High</option>
-                <option value="available_from">Date: Oldest First</option>
-              </select>
-            </div>
+            {/* On mobile, show only the select, not the container or icon */}
+            <select 
+              name="sortBy" 
+              value={sortBy} 
+              onChange={handleSortChange}
+              className="sort-select"
+            >
+              <option value="">Sort By</option>
+              <option value="price">Price: Low to High</option>
+              <option value="bedrooms">Bedrooms: Low to High</option>
+              <option value="bathrooms">Bathrooms: Low to High</option>
+              <option value="available_from">Date: Oldest First</option>
+            </select>
           </div>
 
           <div className="rental-items-section">

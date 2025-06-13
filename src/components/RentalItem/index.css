@@ -88,12 +88,23 @@
 }
 
 .view-details-btn {
-    background-color: #ffba00;
-    color: black;
+    background: #ffd600;
+    color: #222;
+    border: none;
+    box-shadow: 0 2px 8px #ffd60033;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 10px 0;
+    border-radius: 8px;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    outline: none;
 }
 
 .view-details-btn:hover {
-    background-color: #e5a800;
+    background: #ffb300;
+    color: #222;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 4px 16px #ffd60044;
 }
 
 .contact-btn {
@@ -108,22 +119,127 @@
 @media (max-width: 768px) {
     .rental-item {
         width: 100%;
+        margin: 0 0 0.5rem 0;
+        border-radius: 4px;
+        padding: 10px 6px 10px 6px;
+        box-shadow: none;
+    }
+    .rental-img {
+        height: 120px;
+        border-radius: 3px;
+    }
+    .rental-details {
+        padding: 8px 0 0 0;
+    }
+    .rental-heading-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+    }
+    .rental-item-heading {
+        font-size: 1rem;
+        margin: 0;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .rental-price {
+        font-size: 0.95rem;
+        margin: 0 0 0 8px;
+    }
+    .specifications-container {
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 6px 0;
+    }
+    .specifications-container p {
+        font-size: 0.8rem;
+        padding: 2px 6px;
+        border-radius: 3px;
         margin: 0;
     }
-
-    .specifications-container {
-        flex-direction: row;
-        align-items: flex-start;
+    .location-container {
+        margin-bottom: 6px;
     }
-
+    .location {
+        font-size: 0.8rem;
+    }
     .button-container {
         flex-direction: row;
+        gap: 4px;
+        margin-top: 6px;
+    }
+    .button {
+        width: 50%;
+        padding: 6px 0;
+        font-size: 0.85rem;
+        border-radius: 3px;
+    }
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .modal-header h2 {
+        font-size: 1.1rem;
+    }
+    .owner-details {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+    }
+    .owner-details p {
+        font-size: 0.95rem;
+        margin: 0;
+        word-break: break-all;
+    }
+    .close-modal-btn {
+        width: 100%;
+        margin-top: 12px;
+        font-size: 0.95rem;
+        padding: 8px 0;
+        border-radius: 4px;
+    }
+    .ReactModal__Content {
+        padding: 12px 8px !important;
+        max-width: 95vw !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
+    .view-details-btn {
+        font-size: 0.95rem;
+        padding: 8px 0;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px #ffd60022;
+    }
+}
+
+@media (max-width: 480px) {
+    .rental-img {
+        height: 180px;
+    }
+
+    .rental-item-heading {
+        font-size: 1.1rem;
+    }
+
+    .rental-price {
+        font-size: 1rem;
+    }
+
+    .specifications-container p {
+        font-size: 0.85rem;
+    }
+
+    .location {
+        font-size: 0.85rem;
     }
 
     .button {
-        width: 100%;
-        margin-bottom: 10px;
-        margin-right: 5px;
+        font-size: 0.9rem;
     }
 }
 
@@ -158,4 +274,83 @@
 
 .modal-header h2 {
     color: #20c755;
+}
+
+/* Owner Details Modal Modern Styles */
+.ReactModal__Content {
+    background: #181f18 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(32, 199, 85, 0.18) !important;
+    padding: 32px 28px !important;
+    max-width: 400px !important;
+    width: 95vw !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    border: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 18px;
+}
+.modal-header h2 {
+    color: #20c755;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+.close-modal-btn {
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: background 0.2s;
+    font-weight: 600;
+}
+.close-modal-btn:hover {
+    background: #d32f2f;
+}
+.owner-details {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+}
+.owner-details p {
+    margin: 0;
+    color: #e6ffe6;
+    word-break: break-all;
+}
+.owner-details a {
+    color: #20c755;
+    text-decoration: none;
+    word-break: break-all;
+}
+@media (max-width: 600px) {
+    .ReactModal__Content {
+        padding: 16px 6px !important;
+        max-width: 98vw !important;
+    }
+    .modal-header h2 {
+        font-size: 1.05rem;
+    }
+    .close-modal-btn {
+        font-size: 0.95rem;
+        padding: 7px 10px;
+    }
+    .owner-details {
+        font-size: 0.95rem;
+    }
 }
