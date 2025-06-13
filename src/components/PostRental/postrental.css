@@ -186,26 +186,57 @@ body, html {
 /* Responsive Styling */
 @media (max-width: 768px) {
   .post-rentals-section {
-    padding: 80px 20px 40px;
+    padding: 80px 10px 40px;
   }
-
   .post-rental-des h2 {
     font-size: 2rem;
   }
-
   .rental-form {
-    padding: 1.5rem;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    width: 100%;
   }
-
   .input-group {
-    gap: 1rem;
+    gap: 0.5rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-
   .input-field {
-    min-width: 100%;
+    min-width: 0;
     max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-
+  .input-field input,
+  .input-field textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    font-size: 0.95rem;
+  }
+  .input-field input[type="file"] {
+    padding: 0.8rem 1rem;
+  }
+  .image-preview {
+    margin-top: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .image-thumb {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
   .form-submit button {
     width: 100%;
     padding: 1rem;
