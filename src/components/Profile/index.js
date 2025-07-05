@@ -4,6 +4,8 @@ import Navbar from "../Navbar";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FiEdit2 } from "react-icons/fi";
+import { FaHome, FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 const Profile = () => {
@@ -16,6 +18,8 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
   const [name, setName] = useState("Prasad Nallajala");
+  const [userListings, setUserListings] = useState([]);
+  const [listingsLoading, setListingsLoading] = useState(false);
   let timeAgo;
   if (userDetails && userDetails.created_at) {
     try {
@@ -49,6 +53,23 @@ const Profile = () => {
     setOccupation(data.occupation);
     setBio(data.bio);
     setLocation(data.location);
+  };
+
+  const fetchUserListings = async () => {
+    try {
+      setListingsLoading(true);
+      const token = localStorage.getItem("token");
+      const response = await axios.get("https://stayspot.onrender.com/api/user/rentals", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUserListings(response.data);
+    } catch (error) {
+      console.error("Error fetching user listings:", error);
+    } finally {
+      setListingsLoading(false);
+    }
   };
 
   const updateUserDetails=async()=>{
@@ -107,6 +128,7 @@ const Profile = () => {
 
   useEffect(() => {
     fecthUserDetails();
+    fetchUserListings();
   }, []);
 
   const renderProfileImage = () => {
@@ -204,6 +226,70 @@ const Profile = () => {
               Save Changes
             </button>
           </div>
+        </div>
+
+        {/* Your Listings Section */}
+        <div className="profile-listings-section">
+          <div className="listings-section-header">
+            <h3>Your Listings</h3>
+            <Link to="/your-listings" className="view-all-listings-btn">
+              <FaEye /> View All
+            </Link>
+          </div>
+          
+          {listingsLoading ? (
+            <div className="listings-loading">Loading your listings...</div>
+          ) : userListings.length === 0 ? (
+            <div className="no-listings">
+              <FaHome className="no-listings-icon" />
+              <p>You haven't posted any rentals yet.</p>
+              <Link to="/post-rental" className="post-first-listing-btn">
+                Post Your First Rental
+              </Link>
+            </div>
+          ) : (
+            <div className="profile-listings-grid">
+              {userListings.slice(0, 3).map((listing) => (
+                <div key={listing.id} className="profile-listing-card">
+                  <div className="profile-listing-image">
+                    <img src={listing.imageUrl} alt={listing.title} />
+                    <div className="listing-status">
+                      <span className={`status-badge ${listing.status}`}>
+                        {listing.status}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="profile-listing-content">
+                    <h4>{listing.title}</h4>
+                    <p className="listing-location">{listing.location}</p>
+                    <p className="listing-price">₹{listing.price}</p>
+                    <div className="listing-specs">
+                      <span>{listing.bedrooms} Bed</span>
+                      <span>{listing.bathrooms} Bath</span>
+                      <span>{listing.size}</span>
+                    </div>
+                    <Link 
+                      to={`/rental/details/${listing.id}`} 
+                      className="view-listing-btn"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+              {userListings.length > 3 && (
+                <div className="more-listings-card">
+                  <div className="more-listings-content">
+                    <FaHome className="more-listings-icon" />
+                    <p>You have {userListings.length - 3} more listings</p>
+                    <Link to="/your-listings" className="view-all-btn">
+                      View All Listings
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

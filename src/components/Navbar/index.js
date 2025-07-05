@@ -102,9 +102,14 @@ const Navbar = () => {
             {profileDropdownActive && (
               <div className="profile-dropdown">
                 {isLoggedIn ? (
-                  <Link to="/profile" className="dropdown-item">
-                    Profile
-                  </Link>
+                  <>
+                    <Link to="/profile" className="dropdown-item">
+                      Profile
+                    </Link>
+                    <Link to="/your-listings" className="dropdown-item">
+                      Your Listings
+                    </Link>
+                  </>
                 ) : (
                   " "
                 )}

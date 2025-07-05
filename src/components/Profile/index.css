@@ -146,5 +146,315 @@
     .username{
         text-align: start;
     }
+  }
 
+  /* Your Listings Section Styles */
+  .profile-listings-section {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .listings-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+  }
+
+  .listings-section-header h3 {
+    color: #20c755;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .view-all-listings-btn {
+    background: rgba(32, 199, 85, 0.2);
+    color: #20c755;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .view-all-listings-btn:hover {
+    background: #20c755;
+    color: white;
+    text-decoration: none;
+  }
+
+  .listings-loading {
+    text-align: center;
+    padding: 40px;
+    color: #ccc;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .listings-loading::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(32, 199, 85, 0.2);
+    border-top: 2px solid #20c755;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .no-listings {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+
+  .no-listings-icon {
+    font-size: 3rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .no-listings p {
+    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+  }
+
+  .post-first-listing-btn {
+    background: linear-gradient(135deg, #20c755, #1a9f45);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-first-listing-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .post-first-listing-btn:hover::before {
+    left: 100%;
+  }
+
+  .post-first-listing-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(32, 199, 85, 0.3);
+    text-decoration: none;
+    color: white;
+  }
+
+  .profile-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .profile-listing-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .profile-listing-card:hover {
+    transform: translateY(-2px);
+    border-color: #20c755;
+    box-shadow: 0 4px 15px rgba(32, 199, 85, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .profile-listing-image {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+  }
+
+  .profile-listing-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .listing-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  .status-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .status-badge.available {
+    background: rgba(32, 199, 85, 0.2);
+    color: #20c755;
+    border: 1px solid #20c755;
+  }
+
+  .status-badge.rented {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+  }
+
+  .status-badge.maintenance {
+    background: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+  }
+
+  .profile-listing-content {
+    padding: 15px;
+  }
+
+  .profile-listing-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+  }
+
+  .listing-location {
+    color: #20c755;
+    font-size: 0.8rem;
+    margin: 0 0 8px 0;
+  }
+
+  .listing-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #20c755;
+    margin: 0 0 12px 0;
+  }
+
+  .listing-specs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .listing-specs span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #ccc;
+  }
+
+  .view-listing-btn {
+    background: rgba(32, 199, 85, 0.2);
+    color: #20c755;
+    border: 1px solid #20c755;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .view-listing-btn:hover {
+    background: #20c755;
+    color: white;
+    text-decoration: none;
+  }
+
+  .more-listings-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+  }
+
+  .more-listings-content {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .more-listings-icon {
+    font-size: 2rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .more-listings-content p {
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  .view-all-btn {
+    background: linear-gradient(135deg, #20c755, #1a9f45);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .view-all-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(32, 199, 85, 0.3);
+    text-decoration: none;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .profile-listings-section {
+      margin-top: 20px;
+    }
+
+    .listings-section-header {
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .profile-listings-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .listing-specs {
+      gap: 6px;
+    }
+
+    .listing-specs span {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+    }
   }
