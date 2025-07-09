@@ -12,6 +12,7 @@ import {
   FaSignOutAlt,
   FaSignInAlt,
   FaUserCircle,
+  FaHeart,
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -56,7 +57,7 @@ const Navbar = () => {
     <img src={userImageUrl} alt="Profile" className="profile-image-navbar" />
   ) : (
     <div className="profile-placeholder">
-      {isLoggedIn ? userName?.charAt(0).toUpperCase() : <FaUserCircle />}
+      {isLoggedIn && userName && userName.trim().length > 0 ? <span>{userName.charAt(0).toUpperCase()}</span> : <FaUserCircle size={40} />}
     </div>
   );
 
@@ -108,6 +109,9 @@ const Navbar = () => {
                     </Link>
                     <Link to="/your-listings" className="dropdown-item">
                       Your Listings
+                    </Link>
+                    <Link to="/favorites" className="dropdown-item">
+                      Favorites
                     </Link>
                   </>
                 ) : (

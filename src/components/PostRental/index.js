@@ -11,6 +11,8 @@ import {
   FaBath,
   FaRegUser,
   FaCheckCircle,
+  FaPlus,
+  FaTimes,
 } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import Navbar from "../Navbar";
@@ -22,8 +24,9 @@ import "./postrental.css";
 
 const PostRental = () => {
   const navigate = useNavigate();
-  const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [uploading, setUploading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const jwtToken = localStorage.getItem("token");
   const isLoggedin = jwtToken !== null;
@@ -61,14 +64,39 @@ const PostRental = () => {
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-      uploadImageToCloud(file);
+    const files = Array.from(e.target.files);
+    const validFiles = files.filter(file => 
+      file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024 // 5MB limit
+    );
+
+    if (validFiles.length === 0) {
+      toast.error("Please select valid image files (max 5MB each)");
+      return;
     }
+
+    if (images.length + validFiles.length > 10) {
+      toast.error("Maximum 10 images allowed");
+      return;
+    }
+
+    setUploading(true);
+    
+    // Create preview URLs
+    const newImages = validFiles.map(file => ({
+      file,
+      preview: URL.createObjectURL(file),
+      uploading: true
+    }));
+    
+    setImages(prev => [...prev, ...newImages]);
+
+    // Upload each image
+    validFiles.forEach((file, index) => {
+      uploadImageToCloud(file, newImages[index]);
+    });
   };
 
-  const uploadImageToCloud = (file) => {
+  const uploadImageToCloud = (file, imageObj) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "imageUrl");
@@ -76,24 +104,45 @@ const PostRental = () => {
     axios
       .post(`https://api.cloudinary.com/v1_1/dnd03w7us/image/upload`, formData)
       .then((response) => {
-        setImageUrl(response.data.secure_url);
+        setImageUrls(prev => [...prev, response.data.secure_url]);
+        setImages(prev => 
+          prev.map(img => 
+            img.file === file 
+              ? { ...img, uploading: false, url: response.data.secure_url }
+              : img
+          )
+        );
+        setUploading(false);
       })
       .catch((error) => {
-        toast.error("Failed to upload image");
+        toast.error(`Failed to upload ${file.name}`);
+        setImages(prev => prev.filter(img => img.file !== file));
+        setUploading(false);
       });
+  };
+
+  const removeImage = (index) => {
+    setImages(prev => prev.filter((_, i) => i !== index));
+    setImageUrls(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!imageUrl) {
-      toast.error("Please upload an image.");
+    if (imageUrls.length === 0) {
+      toast.error("Please upload at least one image.");
+      return;
+    }
+
+    if (uploading) {
+      toast.error("Please wait for all images to finish uploading.");
       return;
     }
 
     const updatedFormData = {
       ...formData,
-      imageUrl: imageUrl,
+      imageUrl: imageUrls[0], // Primary image
+      imageUrls: imageUrls, // All images array
     };
 
     try {
@@ -122,7 +171,8 @@ const PostRental = () => {
         contact_email: "",
         contact_phone: "",
       });
-      setImage(null);
+      setImages([]);
+      setImageUrls([]);
     } catch (error) {
       toast.error("Failed to post rental property.");
     }
@@ -291,20 +341,56 @@ const PostRental = () => {
             </div>
 
             <div className="input-group">
-              <div className="input-field">
-                <FaImage className="input-icon" />
+              <div className="image-upload-section">
+                <div className="image-upload-header">
+                  <FaImage className="input-icon" />
+                  <span>Property Images (Max 10 images, 5MB each)</span>
+                </div>
                 <input
                   type="file"
                   accept="image/*"
+                  multiple
                   onChange={handleImageUpload}
-                  required
+                  disabled={uploading || images.length >= 10}
+                  className="image-input"
                 />
-              </div>
-              {image && (
-                <div className="image-preview">
-                  <img src={image} alt="Property" className="image-thumb" />
+                <div className="image-preview-grid">
+                  {images.map((image, index) => (
+                    <div key={index} className="image-preview-item">
+                      <img src={image.preview} alt={`Property ${index + 1}`} />
+                      {image.uploading && (
+                        <div className="upload-overlay">
+                          <div className="upload-spinner"></div>
+                          <span>Uploading...</span>
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        className="remove-image-btn"
+                        onClick={() => removeImage(index)}
+                        disabled={image.uploading}
+                      >
+                        <FaTimes />
+                      </button>
+                      {index === 0 && (
+                        <div className="primary-badge">Primary</div>
+                      )}
+                    </div>
+                  ))}
+                  {images.length < 10 && (
+                    <div className="add-image-placeholder">
+                      <FaPlus />
+                      <span>Add More</span>
+                    </div>
+                  )}
                 </div>
-              )}
+                {uploading && (
+                  <div className="upload-progress">
+                    <div className="upload-spinner"></div>
+                    <span>Uploading images...</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="input-group">
