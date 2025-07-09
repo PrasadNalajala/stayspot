@@ -3,19 +3,25 @@
   background-color: black;
   justify-content: space-between;
   position: fixed;
-  padding: 7px;
+  padding: 0 20px;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
   align-items: center;
+  height: 64px;
 }
 
 .logo-container p {
-  font-size: 25px;
+  font-size: 28px;
   color: #20c755;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding-left: 30px;
+  margin: 0;
+  line-height: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
 }
 
 .nav-items-container {
@@ -135,6 +141,59 @@
   cursor: pointer;
 }
 
+.profile-image-navbar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #20c755;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.profile-letter {
+  font-size: 28px;
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-svg-icon {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  border: 2px solid red !important; /* DEBUG: Remove after confirming */
+  background: yellow !important; /* DEBUG: Remove after confirming */
+}
+
+.profile-svg-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-svg-icon-wrapper svg {
+  width: 40px !important;
+  height: 40px !important;
+  display: block;
+}
+
 .profile-dropdown {
   position: absolute;
   top: 60px;
@@ -190,4 +249,53 @@
   .icon-only {
     font-size: 1.2rem;
   }
+}
+
+.profile-placeholder svg {
+  width: 27px;
+  height: 27px;
+}
+
+.profile-image-navbar,
+.profile-placeholder,
+.profile-svg-icon-wrapper {
+  height: 48px;
+  width: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-image-navbar {
+  object-fit: cover;
+  height: 48px;
+  width: 48px;
+}
+
+.profile-placeholder .profile-letter {
+  font-size: 32px;
+  line-height: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-svg-icon-wrapper svg {
+  width: 48px !important;
+  height: 48px !important;
+  display: block;
+  margin: 0;
+  padding: 0;
 }

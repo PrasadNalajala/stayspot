@@ -37,6 +37,11 @@ const Home = () => {
                     <p className="welcome-subtitle animate-on-scroll">
                         Your Perfect Home Awaits
                     </p>
+                    <div className="product-hunt-badge" style={{width:'100%',display:'flex',justifyContent:'center',marginTop:'20px',marginBottom:'10px'}}>
+                      <a href="https://www.producthunt.com/products/stayspot?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-stayspot" target="_blank" rel="noopener noreferrer">
+                        <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=990642&theme=light&t=1752079099862" alt="Stayspot - Your spot, your rules – Discover rentals your way. | Product Hunt" style={{width: '250px', height: '54px'}} width="250" height="54" />
+                      </a>
+                    </div>
                 </div>
 
                 <div className='browse-rentals-section animate-on-scroll'>
