@@ -14,11 +14,15 @@ import Favorites from "./components/Favorites/index.js";
 import Messaging from "./components/Messaging/index.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./components/Navbar/index.js";
+import Footer from "./components/Footer/index.js";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Navbar />
+        {/* Removed main-content wrapper to restore previous look */}
         <Routes>
           <Route path="/login" Component={Login} />
           <Route exact path="/" Component={Home} />
@@ -32,6 +36,7 @@ function App() {
           <Route path="/rental/details/:id" Component={RentalDetails} />
           <Route path="/message/:rentalId" Component={Messaging} />
         </Routes>
+        <Footer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
