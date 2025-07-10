@@ -142,6 +142,23 @@ const LoginFields = (props) => {
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem("token", token);
+
+        // Fetch user profile to get userId
+        try {
+          const profileRes = await axios.get("https://stayspot.onrender.com/api/user", {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          console.log("Profile response:", profileRes.data); // Debug log
+          // Support both { id: ... } and { user: { id: ... } } formats
+          if (profileRes.data && profileRes.data.id) {
+            localStorage.setItem("userId", profileRes.data.id);
+          } else if (profileRes.data && profileRes.data.user && profileRes.data.user.id) {
+            localStorage.setItem("userId", profileRes.data.user.id);
+          }
+        } catch (profileErr) {
+          console.error("Failed to fetch user profile for userId:", profileErr);
+        }
+
         toast.success("Login success");
         navigate("/");
       }
@@ -159,11 +176,11 @@ const LoginFields = (props) => {
       console.error("Error during signup:", error);
     }
   };
-  const onClickLogin = (e) => {
+  const onClickLogin = async (e) => {
     e.preventDefault();
     if (email && password) {
-      fecthLogin();
       setIsLoading(true);
+      await fecthLogin();
     } else {
       toast.warning("Enter All Fields");
     }

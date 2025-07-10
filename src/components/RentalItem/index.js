@@ -1,6 +1,6 @@
 import './index.css';
 import { Link } from 'react-router-dom';
-import { FaMapMarkedAlt, FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaMapMarkedAlt, FaHeart, FaRegHeart, FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import { SiMinutemailer } from "react-icons/si";
 import {FiPhoneOutgoing} from 'react-icons/fi';
 import { useState, useEffect } from 'react';
@@ -56,27 +56,6 @@ const RentalItem = (props) => {
         }
     };
 
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px',
-            borderRadius: '8px',
-            maxWidth: '500px',
-            width: '90%', 
-            border:'none',
-            backgroundColor: '#141414',
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-        },
-        overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-        },
-    };
-
     return (
         <div className='rental-item'>
             <div className='rental-image-container'>
@@ -103,19 +82,32 @@ const RentalItem = (props) => {
                     <p className='location'><FaMapMarkedAlt className='map-icon' />{location}</p>
                 </div>
                 <div className='button-container'>
-                    <Link to={`/rental/details/${id}`} className='view-details-btn button' style={{textDecoration:'none'}}>
-                    View Details
+                    <Link to={`/rental/details/${id}`} className='view-details-btn button'>
+                        View Details
                     </Link>
-                    <Link to={`/message/${id}`} className='message-btn button' style={{textDecoration:'none'}}>
-                    Message Owner
-                    </Link>
-                    <button className='contact-btn button' onClick={openModal} style={{fontSize:'15px'}}>Owner Details</button>
+                    <button 
+                        className='message-btn button'
+                        onClick={() => {
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                                toast.error('Please login to send messages');
+                                return;
+                            }
+                            window.location.href = `/message/${id}`;
+                        }}
+                    >
+                        Message Owner
+                    </button>
+                    <button className='contact-btn button' onClick={openModal}>
+                        Owner Details
+                    </button>
                 </div>
             </div>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                style={customStyles}
+                className="owner-details-modal"
+                overlayClassName="owner-details-modal-overlay"
                 contentLabel="Owner Details Modal"
             >
                 <div className='modal-header'>
@@ -123,9 +115,33 @@ const RentalItem = (props) => {
                     <button className='close-modal-btn' onClick={closeModal}>Close</button>
                 </div>
                 <div className='owner-details'>
-                    <p><strong>Name:</strong> <span style={{textDecoration:'none',color:'#20c755'}}>{contact_name}</span></p>
-                    <p><strong>Email:</strong> <a style={{textDecoration:'none',color:'#20c755'}}href={`mailto:${contact_email}`}>{contact_email}</a></p>
-                    <p><strong>Phone:</strong><a style={{textDecoration:'none',color:'#20c755'}} href={`tel:${contact_phone}`}>{contact_phone}</a> </p>
+                    <div className='owner-detail-item'>
+                        <div className='detail-icon'>
+                            <FaUser />
+                        </div>
+                        <div className='detail-content'>
+                            <span className='detail-label'>Name</span>
+                            <span className='owner-info'>{contact_name}</span>
+                        </div>
+                    </div>
+                    <div className='owner-detail-item'>
+                        <div className='detail-icon'>
+                            <FaEnvelope />
+                        </div>
+                        <div className='detail-content'>
+                            <span className='detail-label'>Email</span>
+                            <a className='owner-info' href={`mailto:${contact_email}`}>{contact_email}</a>
+                        </div>
+                    </div>
+                    <div className='owner-detail-item'>
+                        <div className='detail-icon'>
+                            <FaPhone />
+                        </div>
+                        <div className='detail-content'>
+                            <span className='detail-label'>Phone</span>
+                            <a className='owner-info' href={`tel:${contact_phone}`}>{contact_phone}</a>
+                        </div>
+                    </div>
                 </div>
             </Modal>
         </div>
