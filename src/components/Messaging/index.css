@@ -10,6 +10,9 @@
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   border-radius: 18px 18px 0 0;
   overflow: hidden;
+  padding-bottom: 48px !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .messaging-header {
@@ -500,4 +503,68 @@
   margin-top: 10px;
   letter-spacing: 0.5px;
   text-align: center;
+} 
+/* Conversation List Modern Card Styles */
+.conversation-card {
+  background: #181818;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px 0 rgba(32, 199, 85, 0.08), 0 1.5px 4px 0 rgba(32, 199, 85, 0.04);
+  border: 1.5px solid #232526;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+.conversation-card:hover {
+  background: #232526;
+  border-color: #20c755;
+  box-shadow: 0 8px 32px 0 rgba(32, 199, 85, 0.18);
+}
+.conversation-card .avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #20c755 60%, #1a9f45 100%);
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.25rem;
+  border: 2px solid #20c755;
+  overflow: hidden;
+}
+.conversation-card .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.conversation-card .font-semibold {
+  font-weight: 600;
+}
+.conversation-card .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .conversation-card {
+    padding: 0.75rem 0.5rem;
+    border-radius: 1rem;
+  }
+  .conversation-card .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+  }
+} 
+@media (max-width: 900px) {
+  .messaging-container {
+    max-width: 100vw;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 } 

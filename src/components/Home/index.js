@@ -3,15 +3,13 @@ import familyImg from '../../assets/familylmg.png'
 import profileMale from '../../assets/profileMale.png'
 import profileWomen from '../../assets/ProfileWomen.png'
 import apkPreview from '../../assets/apkPreview.png'
-import { FaArrowRight, FaSearch, FaFilter, FaMobileAlt, FaChartLine, FaUsers, FaBell } from "react-icons/fa";
+import { FaArrowRight, FaSearch, FaFilter, FaMobileAlt, FaChartLine, FaUsers, FaBell, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
-import Footer from '../Footer'
 import { useEffect } from 'react'
 
 const Home = () => {
     useEffect(() => {
-        // Add scroll animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -112,53 +110,58 @@ const Home = () => {
                     </Link>
                 </div>
 
-                <div className='testimonials-section animate-on-scroll'>
-                    <h1>What Our Users Say</h1>
-                    <div className='testimonial-container'>
-                        <div className="testimonial-content">
-                            <p>"Finding a rental was so easy with <span>StaySpot</span>. The listings were accurate and the process was smooth!"</p>
-                            <p className='customer-name'>- Koushik K</p>
+                <div className="testimonials-section animate-on-scroll" style={{padding: '60px 0 40px 0', background: 'rgba(32,199,85,0.04)'}}>
+                    <h1 style={{fontSize:'2.2rem', color:'#20c755', textAlign:'center', fontWeight:700, marginBottom:'2.5rem'}}>What Our Users Say</h1>
+                    <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center', gap:'2rem', maxWidth:'900px', margin:'0 auto'}}>
+                        <div style={{background:'#181c1a', borderRadius:'18px', boxShadow:'0 4px 24px rgba(32,199,85,0.10)', border:'1.5px solid #20c75522', padding:'2rem 1.5rem', maxWidth:'320px', minWidth:'260px', display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', position:'relative'}}>
+                            <FaQuoteLeft style={{color:'#20c755', fontSize:'1.5rem', marginBottom:'8px'}} />
+                            <p style={{color:'#fff', fontSize:'1.1rem', marginBottom:'1rem', lineHeight:1.6}}>
+                                "Finding a rental was so easy with <span style={{color:'#20c755'}}>StaySpot</span>. The listings were accurate and the process was smooth!"
+                            </p>
+                            <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'0.5rem'}}>
+                                <img src={profileWomen} className='profile-img' alt='Happy customer' style={{width:'60px', height:'60px', borderRadius:'50%', border:'2.5px solid #20c755', objectFit:'cover'}} />
+                                <span className='customer-name' style={{color:'#20c755', fontWeight:600}}>- Koushik K</span>
+                            </div>
+                            <FaQuoteRight style={{color:'#20c755', fontSize:'1.2rem', position:'absolute', right:'18px', bottom:'18px'}} />
                         </div>
-                        <div className="testimonial-image">
-                            <img src={profileWomen} className='profile-img' alt='Happy customer' />
-                        </div>
-                    </div>
-                    <div className='testimonial-container'>
-                        <div className="testimonial-content">
-                            <p>"I rented out my property within a week of posting it here. Super convenient!"</p>
-                            <p className='customer-name'>- Boyapati Chandra</p>
-                        </div>
-                        <div className="testimonial-image">
-                            <img src={profileMale} className='profile-img' alt='Satisfied property owner' />
+                        <div style={{background:'#181c1a', borderRadius:'18px', boxShadow:'0 4px 24px rgba(32,199,85,0.10)', border:'1.5px solid #20c75522', padding:'2rem 1.5rem', maxWidth:'320px', minWidth:'260px', display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', position:'relative'}}>
+                            <FaQuoteLeft style={{color:'#20c755', fontSize:'1.5rem', marginBottom:'8px'}} />
+                            <p style={{color:'#fff', fontSize:'1.1rem', marginBottom:'1rem', lineHeight:1.6}}>
+                                "I rented out my property within a week of posting it here. Super convenient!"
+                            </p>
+                            <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'0.5rem'}}>
+                                <img src={profileMale} className='profile-img' alt='Satisfied property owner' style={{width:'60px', height:'60px', borderRadius:'50%', border:'2.5px solid #20c755', objectFit:'cover'}} />
+                                <span className='customer-name' style={{color:'#20c755', fontWeight:600}}>- Boyapati Chandra</span>
+                            </div>
+                            <FaQuoteRight style={{color:'#20c755', fontSize:'1.2rem', position:'absolute', right:'18px', bottom:'18px'}} />
                         </div>
                     </div>
                 </div>
 
-                <div className="app-download-section animate-on-scroll">
-                    <div className="download-container">
-                        <div className="text-content">
-                            <h1 className="download-heading">
-                                Download the <span>StaySpot</span> App 📲
-                            </h1>
-                            <p className="download-description">
-                                Get instant access to new listings, manage your property, and stay connected with potential renters - all from your mobile device.
-                            </p>
-                            <a
-                                href="https://drive.google.com/file/d/1ZYmrV4nPTdDA3iOkOXRshdRtlAgAbfVN/view?usp=drive_link"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="download-btn"
-                            >
-                                Download APK
-                            </a>
+                <div className="app-download-section animate-on-scroll" style={{background:'rgba(32,199,85,0.07)', borderRadius:'30px', margin:'2rem auto', maxWidth:'1100px', boxShadow:'0 8px 32px rgba(32,199,85,0.10)', display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'center', padding:'3rem 2rem', gap:'2.5rem'}}>
+                    <div className="text-content" style={{flex:'1 1 320px', minWidth:'260px', display:'flex', flexDirection:'column', gap:'1.5rem', alignItems:'flex-start'}}>
+                        <h1 className="download-heading" style={{fontSize:'2.2rem', fontWeight:700, color:'#fff', marginBottom:'0.5rem'}}>
+                            Download the <span style={{color:'#20c755'}}>StaySpot</span> App <span role="img" aria-label="mobile">📲</span>
+                        </h1>
+                        <p className="download-description" style={{fontSize:'1.1rem', color:'#a0a0a0', lineHeight:1.6, marginBottom:'1.5rem'}}>
+                            Get instant access to new listings, manage your property, and stay connected with potential renters - all from your mobile device.
+                        </p>
+                        <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
+                          <a
+                              href="https://drive.google.com/file/d/1ZYmrV4nPTdDA3iOkOXRshdRtlAgAbfVN/view?usp=drive_link"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="download-btn"
+                              style={{fontSize:'1.15rem', padding:'1rem 2.5rem', borderRadius:'50px', background:'linear-gradient(135deg, #20c755 0%, #1a9f45 100%)', color:'#fff', fontWeight:600, boxShadow:'0 4px 15px rgba(32,199,85,0.18)', marginTop:'0.5rem', transition:'all 0.3s'}}>
+                              Download APK
+                          </a>
                         </div>
-                        <div className="image-content">
-                            <img src={apkPreview} alt="StaySpot App Preview" className="app-mockup" />
-                        </div>
+                    </div>
+                    <div className="image-content" style={{flex:'1 1 260px', display:'flex', justifyContent:'center', alignItems:'center'}}>
+                        <img src={apkPreview} alt="StaySpot App Preview" className="app-mockup" style={{maxWidth:'260px', borderRadius:'20px', boxShadow:'0 20px 40px rgba(0,0,0,0.18)', transition:'transform 0.3s'}} />
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

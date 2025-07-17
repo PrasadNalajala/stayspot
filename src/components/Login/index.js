@@ -149,11 +149,22 @@ const LoginFields = (props) => {
             headers: { Authorization: `Bearer ${token}` }
           });
           console.log("Profile response:", profileRes.data); // Debug log
-          // Support both { id: ... } and { user: { id: ... } } formats
-          if (profileRes.data && profileRes.data.id) {
-            localStorage.setItem("userId", profileRes.data.id);
-          } else if (profileRes.data && profileRes.data.user && profileRes.data.user.id) {
-            localStorage.setItem("userId", profileRes.data.user.id);
+          
+          // Handle different response formats
+          let userData = null;
+          if (Array.isArray(profileRes.data) && profileRes.data.length > 0) {
+            // If response is an array, take the first user
+            userData = profileRes.data[0];
+          } else if (profileRes.data && typeof profileRes.data === 'object') {
+            // If response is a single object
+            userData = profileRes.data;
+          }
+          
+          if (userData && userData.id) {
+            localStorage.setItem("userId", userData.id);
+            console.log("Set userId to:", userData.id);
+          } else {
+            console.error("No valid user ID found in profile response");
           }
         } catch (profileErr) {
           console.error("Failed to fetch user profile for userId:", profileErr);

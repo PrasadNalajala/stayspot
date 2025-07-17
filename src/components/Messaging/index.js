@@ -1,132 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaArrowLeft, FaPaperPlane, FaEnvelope } from 'react-icons/fa';
-import messagingService from '../../services/messagingService';
-import './index.css';
+import { fetchMessages, sendMessage, fetchConversations } from '../../services/messagingService';
 import ClipLoader from 'react-spinners/ClipLoader';
+import axios from 'axios';
 
 const Messaging = () => {
-    const { rentalId } = useParams();
+    const { conversationId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [rentalDetails, setRentalDetails] = useState(null);
+    const [conversation, setConversation] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const messagesEndRef = useRef(null);
+    const [conversationIdState, setConversationIdState] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
+        const initializeMessaging = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                toast.error('Please login to send messages');
+                navigate('/login');
+                return;
+            }
+            setIsAuthenticated(true);
+            
+            // Get userId from localStorage or fetch from API
+            let currentUserId = localStorage.getItem('userId');
+            if (!currentUserId) {
+                try {
+                    const profileRes = await axios.get("https://stayspot.onrender.com/api/user", {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    
+                    // Handle different response formats
+                    let userData = null;
+                    if (Array.isArray(profileRes.data) && profileRes.data.length > 0) {
+                        userData = profileRes.data[0];
+                    } else if (profileRes.data && typeof profileRes.data === 'object') {
+                        userData = profileRes.data;
+                    }
+                    
+                    if (userData && userData.id) {
+                        currentUserId = userData.id;
+                        localStorage.setItem("userId", currentUserId);
+                    }
+                } catch (profileErr) {
+                    console.error("Failed to fetch user profile:", profileErr);
+                }
+            }
+            setUserId(currentUserId);
+            await loadConversation();
+        };
+        
+        initializeMessaging();
+    }, [navigate, location]);
+
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages]);
+
+    const loadConversation = async () => {
         const token = localStorage.getItem('token');
-        if (!token) {
-            toast.error('Please login to send messages');
-            navigate('/login');
+        // Get rentalId from navigation state if available
+        let rentalId = location.state?.rentalId || null;
+        // If you have a conversationId (from the URL), do NOT POST to /api/conversations
+        if (conversationId) {
+            // Use GET to fetch all conversations and find the one with this ID
+            const res = await fetchConversations(token);
+            if (res.conversations) {
+                const conv = res.conversations.find(c => String(c.id) === String(conversationId));
+                setConversation(conv || null);
+                if (conv && conv.id) {
+                    const correctConversationId = String(conv.id);
+                    setConversationIdState(correctConversationId);
+                    // Load messages with the correct conversation ID
+                    await loadMessages(correctConversationId);
+                }
+            }
             return;
         }
-        setIsAuthenticated(true);
-        loadRentalDetails();
-        loadMessages();
-    }, [rentalId, navigate]);
-
-    const loadRentalDetails = async () => {
-        console.log('Calling loadRentalDetails');
-        try {
-            const response = await messagingService.getRentalDetails(rentalId);
-            // If the API returns the rental directly (not inside a 'rental' key)
-            const rental = response.rental || response; // support both formats
-            console.log('Rental details loaded:', rental); // Debug output
-            setRentalDetails({
-                id: rental.id,
-                title: rental.title,
-                owner: rental.contact_name || rental.name || 'Owner',
-                ownerEmail: rental.contact_email || rental.email || '',
-            });
-        } catch (error) {
-            // fallback or error handling
-            setRentalDetails(null);
+        // If you have a rentalId (starting a new conversation), POST to /api/conversations
+        if (rentalId) {
+            const res = await fetchConversations(token, rentalId);
+            if (res.conversation) {
+                setConversation(res.conversation);
+                const correctConversationId = String(res.conversation.id);
+                setConversationIdState(correctConversationId);
+                await loadMessages(correctConversationId);
+                return;
+            }
+        }
+        // Fallback: GET all conversations
+        const res = await fetchConversations(token);
+        if (res.conversations) {
+            const conv = res.conversations.find(c => String(c.id) === String(conversationId));
+            setConversation(conv || null);
+            if (conv && conv.id) {
+                const correctConversationId = String(conv.id);
+                setConversationIdState(correctConversationId);
+                await loadMessages(correctConversationId);
+            }
         }
     };
 
-    const loadMessages = async () => {
+    const loadMessages = async (conversationIdToUse = conversationIdState) => {
+        if (!conversationIdToUse) {
+            return;
+        }
+        setLoading(true);
+        const token = localStorage.getItem('token');
         try {
-            const response = await messagingService.getMessages(rentalId);
-            
-            if (response.success) {
-                setMessages(response.messages);
+            const response = await axios.get(`https://stayspot.onrender.com/api/conversations/${conversationIdToUse}/messages`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (response.data && response.data.messages) {
+                setMessages(response.data.messages);
             } else {
                 setMessages([]);
             }
         } catch (error) {
-            console.error('Error loading messages:', error);
-            // Fallback to mock data if API fails
-            const userId = localStorage.getItem('userId');
-            setMessages([
-                {
-                    id: 1,
-                    sender: 'user',
-                    sender_id: userId, // Add sender_id for correct UI rendering
-                    content: 'Hi, I\'m interested in this property. Is it still available?',
-                    timestamp: new Date().toISOString()
-                },
-                {
-                    id: 2,
-                    sender: 'owner',
-                    sender_id: 'owner', // Use a string or a unique id for owner
-                    content: 'Yes, it\'s still available! When would you like to schedule a viewing?',
-                    timestamp: new Date().toISOString()
-                }
-            ]);
+            setMessages([]);
         } finally {
             setLoading(false);
         }
     };
 
-    const sendMessage = async () => {
+    const handleSendMessage = async () => {
         if (!newMessage.trim()) {
             toast.error('Please enter a message');
             return;
         }
-
-        const userId = localStorage.getItem('userId'); // Ensure userId is available
-
+        const token = localStorage.getItem('token');
         try {
-            const response = await messagingService.sendMessage(rentalId, newMessage.trim());
-
-            if (response.success) {
-                const message = {
-                    id: response.message.id,
-                    sender: 'user',
-                    sender_id: userId, // Add sender_id for correct UI rendering
-                    content: newMessage.trim(),
-                    timestamp: new Date().toISOString()
-                };
-
-                setMessages(prev => [...prev, message]);
+            const response = await axios.post(`https://stayspot.onrender.com/api/conversations/${conversationIdState}/messages`, {
+                content: newMessage.trim()
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (response.data && response.data.message === 'Message sent') {
                 setNewMessage('');
-                toast.success('Message sent!');
+                loadMessages();
+                // toast.success('Message sent!'); // Removed success toast
             } else {
                 toast.error('Failed to send message');
             }
         } catch (error) {
-            console.error('Error sending message:', error);
-            // Fallback to local state if API fails
-            const message = {
-                id: Date.now(),
-                sender: 'user',
-                sender_id: userId, // Add sender_id for correct UI rendering
-                content: newMessage.trim(),
-                timestamp: new Date().toISOString()
-            };
-
-            setMessages(prev => [...prev, message]);
-            setNewMessage('');
-            toast.success('Message sent! (offline mode)');
+            toast.error('Failed to send message');
         }
     };
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            sendMessage();
+            handleSendMessage();
         }
     };
 
@@ -136,98 +169,92 @@ const Messaging = () => {
 
     if (loading) {
         return (
-            <div className="messaging-container">
-                <div className="messaging-loader-wrapper">
-                    <ClipLoader color="#20c755" size={60} speedMultiplier={1.2} />
-                    <div className="loader-text">Loading your chat...</div>
-                </div>
+            <div className="flex justify-center items-center h-96">
+                <ClipLoader color="#20c755" size={60} speedMultiplier={1.2} />
+                <div className="ml-4 text-lg">Loading your chat...</div>
             </div>
         );
     }
 
-    const userId = localStorage.getItem('userId');
-    console.log('Current userId from localStorage:', userId);
+    // Determine the name of the person you are chatting with
+    let chatPartnerName = '';
+    if (conversation) {
+        if (String(conversation.owner_id) === String(userId)) {
+            chatPartnerName = conversation.user_name || '';
+        } else if (String(conversation.user_id) === String(userId)) {
+            chatPartnerName = conversation.owner_name || '';
+        } else {
+            chatPartnerName = conversation.owner_name || conversation.user_name || '';
+        }
+    }
 
+    // Use chatPartnerName as the main title in the header
     return (
-        <div className="messaging-container">
-            <div className="messaging-header">
-                <button className="back-btn" onClick={() => navigate(-1)} title="Back">
-                    <FaArrowLeft />
+        <div className="max-w-2xl mx-auto flex flex-col h-[80vh] bg-black rounded-lg shadow p-0 md:p-4 mt-16">
+            {/* Header */}
+            <div className="flex items-center border-b px-4 py-3">
+                <button className="mr-4 text-gray-400 hover:text-gray-200" onClick={() => navigate(-1)} title="Back">
+                    <FaArrowLeft size={20} />
                 </button>
-                <div className="header-avatar-name">
-                    <div className="owner-avatar">
-                        {rentalDetails?.profile_url ? (
-                            <img src={rentalDetails.profile_url} alt="Owner" className="owner-img" />
-                        ) : (
-                            <span>
-                                {(rentalDetails?.contact_name?.charAt(0).toUpperCase()) ||
-                                (rentalDetails?.name?.charAt(0).toUpperCase()) ||
-                                'O'}
-                            </span>
-                        )}
-                    </div>
-                </div>
-                <div className="header-title-group">
-                    <h2 className="property-title">{rentalDetails?.title || 'Property'}</h2>
-                    <div className="owner-name-subtitle">
-                        {rentalDetails?.contact_name || rentalDetails?.name || 'Owner'}
+                <div className="flex-1">
+                    <div className="font-bold text-lg text-white">{chatPartnerName || 'Chat'}</div>
+                    <div className="text-gray-400 text-sm">
+                        {conversation?.rental_title || conversation?.rental?.title || ''}
                     </div>
                 </div>
             </div>
 
-            <div className="messages-container">
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto px-4 py-2 bg-black">
                 {messages.length === 0 ? (
-                    <div className="no-messages">
-                        <div className="no-messages-icon">
-                            <FaEnvelope />
-                        </div>
-                        <h3>No messages yet</h3>
-                        <p>Start a conversation with the property owner</p>
+                    <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                        <FaEnvelope size={40} className="mb-2" />
+                        <h3 className="text-lg font-semibold mb-1">No messages yet</h3>
+                        <p>Start a conversation</p>
                     </div>
                 ) : (
-                    <div className="messages-list">
+                    <div className="flex flex-col space-y-2">
                         {messages.map((message) => {
+                            // This logic determines if the message was sent by the current user
                             const isUser = String(message.sender_id) === String(userId);
                             return (
                                 <div
                                     key={message.id}
-                                    className={`message ${isUser ? 'user-message' : 'owner-message'}`}
+                                    className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
                                 >
-                                    <div className="message-content">
+                                    <div className={`rounded-lg px-4 py-2 max-w-xs break-words shadow text-sm ${isUser ? 'bg-green-600 text-white text-right' : 'bg-neutral-900 border text-white text-left'}`}>
                                         <p>{message.content}</p>
-                                        <span className="message-time">
+                                        <span className="block text-xs text-gray-400 mt-1">
                                             {new Date(message.timestamp).toLocaleTimeString()}
                                         </span>
                                     </div>
                                 </div>
                             );
                         })}
+                        <div ref={messagesEndRef} />
                     </div>
                 )}
             </div>
 
-            <div className="message-input-container">
-                <div className="message-input-wrapper">
-                    <textarea
-                        className="message-input"
-                        placeholder="Type your message..."
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        rows="1"
-                    />
-                    <button
-                        className="send-btn"
-                        onClick={sendMessage}
-                        disabled={!newMessage.trim()}
-                    >
-                        <FaPaperPlane />
-                    </button>
-                </div>
-                <p className="message-hint">
-                    Press Enter to send, Shift+Enter for new line
-                </p>
-            </div>
+            {/* Input */}
+            <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="border-t px-4 py-3 bg-black flex items-center">
+                <textarea
+                    className="flex-1 resize-none border rounded-lg px-3 py-2 mr-2 focus:outline-none focus:ring focus:border-green-400 text-sm bg-neutral-900 text-white placeholder-gray-500"
+                    placeholder="Type your message..."
+                    value={newMessage}
+                    onChange={e => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                    rows={1}
+                />
+                <button
+                    type="submit"
+                    className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 transition disabled:opacity-50"
+                    title="Send"
+                    disabled={!newMessage.trim()}
+                >
+                    <FaPaperPlane />
+                </button>
+            </form>
         </div>
     );
 };

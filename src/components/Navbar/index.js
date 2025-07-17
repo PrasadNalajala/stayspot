@@ -13,6 +13,7 @@ import {
   FaSignInAlt,
   FaUserCircle,
   FaHeart,
+  FaEnvelope,
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -112,6 +113,9 @@ const Navbar = () => {
                     </Link>
                     <Link to="/favorites" className="dropdown-item">
                       Favorites
+                    </Link>
+                    <Link to="/messages" className="dropdown-item">
+                      Messages
                     </Link>
                   </>
                 ) : (

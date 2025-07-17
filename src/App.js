@@ -12,6 +12,7 @@ import RentalDetails from "./components/RentalDetails/index.js";
 import YourListings from "./components/YourListings/index.js";
 import Favorites from "./components/Favorites/index.js";
 import Messaging from "./components/Messaging/index.js";
+import ConversationList from "./components/Messaging/ConversationList.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar/index.js";
@@ -34,7 +35,9 @@ function App() {
           <Route path="/your-listings" Component={YourListings} />
           <Route path="/favorites" Component={Favorites} />
           <Route path="/rental/details/:id" Component={RentalDetails} />
-          <Route path="/message/:rentalId" Component={Messaging} />
+          <Route path="/messages" Component={ConversationList} />
+          <Route path="/messages/:conversationId" Component={Messaging} />
+          <Route path="/message/:conversationId" Component={Messaging} />
         </Routes>
         <Footer />
         <ToastContainer

@@ -141,7 +141,7 @@ const BrowseRentals = (props) => {
 
   return (
     <div className="browse-rentals-container">
-      <Navbar />
+      {/* <Navbar /> */}
       {isLoading ? (
         <div className="loading-container">
           <ImageGrid />

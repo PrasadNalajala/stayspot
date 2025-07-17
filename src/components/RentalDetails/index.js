@@ -10,6 +10,8 @@ import { FaUserCircle, FaBed, FaBath, FaRuler, FaCalendarAlt, FaCheckCircle } fr
 import { MdLocationOn, MdDescription } from 'react-icons/md';
 import Loader from '../Loader'
 import { formatDistanceToNow } from 'date-fns';
+import { createOrGetConversation } from '../../services/messagingService';
+import { useNavigate } from 'react-router-dom';
 
 // #ToDo
 // imageUrls
@@ -38,6 +40,8 @@ const RentalDetails = () => {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRentalDetails = async () => {
@@ -117,6 +121,60 @@ const RentalDetails = () => {
         month: "long",
         day: "numeric",
       });
+
+    const userId = localStorage.getItem('userId');
+    const isOwner = rentalData && rentalData.user_id && String(rentalData.user_id) === String(userId);
+
+    const handleMessageOwner = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            toast.error('Please login to message the owner');
+            navigate('/login');
+            return;
+        }
+        // Prompt for the first message
+        const firstMessage = window.prompt('Type your message to the owner:');
+        if (!firstMessage || !firstMessage.trim()) {
+            toast.error('Message cannot be empty');
+            return;
+        }
+        try {
+            // Step 1: Create or get conversation
+            const convoRes = await fetch('https://stayspot.onrender.com/api/conversations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ rentalId: id })
+            });
+            const convoData = await convoRes.json();
+            if (!convoData.conversation || !convoData.conversation.id) {
+                toast.error('Could not start conversation');
+                return;
+            }
+            const conversationId = convoData.conversation.id;
+            // Step 2: Send the first message
+            const msgRes = await fetch(`https://stayspot.onrender.com/api/conversations/${conversationId}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ content: firstMessage.trim() })
+            });
+            const msgData = await msgRes.json();
+            if (msgData.message === 'Message sent') {
+                toast.success('Message sent!');
+                navigate(`/messages/${conversationId}`, { state: { rentalId: id } });
+            } else {
+                toast.error('Failed to send message');
+            }
+        } catch (err) {
+            toast.error('Could not start conversation');
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -158,6 +216,14 @@ const RentalDetails = () => {
                                 </p>
                             </div>
                         </div>
+                        {!isOwner && (
+                            <button
+                                className="mt-4 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow transition"
+                                onClick={handleMessageOwner}
+                            >
+                                Message Owner
+                            </button>
+                        )}
                     </div>
 
                     <div className="comments-section">

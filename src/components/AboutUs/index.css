@@ -26,7 +26,7 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.about-section, .values-section, .team-section {
+.about-section, .values-section {
   background: rgba(32, 199, 85, 0.04);
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(32, 199, 85, 0.08);
@@ -48,53 +48,6 @@
   text-align: center;
   color: #ffffff;
   /* animation: fadeIn 1.5s ease-in forwards; */
-}
-
-.team-container {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
-  gap: 24px;
-  justify-content: center;
-}
-
-.team-card {
-  background: #232323;
-  padding: 18px 8px;
-  border-radius: 14px;
-  box-shadow: 0px 6px 24px rgba(32, 199, 85, 0.10);
-  border: 1.5px solid #20c75522;
-  width: 220px;
-  margin: 10px 0;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.team-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0px 12px 32px rgba(32, 199, 85, 0.18);
-}
-
-.team-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  border: 2.5px solid #20c75544;
-}
-
-.team-info {
-  margin-top: 10px;
-}
-
-.team-name {
-  font-size: 1.1rem !important;
-  font-weight: bold;
-  color: #20c755;
-}
-
-.team-role {
-  font-size: 0.95rem !important;
-  color: #bbbbbb;
 }
 
 .contact-section {
@@ -245,6 +198,273 @@
   }
 }
 
+/* --- HERO SECTION --- */
+.about-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  background: linear-gradient(135deg, #141414 60%, #20c75522 100%);
+  border-radius: 20px;
+  padding: 48px 32px 32px 32px;
+  margin-bottom: 48px;
+  box-shadow: 0 8px 32px rgba(32, 199, 85, 0.08);
+  flex-wrap: wrap;
+}
+.hero-content {
+  flex: 1 1 350px;
+  min-width: 300px;
+}
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.brand-highlight {
+  color: #20c755;
+}
+.hero-tagline {
+  font-size: 1.5rem;
+  color: #20c755;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.hero-desc {
+  font-size: 1.1rem;
+  color: #bbbbbb;
+  margin-bottom: 24px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #20c755 0%, #1a9f45 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(32, 199, 85, 0.3);
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(32, 199, 85, 0.4);
+}
+.hero-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-image img {
+  max-width: 320px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(32, 199, 85, 0.12);
+}
+
+/* --- FEATURES SECTION --- */
+.about-features {
+  margin-bottom: 48px;
+  text-align: center;
+}
+.about-features h2 {
+  font-size: 2.5rem;
+  color: #20c755;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  justify-items: center;
+}
+.feature-item {
+  background: #232323;
+  border-radius: 16px;
+  padding: 32px 18px;
+  box-shadow: 0 4px 24px rgba(32, 199, 85, 0.08);
+  border: 1.5px solid #20c75522;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-item:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0px 12px 32px rgba(32, 199, 85, 0.18);
+}
+.feature-icon {
+  font-size: 2.5rem;
+  color: #20c755;
+  margin-bottom: 12px;
+}
+.feature-item h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #20c755;
+  margin-bottom: 8px;
+}
+.feature-item p {
+  font-size: 1rem;
+  color: #bbbbbb;
+  margin: 0;
+}
+
+/* --- TESTIMONIALS SECTION --- */
+.about-testimonials {
+  margin: 48px 0;
+  text-align: center;
+}
+.about-testimonials h2 {
+  font-size: 2.2rem;
+  color: #20c755;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+.testimonial-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+.testimonial-item {
+  background: #232323;
+  border-radius: 16px;
+  padding: 32px 24px 24px 24px;
+  box-shadow: 0 4px 24px rgba(32, 199, 85, 0.08);
+  border: 1.5px solid #20c75522;
+  color: #fff;
+  max-width: 350px;
+  min-width: 260px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quote-icon {
+  color: #20c755;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.quote-right {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  font-size: 1.2rem;
+}
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.testimonial-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #20c755;
+}
+
+/* --- APP CTA SECTION --- */
+.about-app-cta {
+  background: linear-gradient(135deg, rgba(32, 199, 85, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+  padding: 3rem 2rem;
+  border-radius: 30px;
+  margin: 2rem auto 0 auto;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-cta-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+.app-cta-text {
+  flex: 1 1 350px;
+  min-width: 300px;
+}
+.app-cta-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.app-cta-text .brand-highlight {
+  color: #20c755;
+}
+.app-cta-text p {
+  font-size: 1.1rem;
+  color: #bbbbbb;
+  margin-bottom: 24px;
+}
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #20c755 0%, #1a9f45 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: fit-content;
+  box-shadow: 0 4px 15px rgba(32, 199, 85, 0.3);
+}
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(32, 199, 85, 0.4);
+}
+.app-cta-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-cta-image img {
+  max-width: 220px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(32, 199, 85, 0.12);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+  .about-hero, .app-cta-content {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  .hero-image, .app-cta-image {
+    justify-content: center;
+    margin-top: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .about-us-page {
+    padding: 16px;
+  }
+  .about-hero, .about-features, .about-section, .about-testimonials, .about-app-cta {
+    padding: 18px 6px;
+    margin-bottom: 24px;
+  }
+  .features-list, .testimonial-list {
+    gap: 16px;
+  }
+  .feature-item, .testimonial-item {
+    padding: 18px 8px;
+  }
+}
+
 @media (max-width: 768px) {
   .about-header h1 {
     font-size: 30px;
@@ -268,7 +488,7 @@
   .mission-point p{
     font-size: 11px;
   }
-  .about-section, .values-section, .team-section {
+  .about-section, .values-section {
     padding: 16px 4px;
     border-radius: 10px;
     margin-bottom: 18px;
@@ -282,26 +502,6 @@
     padding: 12px 4px;
     font-size: 0.95rem;
   }
-  .team-container {
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .team-card {
-    width: 48%;
-    min-width: 140px;
-    padding: 10px 2px;
-  }
-  .team-img {
-    width: 48px;
-    height: 48px;
-  }
-  .team-name {
-    font-size: 0.98rem !important;
-  }
-  .team-role {
-    font-size: 0.85rem !important;
-  }
   .icon{
     font-size: 1rem;
   }
@@ -311,4 +511,9 @@
   .value-card {
     width: 27% !important;
   }
+}
+
+/* Remove old team-section styles */
+.team-section, .team-container, .team-card, .team-img, .team-info, .team-name, .team-role {
+  display: none !important;
 }
