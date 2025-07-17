@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchConversations } from '../../services/messagingService';
 import { HiChevronRight, HiPlus } from 'react-icons/hi';
 import { FaUserCircle } from 'react-icons/fa';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const getInitials = (name) => {
   if (!name) return '';
@@ -40,10 +41,15 @@ const ConversationList = () => {
     });
   }, []);
 
-  if (loading) return <div className="flex justify-center items-center h-64 text-lg text-white">Loading conversations...</div>;
+  if (loading) return (
+    <div className="flex flex-col justify-center items-center min-h-[60vh] text-lg text-white">
+      <ClipLoader color="#20c755" size={48} speedMultiplier={1.1} />
+      <div className="mt-4 text-green-400 font-semibold text-base">Loading conversations...</div>
+    </div>
+  );
 
   if (!conversations.length) {
-    return <div className="flex justify-center items-center h-64 text-gray-400">No conversations yet.</div>;
+    return <div className="flex justify-center items-center min-h-[60vh] text-gray-400">No conversations yet.</div>;
   }
 
   const userId = localStorage.getItem('userId');
@@ -102,7 +108,6 @@ const ConversationList = () => {
           );
         })}
       </div>
-      {/* Floating New Chat Button */}
       <button
         className="fixed bottom-8 right-8 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl border-4 border-[#181818] transition-all duration-200 hover:scale-110"
         title="Start New Chat"

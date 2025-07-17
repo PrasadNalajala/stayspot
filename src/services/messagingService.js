@@ -77,3 +77,55 @@ const messagingService = {
 };
 
 export default messagingService; 
+
+export async function fetchConversations(token, rentalId) {
+  if (rentalId) {
+    // Use POST to get or create a conversation for a specific rental
+    const res = await fetch('https://stayspot.onrender.com/api/conversations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ rentalId })
+    });
+    return res.json(); // { conversation: {...} }
+  } else {
+    // Use GET to fetch all conversations
+    const res = await fetch('https://stayspot.onrender.com/api/conversations', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.json(); // { conversations: [...] }
+  }
+}
+
+export async function createOrGetConversation(token, rentalId) {
+  const res = await fetch('https://stayspot.onrender.com/api/conversations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ rentalId })
+  });
+  return res.json();
+}
+
+export async function fetchMessages(token, conversationId) {
+  const res = await fetch(`https://stayspot.onrender.com/api/conversations/${conversationId}/messages`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.json();
+}
+
+export async function sendMessage(token, conversationId, content) {
+  const res = await fetch(`https://stayspot.onrender.com/api/conversations/${conversationId}/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ content })
+  });
+  return res.json();
+} 

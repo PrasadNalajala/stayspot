@@ -86,7 +86,7 @@ const Messaging = () => {
             }
             return;
         }
-        // If you have a rentalId (starting a new conversation), POST to /api/conversations
+       
         if (rentalId) {
             const res = await fetchConversations(token, rentalId);
             if (res.conversation) {
@@ -146,8 +146,17 @@ const Messaging = () => {
             });
             if (response.data && response.data.message === 'Message sent') {
                 setNewMessage('');
-                loadMessages();
-                // toast.success('Message sent!'); // Removed success toast
+                // Instead of calling loadMessages (which sets loading), fetch messages directly without setting loading
+                try {
+                    const res = await axios.get(`https://stayspot.onrender.com/api/conversations/${conversationIdState}/messages`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (res.data && res.data.messages) {
+                        setMessages(res.data.messages);
+                    }
+                } catch (error) {
+                    // Optionally handle error
+                }
             } else {
                 toast.error('Failed to send message');
             }
@@ -225,7 +234,20 @@ const Messaging = () => {
                                     <div className={`rounded-lg px-4 py-2 max-w-xs break-words shadow text-sm ${isUser ? 'bg-green-600 text-white text-right' : 'bg-neutral-900 border text-white text-left'}`}>
                                         <p>{message.content}</p>
                                         <span className="block text-xs text-gray-400 mt-1">
-                                            {new Date(message.timestamp).toLocaleTimeString()}
+                                            {(() => {
+                                                const date = new Date(message.timestamp);
+                                                const now = new Date();
+                                                const isToday = date.toDateString() === now.toDateString();
+                                                const isThisYear = date.getFullYear() === now.getFullYear();
+                                                const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+                                                if (isToday) {
+                                                    return time;
+                                                } else if (isThisYear) {
+                                                    return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${time}`;
+                                                } else {
+                                                    return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}, ${time}`;
+                                                }
+                                            })()}
                                         </span>
                                     </div>
                                 </div>

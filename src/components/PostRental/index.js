@@ -16,7 +16,6 @@ import {
 } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -427,7 +426,6 @@ const PostRental = () => {
           </Modal>
         }
       </div>
-      <Footer />
 
       {showSuccess && (
         <>

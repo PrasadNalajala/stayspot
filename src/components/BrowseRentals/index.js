@@ -1,7 +1,6 @@
 import Navbar from "../Navbar";
 import "./index.css";
 import RentalItem from "../RentalItem";
-import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -286,7 +285,6 @@ const BrowseRentals = (props) => {
           </div>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

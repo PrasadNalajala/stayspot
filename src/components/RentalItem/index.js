@@ -1,5 +1,5 @@
 import './index.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaMapMarkedAlt, FaHeart, FaRegHeart, FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import { SiMinutemailer } from "react-icons/si";
 import {FiPhoneOutgoing} from 'react-icons/fi';
@@ -12,6 +12,7 @@ const RentalItem = (props) => {
     const { title, location, price, bedrooms, bathrooms, size, imageUrl, contact_email,contact_name,contact_phone,id } = itemDetails;
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    const navigate = useNavigate();
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -87,13 +88,30 @@ const RentalItem = (props) => {
                     </Link>
                     <button 
                         className='message-btn button'
-                        onClick={() => {
+                        onClick={async () => {
                             const token = localStorage.getItem('token');
                             if (!token) {
                                 toast.error('Please login to send messages');
                                 return;
                             }
-                            window.location.href = `/message/${id}`;
+                            try {
+                                const response = await fetch('https://stayspot.onrender.com/api/conversations', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        Authorization: `Bearer ${token}`
+                                    },
+                                    body: JSON.stringify({ rentalId: id })
+                                });
+                                const data = await response.json();
+                                if (data.conversation && data.conversation.id) {
+                                    navigate(`/messages/${data.conversation.id}`);
+                                } else {
+                                    toast.error('Could not start conversation');
+                                }
+                            } catch (err) {
+                                toast.error('Could not start conversation');
+                            }
                         }}
                     >
                         Message Owner
