@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   FaBars,
+  FaTimes,
   FaHome,
   FaSearch,
   FaPlus,
@@ -76,21 +77,20 @@ const Navbar = () => {
         <p>StaySpot</p>
       </Link>
       <div className="nav-items-container">
-        <FaBars className="menu-icon"  style={{outline:'none'}} onClick={toggleMenu} />
         <ul className={`menu ${menuActive ? "active" : ""}`}>
-          <Link to="/" className="nav-link">
+          <Link to="/" className="nav-link" onClick={() => setMenuActive(false)}>
             <FaHome className="icon-only" />{" "}
             <span className="link-text">Home</span>
           </Link>
-          <Link to="/browse-rentals" className="nav-link">
+          <Link to="/browse-rentals" className="nav-link" onClick={() => setMenuActive(false)}>
             <FaSearch className="icon-only" />{" "}
             <span className="link-text">Browse</span>
           </Link>
-          <Link to="/post-rental" className="nav-link">
+          <Link to="/post-rental" className="nav-link" onClick={() => setMenuActive(false)}>
             <FaPlus className="icon-only" />{" "}
             <span className="link-text">Post</span>
           </Link>
-          <Link to="/about-us" className="nav-link">
+          <Link to="/about-us" className="nav-link" onClick={() => setMenuActive(false)}>
             <FaInfoCircle className="icon-only" />{" "}
             <span className="link-text">About</span>
           </Link>
@@ -105,16 +105,16 @@ const Navbar = () => {
               <div className="profile-dropdown">
                 {isLoggedIn ? (
                   <>
-                    <Link to="/profile" className="dropdown-item">
+                    <Link to="/profile" className="dropdown-item" onClick={() => setMenuActive(false)}>
                       Profile
                     </Link>
-                    <Link to="/your-listings" className="dropdown-item">
+                    <Link to="/your-listings" className="dropdown-item" onClick={() => setMenuActive(false)}>
                       Your Listings
                     </Link>
-                    <Link to="/favorites" className="dropdown-item">
+                    <Link to="/favorites" className="dropdown-item" onClick={() => setMenuActive(false)}>
                       Favorites
                     </Link>
-                    <Link to="/messages" className="dropdown-item">
+                    <Link to="/messages" className="dropdown-item" onClick={() => setMenuActive(false)}>
                       Messages
                     </Link>
                   </>
@@ -128,6 +128,12 @@ const Navbar = () => {
             )}
           </li>
         </ul>
+        {/* Hamburger/Close icon on the right for mobile */}
+        {menuActive ? (
+          <FaTimes className="menu-icon" style={{outline:'none'}} onClick={toggleMenu} />
+        ) : (
+          <FaBars className="menu-icon" style={{outline:'none'}} onClick={toggleMenu} />
+        )}
       </div>
     </div>
   );

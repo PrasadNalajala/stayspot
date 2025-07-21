@@ -1,9 +1,6 @@
 .listings-container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
-  background-color: #0a0a0a;
   color: #ffffff;
   margin-top: 65px;
 }

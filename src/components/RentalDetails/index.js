@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
 import './index.css';
-import Navbar from '../Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'; 
 import { useParams } from 'react-router-dom';
@@ -177,11 +176,15 @@ const RentalDetails = () => {
 
     return (
         <>
-            <Navbar />
             {!loading ? (
                 <div className="rental-details-page">
+                    {/* Back Button */}
+                    <button className="back-btn" onClick={() => window.history.back()} title="Back">
+                        <svg width="28" height="28" fill="none" stroke="#20c755" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
                     <div className="rental-header-container">
                         <div className="rental-image-container">
+                            <div className="rental-image-gradient"></div>
                             <img src={imageUrl} alt={title} className="rental-image" />
                         </div>
                         <div className="rental-header">
@@ -190,10 +193,10 @@ const RentalDetails = () => {
                                 <MdLocationOn className="icon" /> {location}
                             </p>
                             <p className="rental-price">₹{price}/month</p>
-                            <div className="rental-specs">
-                                <span><FaBed className="icon" /> {bedrooms} Bedrooms</span>
-                                <span><FaBath className="icon" /> {bathrooms} Bathrooms</span>
-                                <span><FaRuler className="icon" /> {size}</span>
+                            <div className="rental-specs specs-pill-row">
+                                <span className="spec-pill"><FaBed className="icon" /> <span className="spec-num">{bedrooms}</span> <span className="spec-label">Bedrooms</span></span>
+                                <span className="spec-pill"><FaBath className="icon" /> <span className="spec-num">{bathrooms}</span> <span className="spec-label">Bathrooms</span></span>
+                                <span className="spec-pill"><FaRuler className="icon" /> <span className="spec-num">{size}</span></span>
                             </div>
                             <div className="rental-description">
                                 <h2><MdDescription className="icon" /> Description</h2>
@@ -218,7 +221,7 @@ const RentalDetails = () => {
                         </div>
                         {!isOwner && (
                             <button
-                                className="mt-4 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow transition"
+                                className="mt-4 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow transition message-owner-btn"
                                 onClick={handleMessageOwner}
                             >
                                 Message Owner
@@ -235,7 +238,7 @@ const RentalDetails = () => {
                                 </p>
                             ) : (
                                 comments.map((comment, index) => (
-                                    <div key={index} className="comment">
+                                    <div key={index} className="comment animate-fade-in">
                                         <div className="comment-header">
                                             {comment.profile_url ? (
                                                 <img src={comment.profile_url} alt={comment.name} className="comment-profile-pic" />
@@ -249,6 +252,7 @@ const RentalDetails = () => {
                                                 {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
                                             </p>
                                         </div>
+                                        <hr className="comment-divider" />
                                         <p className="comment-text">{comment.comment}</p>
                                     </div>
                                 ))

@@ -1,12 +1,10 @@
 import React from "react";
 import "./contact.css";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import Navbar from "../Navbar";
 
 const ContactUs = () => {
   return (
     <div className="contact-page">
-      <Navbar />
       <div className="contact-header">
         <h1>Contact Us</h1>
         <p>

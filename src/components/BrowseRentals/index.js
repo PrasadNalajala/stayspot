@@ -139,152 +139,151 @@ const BrowseRentals = (props) => {
   };
 
   return (
-    <div className="browse-rentals-container">
-      {/* <Navbar /> */}
+    <div className="min-h-[80vh] py-8 px-2 md:px-8 mt-24">
       {isLoading ? (
-        <div className="loading-container">
+        <div className="flex flex-col items-center justify-center min-h-[60vh]">
           <ImageGrid />
         </div>
       ) : (
         <div className="rental-section">
-          <div className="search-section">
-            <h1 className="availble-rental">Available Rentals</h1>
-            
-            <div className="search-input-container">
-              <input 
-                type="text" 
-                className="rental-search-input" 
-                placeholder="Search by title or location..." 
-                value={searchInput} 
-                onChange={onChangeInput}
-              />
-              <button className="search-button" onClick={onClicksearch}>
-                <FaSearch className="search-icon"/>
-              </button>
-            </div>
-
-            <button 
-              className="filter-toggle" 
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <FaFilter /> {showFilters ? 'Hide Filters' : 'Show Filters'}
-            </button>
-
-            {showFilters && (
-              <div className="filter-section">
-                <div className="filter-header">
-                  <h3>Filter Properties</h3>
-                  <button className="close-filters" onClick={() => setShowFilters(false)}>
-                    <FaTimes />
-                  </button>
-                </div>
-                <div className="filter-grid">
-                  <div className="filter-group">
-                    <label>Min Rent</label>
-                    <input 
-                      type="number" 
-                      name="priceMin" 
-                      placeholder="Min Rent" 
-                      value={priceMin} 
-                      onChange={handleFilterChange} 
-                    />
-                  </div>
-                  <div className="filter-group">
-                    <label>Max Rent</label>
-                    <input 
-                      type="number" 
-                      name="priceMax" 
-                      placeholder="Max Rent" 
-                      value={priceMax} 
-                      onChange={handleFilterChange} 
-                    />
-                  </div>
-                  <div className="filter-group">
-                    <label>Bedrooms</label>
-                    <input 
-                      type="number" 
-                      name="bedrooms" 
-                      placeholder="Number of bedrooms" 
-                      value={bedrooms} 
-                      onChange={handleFilterChange} 
-                    />
-                  </div>
-                  <div className="filter-group">
-                    <label>Bathrooms</label>
-                    <input 
-                      type="number" 
-                      name="bathrooms" 
-                      placeholder="Number of bathrooms" 
-                      value={bathrooms} 
-                      onChange={handleFilterChange} 
-                    />
-                  </div>
-                  <div className="filter-group">
-                    <label>Status</label>
-                    <select 
-                      name="status" 
-                      value={status} 
-                      onChange={handleFilterChange}
-                    >
-                      <option value="">Select Status</option>
-                      <option value="available">Available</option>
-                      <option value="not available">Not Available</option>
-                    </select>
-                  </div>
-                </div>
-                <button onClick={applyFilters} className="apply-filters-btn">
-                  Apply Filters
+            <div className="search-section">
+              <h1 className="availble-rental">Available Rentals</h1>
+              
+              <div className="search-input-container">
+                <input 
+                  type="text" 
+                  className="rental-search-input" 
+                  placeholder="Search by title or location..." 
+                  value={searchInput} 
+                  onChange={onChangeInput}
+                />
+                <button className="search-button" onClick={onClicksearch}>
+                  <FaSearch className="search-icon"/>
                 </button>
               </div>
-            )}
-            {/* Applied Filters Summary */}
-            {getAppliedFilters().length > 0 && (
-              <div className="applied-filters-summary" style={{margin: '18px 0 0 0', display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-                {getAppliedFilters().map((filter, idx) => (
-                  <span key={idx} style={{background: '#20c75522', color: '#20c755', borderRadius: '6px', padding: '4px 12px', fontSize: '0.95rem', fontWeight: 500}}>{filter}</span>
-                ))}
-              </div>
-            )}
-          </div>
 
-          <div className="sort-section">
-            {/* On mobile, show only the select, not the container or icon */}
-            <select 
-              name="sortBy" 
-              value={sortBy} 
-              onChange={handleSortChange}
-              className="sort-select"
-            >
-              <option value="">Sort By</option>
-              <option value="price">Price: Low to High</option>
-              <option value="bedrooms">Bedrooms: Low to High</option>
-              <option value="bathrooms">Bathrooms: Low to High</option>
-              <option value="available_from">Date: Oldest First</option>
-            </select>
-          </div>
+              <button 
+                className="filter-toggle" 
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                <FaFilter /> {showFilters ? 'Hide Filters' : 'Show Filters'}
+              </button>
 
-          <div className="rental-items-section">
-            {filteredRentalDetails.length > 0 ? (
-              filteredRentalDetails.map((each) => (
-                <RentalItem itemDetails={each} key={each.id} />
-              ))
-            ) : (
-              <div className="no-results-wrapper"> 
-                <div className="no-results-container">
-                  <img src={notFound} alt="No Results Found" className="no-results-image" />
-                  <h2 className="no-results-title">No Results Found</h2>
-                  <p className="no-results-description">
-                    We couldn't find any matches for your search. Try adjusting your filters or explore other options!
-                  </p>
-                  <button className="retry-button" onClick={tryAgain}>
-                    Try Again
+              {showFilters && (
+                <div className="filter-section">
+                  <div className="filter-header">
+                    <h3>Filter Properties</h3>
+                    <button className="close-filters" onClick={() => setShowFilters(false)}>
+                      <FaTimes />
+                    </button>
+                  </div>
+                  <div className="filter-grid">
+                    <div className="filter-group">
+                      <label>Min Rent</label>
+                      <input 
+                        type="number" 
+                        name="priceMin" 
+                        placeholder="Min Rent" 
+                        value={priceMin} 
+                        onChange={handleFilterChange} 
+                      />
+                    </div>
+                    <div className="filter-group">
+                      <label>Max Rent</label>
+                      <input 
+                        type="number" 
+                        name="priceMax" 
+                        placeholder="Max Rent" 
+                        value={priceMax} 
+                        onChange={handleFilterChange} 
+                      />
+                    </div>
+                    <div className="filter-group">
+                      <label>Bedrooms</label>
+                      <input 
+                        type="number" 
+                        name="bedrooms" 
+                        placeholder="Number of bedrooms" 
+                        value={bedrooms} 
+                        onChange={handleFilterChange} 
+                      />
+                    </div>
+                    <div className="filter-group">
+                      <label>Bathrooms</label>
+                      <input 
+                        type="number" 
+                        name="bathrooms" 
+                        placeholder="Number of bathrooms" 
+                        value={bathrooms} 
+                        onChange={handleFilterChange} 
+                      />
+                    </div>
+                    <div className="filter-group">
+                      <label>Status</label>
+                      <select 
+                        name="status" 
+                        value={status} 
+                        onChange={handleFilterChange}
+                      >
+                        <option value="">Select Status</option>
+                        <option value="available">Available</option>
+                        <option value="not available">Not Available</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button onClick={applyFilters} className="apply-filters-btn">
+                    Apply Filters
                   </button>
                 </div>
-              </div>
-            )}
+              )}
+              {/* Applied Filters Summary */}
+              {getAppliedFilters().length > 0 && (
+                <div className="applied-filters-summary" style={{margin: '18px 0 0 0', display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+                  {getAppliedFilters().map((filter, idx) => (
+                    <span key={idx} style={{background: '#20c75522', color: '#20c755', borderRadius: '6px', padding: '4px 12px', fontSize: '0.95rem', fontWeight: 500}}>{filter}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="sort-section">
+              {/* On mobile, show only the select, not the container or icon */}
+              <select 
+                name="sortBy" 
+                value={sortBy} 
+                onChange={handleSortChange}
+                className="sort-select"
+              >
+                <option value="">Sort By</option>
+                <option value="price">Price: Low to High</option>
+                <option value="bedrooms">Bedrooms: Low to High</option>
+                <option value="bathrooms">Bathrooms: Low to High</option>
+                <option value="available_from">Date: Oldest First</option>
+              </select>
+            </div>
+
+            <div className="rental-items-section">
+              {filteredRentalDetails.length > 0 ? (
+                filteredRentalDetails.map((each) => (
+                  <RentalItem itemDetails={each} key={each.id} />
+                ))
+              ) : (
+                <div className="no-results-wrapper"> 
+                  <div className="no-results-container">
+                    <img src={notFound} alt="No Results Found" className="no-results-image" />
+                    <h2 className="no-results-title">No Results Found</h2>
+                    <p className="no-results-description">
+                      We couldn't find any matches for your search. Try adjusting your filters or explore other options!
+                    </p>
+                    <button className="retry-button" onClick={tryAgain}>
+                      Try Again
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

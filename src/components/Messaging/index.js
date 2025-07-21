@@ -197,86 +197,88 @@ const Messaging = () => {
         }
     }
 
-    // Use chatPartnerName as the main title in the header
+    // Restore the previous chat UI structure
     return (
-        <div className="max-w-2xl mx-auto flex flex-col h-[80vh] bg-black rounded-lg shadow p-0 md:p-4 mt-16">
-            {/* Header */}
-            <div className="flex items-center border-b px-4 py-3">
-                <button className="mr-4 text-gray-400 hover:text-gray-200" onClick={() => navigate(-1)} title="Back">
-                    <FaArrowLeft size={20} />
-                </button>
-                <div className="flex-1">
-                    <div className="font-bold text-lg text-white">{chatPartnerName || 'Chat'}</div>
-                    <div className="text-gray-400 text-sm">
-                        {conversation?.rental_title || conversation?.rental?.title || ''}
+        <div className="min-h-[80vh] py-8 px-2 md:px-8 mt-8">
+            <div className="max-w-2xl mx-auto flex flex-col h-[80vh] bg-black rounded-lg shadow p-0 md:p-4 mt-16">
+                {/* Header */}
+                <div className="flex items-center border-b px-4 py-3">
+                    <button className="mr-4 text-gray-400 hover:text-gray-200" onClick={() => navigate(-1)} title="Back">
+                        <FaArrowLeft size={20} />
+                    </button>
+                    <div className="flex-1">
+                        <div className="font-bold text-lg text-white">{chatPartnerName || 'Chat'}</div>
+                        <div className="text-gray-400 text-sm">
+                            {conversation?.rental_title || conversation?.rental?.title || ''}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-2 bg-black">
-                {messages.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                        <FaEnvelope size={40} className="mb-2" />
-                        <h3 className="text-lg font-semibold mb-1">No messages yet</h3>
-                        <p>Start a conversation</p>
-                    </div>
-                ) : (
-                    <div className="flex flex-col space-y-2">
-                        {messages.map((message) => {
-                            // This logic determines if the message was sent by the current user
-                            const isUser = String(message.sender_id) === String(userId);
-                            return (
-                                <div
-                                    key={message.id}
-                                    className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
-                                >
-                                    <div className={`rounded-lg px-4 py-2 max-w-xs break-words shadow text-sm ${isUser ? 'bg-green-600 text-white text-right' : 'bg-neutral-900 border text-white text-left'}`}>
-                                        <p>{message.content}</p>
-                                        <span className="block text-xs text-gray-400 mt-1">
-                                            {(() => {
-                                                const date = new Date(message.timestamp);
-                                                const now = new Date();
-                                                const isToday = date.toDateString() === now.toDateString();
-                                                const isThisYear = date.getFullYear() === now.getFullYear();
-                                                const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
-                                                if (isToday) {
-                                                    return time;
-                                                } else if (isThisYear) {
-                                                    return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${time}`;
-                                                } else {
-                                                    return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}, ${time}`;
-                                                }
-                                            })()}
-                                        </span>
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto px-4 py-2 bg-black">
+                    {messages.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                            <FaEnvelope size={40} className="mb-2" />
+                            <h3 className="text-lg font-semibold mb-1">No messages yet</h3>
+                            <p>Start a conversation</p>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col space-y-2">
+                            {messages.map((message) => {
+                                // This logic determines if the message was sent by the current user
+                                const isUser = String(message.sender_id) === String(userId);
+                                return (
+                                    <div
+                                        key={message.id}
+                                        className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        <div className={`rounded-lg px-4 py-2 max-w-xs break-words shadow text-sm ${isUser ? 'bg-green-600 text-white text-right' : 'bg-neutral-900 border text-white text-left'}`}>
+                                            <p>{message.content}</p>
+                                            <span className="block text-xs text-gray-400 mt-1">
+                                                {(() => {
+                                                    const date = new Date(message.timestamp);
+                                                    const now = new Date();
+                                                    const isToday = date.toDateString() === now.toDateString();
+                                                    const isThisYear = date.getFullYear() === now.getFullYear();
+                                                    const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+                                                    if (isToday) {
+                                                        return time;
+                                                    } else if (isThisYear) {
+                                                        return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${time}`;
+                                                    } else {
+                                                        return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}, ${time}`;
+                                                    }
+                                                })()}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
-                        <div ref={messagesEndRef} />
-                    </div>
-                )}
-            </div>
+                                );
+                            })}
+                            <div ref={messagesEndRef} />
+                        </div>
+                    )}
+                </div>
 
-            {/* Input */}
-            <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="border-t px-4 py-3 bg-black flex items-center">
-                <textarea
-                    className="flex-1 resize-none border rounded-lg px-3 py-2 mr-2 focus:outline-none focus:ring focus:border-green-400 text-sm bg-neutral-900 text-white placeholder-gray-500"
-                    placeholder="Type your message..."
-                    value={newMessage}
-                    onChange={e => setNewMessage(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    rows={1}
-                />
-                <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 transition disabled:opacity-50"
-                    title="Send"
-                    disabled={!newMessage.trim()}
-                >
-                    <FaPaperPlane />
-                </button>
-            </form>
+                {/* Input */}
+                <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="border-t px-4 py-3 bg-black flex items-center">
+                    <textarea
+                        className="flex-1 resize-none border rounded-lg px-3 py-2 mr-2 focus:outline-none focus:ring focus:border-green-400 text-sm bg-neutral-900 text-white placeholder-gray-500"
+                        placeholder="Type your message..."
+                        value={newMessage}
+                        onChange={e => setNewMessage(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        rows={1}
+                    />
+                    <button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 transition disabled:opacity-50"
+                        title="Send"
+                        disabled={!newMessage.trim()}
+                    >
+                        <FaPaperPlane />
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

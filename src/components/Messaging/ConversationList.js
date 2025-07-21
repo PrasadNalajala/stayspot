@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { fetchConversations } from '../../services/messagingService';
 import { HiChevronRight, HiPlus } from 'react-icons/hi';
 import { FaUserCircle } from 'react-icons/fa';
-import ClipLoader from 'react-spinners/ClipLoader';
 
 const getInitials = (name) => {
   if (!name) return '';
@@ -41,22 +40,19 @@ const ConversationList = () => {
     });
   }, []);
 
-  if (loading) return (
-    <div className="flex flex-col justify-center items-center min-h-[60vh] text-lg text-white">
-      <ClipLoader color="#20c755" size={48} speedMultiplier={1.1} />
-      <div className="mt-4 text-green-400 font-semibold text-base">Loading conversations...</div>
-    </div>
-  );
+  if (loading) return <div className="flex justify-center items-center h-64 text-lg text-white">Loading conversations...</div>;
 
   if (!conversations.length) {
-    return <div className="flex justify-center items-center min-h-[60vh] text-gray-400">No conversations yet.</div>;
+    return <div className="flex justify-center items-center h-64 text-gray-400">No conversations yet.</div>;
   }
 
   const userId = localStorage.getItem('userId');
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-black via-[#181818] to-[#232526] pt-24 pb-24 px-2 relative">
-      <h2 className="text-4xl font-extrabold mb-10 text-center text-white tracking-tight drop-shadow-lg">Your Conversations</h2>
+      <div className="listings-header">
+        <h2>Your Conversations</h2>
+      </div>
       <div className="flex flex-col w-full max-w-2xl mx-auto divide-y divide-[#232526] bg-[#181818] rounded-2xl shadow-2xl">
         {conversations.map((convo, idx) => {
           let chatPartnerName = '';

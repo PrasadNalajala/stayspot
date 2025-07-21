@@ -216,7 +216,6 @@ const PostRental = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="post-rentals-section">
         <div className="post-rental-des">
           <h2 className="section-title">Post Your Rental Property</h2>

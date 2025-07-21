@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
-import Navbar from '../Navbar';
 import './index.css';
 
 const YourListings = () => {
@@ -148,21 +147,19 @@ const YourListings = () => {
 
   if (loading) {
     return (
-      <>
-        <Navbar />
+      <div className="min-h-[80vh] py-8 px-2 md:px-8 mt-8">
         <div className="listings-container">
           <div className="loading-container">
             <div className="loading-spinner"></div>
             <p className="loading-text">Loading your listings...</p>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <Navbar />
+    <div className="min-h-[80vh] py-8 px-2 md:px-8 mt-8">
       <div className="listings-container">
         <div className="listings-header">
           <h2>Your Listings</h2>
@@ -171,61 +168,61 @@ const YourListings = () => {
           </Link>
         </div>
 
-      {listings.length === 0 ? (
-        <div className="no-listings">
-          <p>You haven't posted any rentals yet.</p>
-          <Link to="/post-rental" className="add-listing-btn">
-            Post Your First Rental
-          </Link>
-        </div>
-      ) : (
-        <div className="listings-grid">
-          {listings.map((listing) => (
-            <div key={listing.id} className="listing-card">
-              <div className="listing-image">
-                <img src={listing.imageUrl} alt={listing.title} />
-                <div className="listing-status">
-                  <span className={`status-badge ${listing.status}`}>
-                    {listing.status}
-                  </span>
+        {listings.length === 0 ? (
+          <div className="no-listings">
+            <p>You haven't posted any rentals yet.</p>
+            <Link to="/post-rental" className="add-listing-btn">
+              Post Your First Rental
+            </Link>
+          </div>
+        ) : (
+          <div className="listings-grid">
+            {listings.map((listing) => (
+              <div key={listing.id} className="listing-card">
+                <div className="listing-image">
+                  <img src={listing.imageUrl} alt={listing.title} />
+                  <div className="listing-status">
+                    <span className={`status-badge ${listing.status}`}>
+                      {listing.status}
+                    </span>
+                  </div>
+                </div>
+                <div className="listing-content">
+                  <h3>{listing.title}</h3>
+                  <p className="location">{listing.location}</p>
+                  <p className="price">₹{listing.price}</p>
+                  <div className="specs">
+                    <span>{listing.bedrooms} Bedrooms</span>
+                    <span>{listing.bathrooms} Bathrooms</span>
+                    <span>{listing.size}</span>
+                  </div>
+                  <div className="listing-actions">
+                    <Link 
+                      to={`/rental/details/${listing.id}`} 
+                      className="action-btn view-btn"
+                    >
+                      <FaEye /> View
+                    </Link>
+                    <button 
+                      onClick={() => handleEdit(listing)} 
+                      className="action-btn edit-btn"
+                    >
+                      <FaEdit /> Edit
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(listing.id)} 
+                      className="action-btn delete-btn"
+                    >
+                      <FaTrash /> Delete
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="listing-content">
-                <h3>{listing.title}</h3>
-                <p className="location">{listing.location}</p>
-                <p className="price">₹{listing.price}</p>
-                <div className="specs">
-                  <span>{listing.bedrooms} Bedrooms</span>
-                  <span>{listing.bathrooms} Bathrooms</span>
-                  <span>{listing.size}</span>
-                </div>
-                <div className="listing-actions">
-                  <Link 
-                    to={`/rental/details/${listing.id}`} 
-                    className="action-btn view-btn"
-                  >
-                    <FaEye /> View
-                  </Link>
-                  <button 
-                    onClick={() => handleEdit(listing)} 
-                    className="action-btn edit-btn"
-                  >
-                    <FaEdit /> Edit
-                  </button>
-                  <button 
-                    onClick={() => handleDelete(listing.id)} 
-                    className="action-btn delete-btn"
-                  >
-                    <FaTrash /> Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Edit Modal */}
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Edit Modal should be outside listings-container */}
       <Modal
         isOpen={editModalOpen}
         onRequestClose={() => setEditModalOpen(false)}
@@ -376,8 +373,7 @@ const YourListings = () => {
           </div>
         </div>
       </Modal>
-      </div>
-    </>
+    </div>
   );
 };
 

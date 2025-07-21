@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../Navbar';
 import familyImg from '../../assets/familylmg.png';
 import houseGif from '../../assets/house.gif';
 import apkPreview from '../../assets/apkPreview.png';
@@ -79,7 +78,6 @@ const SectionDivider = () => (
 const AboutUs = () => {
   return (
     <div className="bg-black min-h-screen">
-      <Navbar />
       <div className="w-full px-0 md:px-0 py-12 mt-24 flex flex-col gap-8">
         {/* Hero Section */}
         <section className="w-full flex flex-col md:flex-row items-center justify-between gap-12 bg-gradient-to-br from-zinc-900 via-zinc-800 to-green-100/10 rounded-2xl shadow-lg py-10 px-4 md:px-16">

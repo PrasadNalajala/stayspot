@@ -4,7 +4,6 @@ import profileMale from '../../assets/profileMale.png'
 import profileWomen from '../../assets/ProfileWomen.png'
 import apkPreview from '../../assets/apkPreview.png'
 import { FaArrowRight, FaSearch, FaFilter, FaMobileAlt, FaChartLine, FaUsers, FaBell, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
-import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 
@@ -25,7 +24,6 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar />
             <div className='home'>
                 <div className="welcome-section">
                     <h1 className="welcome-heading animate-on-scroll">

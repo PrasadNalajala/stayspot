@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
-import Navbar from "../Navbar";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FiEdit2 } from "react-icons/fi";
@@ -120,7 +119,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className="profile-container">
         <div className="profile-header">
           <div className="profile-section">
