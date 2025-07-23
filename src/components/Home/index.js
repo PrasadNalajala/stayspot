@@ -146,7 +146,7 @@ const Home = () => {
                         </p>
                         <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
                           <a
-                              href="https://drive.google.com/file/d/1ZYmrV4nPTdDA3iOkOXRshdRtlAgAbfVN/view?usp=drive_link"
+                              href="https://drive.google.com/file/d/1ZYmrV4nPTdDA3iOkOXRshdRtlAgAbfVN/view?usp=sharing"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="download-btn"
