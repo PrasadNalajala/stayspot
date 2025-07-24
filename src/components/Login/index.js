@@ -1,120 +1,100 @@
-import React, { useEffect, useRef } from "react";
-import "./index.css";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { FaFacebook } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { DotLoader } from "react-spinners";
 
-const Signup = (props) => {
+const Signup = ({ setisSignUpSelected }) => {
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setisSignUpSelected } = props;
   const navigate = useNavigate();
-  const fecthSignUp = async () => {
-    const data = {
-      name: firstName + lastName,
-      email: email,
-      password: password,
-    };
-    try {
-      const response = await axios.post(
-        "https://stayspot.onrender.com/register",
-        data
-      );
-      if (response.status === 201) {
-        const { token } = response.data;
-        localStorage.setItem("token", token);
-        toast.success("Registration Successful");
-        navigate("/");
-        console.log(response.data);
-      }
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status === 400) {
-          toast.error(error.response.data.error || "Email is already in use.");
-        } else {
-          toast.warning(
-            error.response.data.error || "An error occurred. Please try again."
-          );
-        }
-      } else {
-        toast.warning("Network error. Please check your connection.");
-      }
-      console.error("Error during signup:", error);
-    }
-  };
-  const onClickSignUp = (event) => {
-    event.preventDefault();
-    if (firstName && lastName && email && password.length > 7) {
-      fecthSignUp();
-    } else {
-      alert("Enter all the fields and Password Must be 8 Chars");
-    }
-  };
-  return (
-    <div>
-      <h3 className="signup-heading">Sign up</h3>
-      <button className="oneClickBtn">
-        <FaFacebook style={{ color: "#3b5998", fontSize: "25px" }} /> Signup
-        with Facebook
-      </button>
-      <br />
-      <button className="oneClickBtn">
-        <FaGoogle style={{ color: "#db4437", fontSize: "25px" }} /> Signup with
-        Google
-      </button>
-      <p className="hr-text">OR</p>
-      <form>
-        <input
-          type="name"
-          id="firstname"
-          className="name-input"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstname(e.target.value)}
-        />
 
-        <input
-          type="name"
-          id="secondname"
-          className="name-input"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-        <br />
+  const fetchSignUp = async () => {
+    try {
+      const res = await axios.post("https://stayspot.onrender.com/register", {
+        name: firstName + " " + lastName,
+        email,
+        password,
+      });
+      if (res.status === 201) {
+        localStorage.setItem("token", res.data.token);
+        toast.success("Registration successful");
+        navigate("/");
+      }
+    } catch (err) {
+      toast.error(err?.response?.data?.error || "Signup failed");
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (firstName && lastName && email && password.length >= 8) {
+      fetchSignUp();
+    } else {
+      toast.warning("All fields required. Password must be at least 8 characters.");
+    }
+  };
+
+  return (
+    <div className="text-white">
+      <h3 className="text-lg font-semibold mb-4">Sign Up</h3>
+      <button className="w-full flex items-center justify-center gap-2 border border-gray-700 rounded-lg py-2 mb-3 bg-[#1f1f1f] hover:bg-[#2a2a2a]">
+        <FaFacebook className="text-blue-600" /> Sign up with Facebook
+      </button>
+      <button className="w-full flex items-center justify-center gap-2 border border-gray-700 rounded-lg py-2 mb-4 bg-[#1f1f1f] hover:bg-[#2a2a2a]">
+        <FaGoogle className="text-red-500" /> Sign up with Google
+      </button>
+      <div className="flex items-center my-4 text-gray-400">
+        <div className="flex-grow h-px bg-gray-600" />
+        <span className="px-3">OR</span>
+        <div className="flex-grow h-px bg-gray-600" />
+      </div>
+      <form onSubmit={onSubmit}>
+        <div className="flex gap-2 mb-3">
+          <input
+            type="text"
+            placeholder="First Name"
+            className="w-1/2 p-2 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
+            value={firstName}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="w-1/2 p-2 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
+            value={lastName}
+            onChange={(e) => setLastname(e.target.value)}
+          />
+        </div>
         <input
           type="email"
-          id="emailinput"
-          className="email-input"
           placeholder="Email"
+          className="w-full p-2 mb-3 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
         <input
           type="password"
-          id="passwordinput"
-          className="email-input"
           placeholder="Password"
+          className="w-full p-2 mb-3 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
-        <button type="submit" className="submit-btn" onClick={onClickSignUp}>
-          Sign up
+        <button
+          type="submit"
+          className="w-full bg-[#20c755] text-black font-semibold py-2 rounded-md hover:bg-green-500"
+        >
+          Sign Up
         </button>
       </form>
-      <p className="already-member">
-        Already Member?{" "}
+      <p className="mt-4 text-sm text-gray-400">
+        Already have an account?{" "}
         <span
+          className="text-[#20c755] cursor-pointer"
           onClick={() => setisSignUpSelected(false)}
-          className="already-member-link"
         >
           Login
         </span>
@@ -123,162 +103,126 @@ const Signup = (props) => {
   );
 };
 
-const LoginFields = (props) => {
+const LoginFields = ({ setisSignUpSelected }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setisSignUpSelected } = props;
   const navigate = useNavigate();
-  const fecthLogin = async () => {
-    const credentials = {
-      email: email,
-      password: password,
-    };
-    try {
-      const response = await axios.post(
-        "https://stayspot.onrender.com/login",
-        credentials
-      );
-      if (response.status === 200) {
-        const { token } = response.data;
-        localStorage.setItem("token", token);
-
-        // Fetch user profile to get userId
-        try {
-          const profileRes = await axios.get("https://stayspot.onrender.com/api/user", {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          console.log("Profile response:", profileRes.data); // Debug log
-          
-          // Handle different response formats
-          let userData = null;
-          if (Array.isArray(profileRes.data) && profileRes.data.length > 0) {
-            // If response is an array, take the first user
-            userData = profileRes.data[0];
-          } else if (profileRes.data && typeof profileRes.data === 'object') {
-            // If response is a single object
-            userData = profileRes.data;
-          }
-          
-          if (userData && userData.id) {
-            localStorage.setItem("userId", userData.id);
-            console.log("Set userId to:", userData.id);
-          } else {
-            console.error("No valid user ID found in profile response");
-          }
-        } catch (profileErr) {
-          console.error("Failed to fetch user profile for userId:", profileErr);
-        }
-
-        toast.success("Login success");
-        navigate("/");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      if (error.response) {
-        if (error.response.status === 400) {
-          toast.error(error.response.data.error);
-        } else {
-          toast.warning(error.response.data.error);
-        }
-      } else {
-        toast.warning("Network error. Please check your connection.");
-      }
-      console.error("Error during signup:", error);
-    }
-  };
-  const onClickLogin = async (e) => {
-    e.preventDefault();
-    if (email && password) {
-      setIsLoading(true);
-      await fecthLogin();
-    } else {
-      toast.warning("Enter All Fields");
-    }
-  };
   const emailInputRef = useRef(null);
 
   useEffect(() => {
     emailInputRef.current?.focus();
   }, []);
+
+  const fetchLogin = async () => {
+    try {
+      const res = await axios.post("https://stayspot.onrender.com/login", {
+        email,
+        password,
+      });
+      const { token } = res.data;
+      localStorage.setItem("token", token);
+
+      const profileRes = await axios.get("https://stayspot.onrender.com/api/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const userId = profileRes.data?.id || profileRes.data?.[0]?.id;
+      if (userId) localStorage.setItem("userId", userId);
+
+      toast.success("Login Successful");
+      navigate("/");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      setIsLoading(true);
+      fetchLogin();
+    } else {
+      toast.warning("Enter all fields");
+    }
+  };
+
   return (
-    <div>
-      <h3 className="signup-heading">Login</h3>
-      <form>
+    <div className="text-white">
+      <h3 className="text-lg font-semibold mb-4">Login</h3>
+      <form onSubmit={onSubmit}>
         <input
           type="email"
-          id="email-input"
-          className="email-input"
           placeholder="Email"
-          useRef={emailInputRef}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={emailInputRef}
+          className="w-full p-2 mb-3 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
           value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
         <input
           type="password"
-          id="password-input"
-          className="email-input"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 mb-3 bg-[#1f1f1f] border border-gray-700 text-white rounded-md"
           value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
-        <button type="submit" className="submit-btn" onClick={onClickLogin}>
-          {isLoading ? <DotLoader color="#ffffff" size={10} /> : "Login"}
+        <button
+          type="submit"
+          className="w-full bg-[#20c755] text-black font-semibold py-2 rounded-md hover:bg-green-500"
+        >
+          {isLoading ? <DotLoader size={20} color="#000" /> : "Login"}
         </button>
       </form>
-      <p className="already-member">
-        New Member?{" "}
+      <p className="mt-4 text-sm text-gray-400">
+        New here?{" "}
         <span
+          className="text-[#20c755] cursor-pointer"
           onClick={() => setisSignUpSelected(true)}
-          className="already-member-link"
         >
-          Signup
+          Sign up
         </span>
       </p>
     </div>
   );
 };
 
-const Login = (props) => {
+const Login = () => {
   const [isSignupSelected, setisSignUpSelected] = useState(true);
-  const signupselected = !isSignupSelected ? "" : "selected";
-  const loginselected = !isSignupSelected ? "selected" : "";
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-    }
+    if (token) navigate("/");
   }, []);
+
   return (
-    <div className="bg">
-      <div className="card">
-        <h1 style={{ color: "#20c755" }}>StaySpot</h1>
-        <div className="input-select">
+    <div className="min-h-screen flex items-center justify-center bg-[#161515] px-4">
+      <div className="bg-[#1c1b1b] rounded-xl shadow-2xl w-full max-w-md p-6">
+        <h1 className="text-3xl font-bold text-[#20c755] text-center mb-6">StaySpot</h1>
+        <div className="flex mb-6">
           <button
-            id="signup-btn"
-            className={`input-selection-btn ${signupselected}`}
             onClick={() => setisSignUpSelected(true)}
+            className={`w-1/2 py-2 rounded-l-md font-semibold ${
+              isSignupSelected ? "bg-[#20c755] text-black" : "bg-[#2b2b2b] text-white"
+            }`}
           >
             Sign Up
           </button>
           <button
-            id="login-btn"
-            className={`input-selection-btn ${loginselected}`}
             onClick={() => setisSignUpSelected(false)}
+            className={`w-1/2 py-2 rounded-r-md font-semibold ${
+              !isSignupSelected ? "bg-[#20c755] text-black" : "bg-[#2b2b2b] text-white"
+            }`}
           >
             Login
           </button>
         </div>
-        <div className="container">
-          {isSignupSelected ? (
-            <Signup setisSignUpSelected={setisSignUpSelected} />
-          ) : (
-            <LoginFields setisSignUpSelected={setisSignUpSelected} />
-          )}
-        </div>
+        {isSignupSelected ? (
+          <Signup setisSignUpSelected={setisSignUpSelected} />
+        ) : (
+          <LoginFields setisSignUpSelected={setisSignUpSelected} />
+        )}
       </div>
     </div>
   );
