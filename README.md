@@ -75,4 +75,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Shoutout to [Create React App](https://create-react-app.dev/) for providing an awesome boilerplate! 🎉
 - Big thanks to [React](https://reactjs.org/) for making front-end development a delight! ❤️
+
+## 🔎 SEO: Generating Sitemap
+
+To generate or update the sitemap (including all static and dynamic rental detail pages):
+
+```bash
+node generate-sitemap.js
+```
+
+This will update `sitemap.xml` in the project root.
 ```
