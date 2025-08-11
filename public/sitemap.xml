@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://stayspot.vercel.app/</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/login</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/browse-rentals</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/post-rental</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/about-us</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/contact</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/profile</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/your-listings</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/favorites</loc>
+  </url>
+  <url>
+    <loc>https://stayspot.vercel.app/messages</loc>
+  </url>
+</urlset>
