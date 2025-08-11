@@ -1,33 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stayspot.vercel.app/</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/login</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/browse-rentals</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/post-rental</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/about-us</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/contact</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/profile</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/your-listings</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/favorites</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stayspot.vercel.app/messages</loc>
+    <lastmod>2025-08-11</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>
