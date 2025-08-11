@@ -7,6 +7,9 @@
           { "key": "Cache-Control", "value": "no-cache" }
         ]
       }
+    ],
+    "rewrites": [
+      { "source": "/sitemap.xml", "destination": "/sitemap.xml" }
     ]
   }
   
